@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", "sans-serif";
+    overflow: hidden;
+    --primary: rgb(4, 214, 4);
+    --primaryShade: rgb(15, 15, 15);
+    --secondaryShade: rgb(238, 240, 243);
+    scroll-behavior: smooth;
+    scroll-padding: 300px;
+}
+
+.map {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: black;
+}

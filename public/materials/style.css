@@ -4,9 +4,7 @@ body {
     padding: 0;
     font-family: "poppins", "sans-serif";
     overflow: show;
-    --primary: rgb(4, 214, 4);
-    --primaryShade: rgb(15, 15, 15);
-    --secondaryShade: rgb(238, 240, 243);
+    background: rgb(65, 65, 65);
 }
 
 .gridParent {
@@ -18,16 +16,161 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(46, 46, 46);
     display: flex;
     flex-wrap: wrap;
     width: 700px;
     height: 700px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 12px 90px 0;
 }
 
 .gridChild {
-    background: rgb(46, 46, 46);
-    box-shadow: rgba(255, 255, 255, 0.281) inset 0 0 0 0.5px;
-    width: 25px;
-    height: 25px;
+    box-shadow: rgba(255, 255, 255, 0.08) inset 0 0 0 0.5px;
+    font-size: 6px;
+    color: white;
+}
+
+.gridChild:hover {
+    box-shadow: inset rgba(255, 255, 255, 0.15) 0 0 0 10000px;
+}
+
+.playerCommander {
+    background: rgb(4, 214, 4);
+}
+
+.barracks {
+    background: rgb(30, 131, 75);
+    border-radius: 2px;
+}
+
+.pumpjacks {
+    background: black;
+    border-radius: 6px;
+}
+
+.plasmaTurrets {
+    border-radius: 100%;
+    background: rgb(129, 129, 129);
+}
+
+.enemyCommander {}
+
+
+/**/
+
+.sideBar {
+    width: 300px;
+    background-color: rgb(46, 46, 46);
+    color: white;
+    height: 100vh;
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 12px 90px 0;
+}
+
+.sideBarItem {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 10px;
+    transition: all 0.3s;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+}
+
+.sideBarItem:hover {
+    background-color: rgb(70, 70, 70);
+}
+
+.itemImg {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    margin: 0 15px;
+}
+
+.creditImg {
+    background: white;
+}
+
+.commandCenterImg {
+    background: rgb(4, 214, 4);
+}
+
+.barrackImg {
+    background: rgb(30, 131, 75);
+    border-radius: 2px;
+}
+
+.pumpjackImg {
+    background: black;
+    border-radius: 6px;
+}
+
+.plasmaTurretImg {
+    border-radius: 100%;
+    background: rgb(129, 129, 129);
+}
+
+.tagParent {
+    display: flex;
+    flex-direction: column;
+}
+
+.itemTag {
+    font-size: 17px;
+    margin: 0;
+}
+
+.itemAmount {
+    font-size: 16px;
+    margin: 0;
+    opacity: 0.7;
+}
+
+.displayItem {
+    display: flex;
+    margin: 20px;
+    align-items: center;
+}
+
+.displayImg {
+    width: 35px;
+    height: 35px;
+    margin: 10px;
+    border-radius: 100%;
+}
+
+.displayTagParent {
+    display: flex;
+    flex-direction: column;
+}
+
+.displayTag {
+    margin: 0;
+    font-size: 15px;
+}
+
+.displayAmount {
+    margin: 0;
+    font-size: 13px;
+}
+
+
+/**/
+
+.closeInfoParent {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    margin: auto;
+    bottom: 0;
+    padding: 10px 30px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.closeInfoParentShow {
+    opacity: 1;
+    pointer-events: all;
 }

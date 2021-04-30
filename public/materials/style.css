@@ -21,7 +21,7 @@ body {
     flex-wrap: wrap;
     width: 700px;
     height: 700px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 12px 90px 0;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 12px 90px 0;
 }
 
 .gridChild {
@@ -79,7 +79,7 @@ body {
     display: flex;
     align-items: center;
     padding: 8px 12px;
-    margin: 10px;
+    margin: 10px 14px;
     transition: all 0.3s;
     border-radius: 6px;
     cursor: pointer;
@@ -88,7 +88,9 @@ body {
 }
 
 .sideBarItem:hover {
-    background-color: rgb(70, 70, 70);
+    padding: 8px 20px;
+    margin: 10px 6px;
+    background-color: rgb(61, 61, 61);
 }
 
 .itemImg {

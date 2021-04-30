@@ -28,6 +28,9 @@ body {
     box-shadow: rgba(255, 255, 255, 0.08) inset 0 0 0 0.5px;
     font-size: 6px;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .gridChild:hover {
@@ -51,6 +54,11 @@ body {
 .plasmaTurrets {
     border-radius: 100%;
     background: rgb(129, 129, 129);
+}
+
+.mountains {
+    background: rgb(37, 37, 37);
+    box-shadow: rgb(37, 37, 37) 0 0 12px 0;
 }
 
 .enemyCommander {}

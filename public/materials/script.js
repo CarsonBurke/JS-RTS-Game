@@ -18,17 +18,22 @@ generateMap(rows, cols, gridParent, grids)
 
 function generateMap(rows, cols, gridParent, grids) {
 
-    for (let x = 0; x < cols; x++) {
-        for (y = 0; y < rows; y++) {
+    var z = 0
+
+    for (let y = 0; y < cols; y++) {
+        for (x = 0; x < rows; x++) {
+
+            z++
 
             let gridChild = document.createElement("div")
 
             //console.log(y + ", " + x + " : " + x + y)
 
-            gridChild.id = (x * y)
-            gridChild.innerText = (x + ", " + y)
+            gridChild.id = (z)
+                //gridChild.innerText = (x + ", " + y)
+                //gridChild.innerText = gridChild.id
 
-            grids.push({ x: x, y: y, id: gridChild.id, value: undefined })
+            grids.push({ x: x, y: y, id: gridChild.id, value: undefined, size: undefined })
 
             gridParent.appendChild(gridChild).className = "gridChild"
             gridParent.appendChild(gridChild).className = "gridChild"
@@ -54,13 +59,21 @@ let pumpjacksMax = 3
 let plasmaTurrets = 0
 let plasmaTurretsMax = 8
 
+let mountainAnchors = 0
+let maxMountainAnchors = gridSize * 4
+
+let mountains = 0
+let maxMountains = maxMountainAnchors
+
+console.log(maxMountains)
+
 while (commandCenters < 1) {
 
-    let value1 = Math.floor(Math.random(10) * 27)
-    let value2 = Math.floor(Math.random(10) * 27)
+    let value1 = Math.floor(Math.random(10) * 34)
+    let value2 = Math.floor(Math.random(10) * 34)
 
     for (let coordinates of grids) {
-        if (coordinates.x == value1 && coordinates.y == value2) {
+        if (coordinates.x == value1 && coordinates.y == value2 && !coordinates.value) {
 
             document.getElementById(coordinates.id).classList.add("playerCommander")
             coordinates.value = "commandCenter"
@@ -71,11 +84,11 @@ while (commandCenters < 1) {
 
 while (barracks < 3) {
 
-    let value1 = Math.floor(Math.random(10) * 27)
-    let value2 = Math.floor(Math.random(10) * 27)
+    let value1 = Math.floor(Math.random(10) * 34)
+    let value2 = Math.floor(Math.random(10) * 34)
 
     for (let coordinates of grids) {
-        if (coordinates.x == value1 && coordinates.y == value2) {
+        if (coordinates.x == value1 && coordinates.y == value2 && !coordinates.value) {
 
             document.getElementById(coordinates.id).classList.add("barracks")
             coordinates.value = "barrack"
@@ -86,11 +99,11 @@ while (barracks < 3) {
 
 while (pumpjacks < 2) {
 
-    let value1 = Math.floor(Math.random(10) * 27)
-    let value2 = Math.floor(Math.random(10) * 27)
+    let value1 = Math.floor(Math.random(10) * 34)
+    let value2 = Math.floor(Math.random(10) * 34)
 
     for (let coordinates of grids) {
-        if (coordinates.x == value1 && coordinates.y == value2) {
+        if (coordinates.x == value1 && coordinates.y == value2 && !coordinates.value) {
 
             document.getElementById(coordinates.id).classList.add("pumpjacks")
             coordinates.value = "pumpjack"
@@ -101,15 +114,505 @@ while (pumpjacks < 2) {
 
 while (plasmaTurrets < 6) {
 
-    let value1 = Math.floor(Math.random(10) * 27)
-    let value2 = Math.floor(Math.random(10) * 27)
+    let value1 = Math.floor(Math.random(10) * 34)
+    let value2 = Math.floor(Math.random(10) * 34)
 
     for (let coordinates of grids) {
-        if (coordinates.x == value1 && coordinates.y == value2) {
+        if (coordinates.x == value1 && coordinates.y == value2 && !coordinates.value) {
 
             document.getElementById(coordinates.id).classList.add("plasmaTurrets")
             coordinates.value = "plasmaTurret"
             plasmaTurrets++
+        }
+    }
+}
+
+while (mountainAnchors < maxMountainAnchors) {
+
+    let value1 = Math.floor(Math.random(10) * 34)
+    let value2 = Math.floor(Math.random(10) * 34)
+    let value3 = Math.floor(Math.random(10) * 6)
+
+    for (let coordinates of grids) {
+        if (coordinates.x == value1 && coordinates.y == value2 && !coordinates.value) {
+
+            document.getElementById(coordinates.id).classList.add("mountains")
+            document.getElementById(coordinates.id).style.color = "red"
+
+            coordinates.value = "mountainAnchors"
+            coordinates.size = value3
+            console.log(coordinates.size)
+            mountainAnchors++
+        }
+    }
+}
+while (mountains < maxMountains) {
+
+    let value1 = Math.floor(Math.random(10) * 34)
+    let value2 = Math.floor(Math.random(10) * 34)
+
+    for (let coordinates of grids) {
+
+        if (coordinates.value == "mountainAnchors" && coordinates.size == 1) {
+
+            //bottom
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //bottom right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+        } else if (coordinates.value == "mountainAnchors" && coordinates.size == 2) {
+
+            //top
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //top left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+        } else if (coordinates.value == "mountainAnchors" && coordinates.size == 3) {
+
+            //top
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+
+            //bottom
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //top left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+
+            //top right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //bottom left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //bottom right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+        }
+        if (coordinates.value == "mountainAnchors" && coordinates.size == 4) {
+
+            //top
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+
+            //bottom
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //top left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+
+            //top right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //bottom left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //bottom right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //right right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x - 2 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //right right top
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 2 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //right right bottom
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x - 2 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+        } else if (coordinates.value == "mountainAnchors" && coordinates.size == 5) {
+
+            //top
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+
+            //bottom
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //top left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+
+            //top right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //bottom left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //bottom right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //top top
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 2 == coordinates.y && altCoordinates.x == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //top top left
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 2 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+            //top top right
+            for (let altCoordinates of grids) {
+
+                if (altCoordinates.y + 2 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
+
+                    console.log(altCoordinates.id)
+                    document.getElementById(altCoordinates.id).classList.add("mountains")
+                    altCoordinates.value = "mountains"
+                    mountains++
+                }
+            }
+        }
+    }
+}
+
+for (let coordinates of grids) {
+    if (coordinates.value == "mountains" || coordinates.value == "mountainAnchors") {
+        for (let secondaryCoordinates of grids) {
+            //top left
+            if (coordinates.x - 1 == secondaryCoordinates.x && coordinates.y == secondaryCoordinates.y && !secondaryCoordinates.value) {
+
+                for (let tertiaryCoordinates of grids) {
+                    if (coordinates.x == tertiaryCoordinates.x && coordinates.y - 1 == tertiaryCoordinates.y && !tertiaryCoordinates.value) {
+
+                        document.getElementById(coordinates.id).style.borderTopLeftRadius = "20px"
+                    }
+                }
+            }
+            //top right
+            if (coordinates.x + 1 == secondaryCoordinates.x && coordinates.y == secondaryCoordinates.y && !secondaryCoordinates.value) {
+
+                for (let tertiaryCoordinates of grids) {
+                    if (coordinates.x == tertiaryCoordinates.x && coordinates.y - 1 == tertiaryCoordinates.y && !tertiaryCoordinates.value) {
+
+                        document.getElementById(coordinates.id).style.borderTopRightRadius = "20px"
+                    }
+                }
+            }
+            //bottom left
+            if (coordinates.x - 1 == secondaryCoordinates.x && coordinates.y == secondaryCoordinates.y && !secondaryCoordinates.value) {
+
+                for (let tertiaryCoordinates of grids) {
+                    if (coordinates.x == tertiaryCoordinates.x && coordinates.y + 1 == tertiaryCoordinates.y && !tertiaryCoordinates.value) {
+
+                        document.getElementById(coordinates.id).style.borderBottomLeftRadius = "20px"
+                    }
+                }
+            }
+            //bottom right
+            if (coordinates.x + 1 == secondaryCoordinates.x && coordinates.y == secondaryCoordinates.y && !secondaryCoordinates.value) {
+
+                for (let tertiaryCoordinates of grids) {
+                    if (coordinates.x == tertiaryCoordinates.x && coordinates.y + 1 == tertiaryCoordinates.y && !tertiaryCoordinates.value) {
+
+                        document.getElementById(coordinates.id).style.borderBottomRightRadius = "20px"
+                    }
+                }
+            }
         }
     }
 }

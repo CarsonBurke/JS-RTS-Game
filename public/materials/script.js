@@ -1,22 +1,39 @@
-generateMap()
+let gridParent = document.getElementById("gridParent")
 
-function generateMap(rows, cols) {
+let vpWidth = gridParent.offsetWidth
+let vpHeight = gridParent.offsetHeight
 
-    let map = document.getElementById("gridParent")
+console.log(vpWidth)
 
-    container.style.setProperty('--grid-rows', rows);
-    container.style.setProperty('--grid-cols', cols);
-    for (c = 0; c < (rows * cols); c++) {
-        let cell = document.createElement("div");
-        //cell.innerText = (c + 1);
-        cell.id = (c + 1)
-        container.appendChild(cell).className = "grid-item";
-    };
-    for (let i = 1; i <= 900; i++) {
+let rows = vpWidth / 25
+let cols = vpHeight / 25
 
-        let target = document.getElementById(i)
-        let block = document.createElement("div")
-        block.id = ("a" + i)
-        target.appendChild(block).className = "blockChild"
+console.log(rows)
+
+let grids = []
+
+generateMap(rows, cols, gridParent, grids)
+
+function generateMap(rows, cols, gridParent, grids) {
+
+    gridParent.style.setProperty('--grid-rows', rows)
+    gridParent.style.setProperty('--grid-cols', cols)
+
+    for (let x = 0; x < cols; x++) {
+        for (y = 0; y < rows; y++) {
+
+            let gridChild = document.createElement("div")
+
+            console.log(y + ", " + x + " : " + x + y)
+
+            gridChild.id = (x * y)
+
+            grids.push({ x: x, y: y })
+
+            gridParent.appendChild(gridChild).className = "gridChild"
+            gridParent.appendChild(gridChild).className = "gridChild"
+
+            //gridChild.style.marginTop = (50 * y) + "px"
+        }
     }
-};
+}

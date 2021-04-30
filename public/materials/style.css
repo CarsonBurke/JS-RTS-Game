@@ -3,19 +3,31 @@ body {
     margin: 0;
     padding: 0;
     font-family: "poppins", "sans-serif";
-    overflow: hidden;
+    overflow: show;
     --primary: rgb(4, 214, 4);
     --primaryShade: rgb(15, 15, 15);
     --secondaryShade: rgb(238, 240, 243);
-    scroll-behavior: smooth;
-    scroll-padding: 300px;
 }
 
-.map {
+.gridParent {
+    width: 100vw;
+    height: 100vh;
     position: absolute;
+    margin: auto;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: black;
+    background-color: rgb(70, 70, 70);
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    height: 700px;
+}
+
+.gridChild {
+    background: rgb(46, 46, 46);
+    box-shadow: rgba(255, 255, 255, 0.281) inset 0 0 0 0.5px;
+    width: 25px;
+    height: 25px;
 }

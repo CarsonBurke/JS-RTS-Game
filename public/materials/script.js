@@ -60,7 +60,7 @@ let plasmaTurrets = 0
 let plasmaTurretsMax = 8
 
 let mountainAnchors = 0
-let maxMountainAnchors = gridSize * 4
+let maxMountainAnchors = gridSize * 1.5
 
 let mountains = 0
 let maxMountains = maxMountainAnchors
@@ -549,7 +549,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 2 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -560,7 +559,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 2 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -643,11 +641,11 @@ function commandCenter(closeInfoParent) {
     }
 }
 
-setInterval(generateCredits, 200)
+setInterval(generateCredits, 250)
 
 function generateCredits() {
 
-    credits += 2 * pumpjacks
+    credits += 1 * pumpjacks
 }
 
 setInterval(updateText, 100)

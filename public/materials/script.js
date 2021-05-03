@@ -18,6 +18,9 @@ generateMap(rows, cols, gridParent, grids)
 
 function generateMap(rows, cols, gridParent, grids) {
 
+    //gridParent.style.width = (rows / 10).toFixed(0) * 100 + "px"
+    //gridParent.style.height = (rows / 10).toFixed(0) * 100 + "px"
+
     var z = 0
 
     for (let y = 0; y < cols; y++) {
@@ -64,8 +67,6 @@ let maxMountainAnchors = gridSize * 1.5
 
 let mountains = 0
 let maxMountains = maxMountainAnchors
-
-console.log(maxMountains)
 
 while (commandCenters < 1) {
 
@@ -141,7 +142,6 @@ while (mountainAnchors < maxMountainAnchors) {
 
             coordinates.value = "mountainAnchors"
             coordinates.size = value3
-            console.log(coordinates.size)
             mountainAnchors++
         }
     }
@@ -160,7 +160,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -171,7 +170,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -182,7 +180,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -195,7 +192,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -206,7 +202,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -217,7 +212,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -230,7 +224,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -242,7 +235,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -253,7 +245,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -264,7 +255,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -275,7 +265,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -287,7 +276,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -298,7 +286,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -309,7 +296,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -323,7 +309,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -335,7 +320,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -346,7 +330,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -357,7 +340,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -368,7 +350,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -380,7 +361,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -391,7 +371,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -402,7 +381,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -413,7 +391,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x - 2 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -424,7 +401,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 2 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -435,7 +411,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x - 2 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -448,7 +423,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -460,7 +434,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -471,7 +444,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -482,7 +454,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -493,7 +464,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -505,7 +475,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -516,7 +485,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x + 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -527,7 +495,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y - 1 == coordinates.y && altCoordinates.x - 1 == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -538,7 +505,6 @@ while (mountains < maxMountains) {
 
                 if (altCoordinates.y + 2 == coordinates.y && altCoordinates.x == coordinates.x) {
 
-                    console.log(altCoordinates.id)
                     document.getElementById(altCoordinates.id).classList.add("mountains")
                     altCoordinates.value = "mountains"
                     mountains++
@@ -577,7 +543,7 @@ for (let coordinates of grids) {
                 for (let tertiaryCoordinates of grids) {
                     if (coordinates.x == tertiaryCoordinates.x && coordinates.y - 1 == tertiaryCoordinates.y && !tertiaryCoordinates.value) {
 
-                        document.getElementById(coordinates.id).style.borderTopLeftRadius = "20px"
+                        document.getElementById(coordinates.id).style.borderTopLeftRadius = "100px"
                     }
                 }
             }
@@ -587,7 +553,7 @@ for (let coordinates of grids) {
                 for (let tertiaryCoordinates of grids) {
                     if (coordinates.x == tertiaryCoordinates.x && coordinates.y - 1 == tertiaryCoordinates.y && !tertiaryCoordinates.value) {
 
-                        document.getElementById(coordinates.id).style.borderTopRightRadius = "20px"
+                        document.getElementById(coordinates.id).style.borderTopRightRadius = "100px"
                     }
                 }
             }
@@ -597,7 +563,7 @@ for (let coordinates of grids) {
                 for (let tertiaryCoordinates of grids) {
                     if (coordinates.x == tertiaryCoordinates.x && coordinates.y + 1 == tertiaryCoordinates.y && !tertiaryCoordinates.value) {
 
-                        document.getElementById(coordinates.id).style.borderBottomLeftRadius = "20px"
+                        document.getElementById(coordinates.id).style.borderBottomLeftRadius = "100px"
                     }
                 }
             }
@@ -607,7 +573,7 @@ for (let coordinates of grids) {
                 for (let tertiaryCoordinates of grids) {
                     if (coordinates.x == tertiaryCoordinates.x && coordinates.y + 1 == tertiaryCoordinates.y && !tertiaryCoordinates.value) {
 
-                        document.getElementById(coordinates.id).style.borderBottomRightRadius = "20px"
+                        document.getElementById(coordinates.id).style.borderBottomRightRadius = "100px"
                     }
                 }
             }
@@ -622,6 +588,9 @@ window.onkeydown = function closeInfoParent(key) {
     if (key.which == 88) {
 
         commandCenterTag.attributeStyleMap.clear()
+        barrackTag.attributeStyleMap.clear()
+        pumpjackTag.attributeStyleMap.clear()
+        plasmaTurret.attributeStyleMap.clear()
 
         /*for (let element of bodyelements) {
             doStuff.stuff()
@@ -641,6 +610,42 @@ function commandCenter(closeInfoParent) {
     }
 }
 
+function barrack(closeInfoParent) {
+
+    let barrackTag = document.getElementById("barrackTag")
+
+    if (barracks < 10) {
+
+        barrackTag.style.background = "rgb(70, 70, 70)"
+
+        closeInfoParent.classList.add("closeInfoParentShow")
+    }
+}
+
+function pumpjack(closeInfoParent) {
+
+    let pumpjackTag = document.getElementById("pumpjackTag")
+
+    if (pumpjacks < 1) {
+
+        pumpjackTag.style.background = "rgb(70, 70, 70)"
+
+        closeInfoParent.classList.add("closeInfoParentShow")
+    }
+}
+
+function plasmaTurret(closeInfoParent) {
+
+    let plasmaTurretTag = document.getElementById("plasmaTurretTag")
+
+    if (plasmaTurrets < plasmaTurretsMax) {
+
+        plasmaTurretTag.style.background = "rgb(70, 70, 70)"
+
+        closeInfoParent.classList.add("closeInfoParentShow")
+    }
+}
+
 setInterval(generateCredits, 250)
 
 function generateCredits() {
@@ -653,10 +658,31 @@ setInterval(updateText, 100)
 function updateText() {
 
     let commandCenterAmount = document.getElementById("commandCenterAmount")
+    let barrackAmount = document.getElementById("barrackAmount")
+    let pumpjackAmount = document.getElementById("pumpjackAmount")
+    let plasmaTurretAmount = document.getElementById("plasmaTurretAmount")
 
-    commandCenterAmount.innerText = commandCenters + " / " + commandCentersMax
+    if (commandCenterAmount) {
+
+        commandCenterAmount.innerText = commandCenters + " / " + commandCentersMax
+    }
+    if (barrackAmount) {
+
+        barrackAmount.innerText = barracks + " / " + barracksMax
+    }
+    if (pumpjackAmount) {
+
+        pumpjackAmount.innerText = pumpjacks + " / " + pumpjacksMax
+    }
+    if (plasmaTurretAmount) {
+
+        plasmaTurretAmount.innerText = plasmaTurrets + " / " + plasmaTurretsMax
+    }
 
     let creditAmount = document.getElementById("creditAmount")
 
-    creditAmount.innerText = credits
+    if (creditAmount) {
+
+        creditAmount.innerText = credits
+    }
 }

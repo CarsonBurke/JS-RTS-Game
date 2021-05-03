@@ -6,6 +6,7 @@
         overflow: show;
         background: rgb(65, 65, 65);
         --primary: rgb(29, 92, 228);
+        overflow: hidden;
     }
     
     .gridParent {
@@ -20,9 +21,9 @@
         background-color: rgb(46, 46, 46);
         display: flex;
         flex-wrap: wrap;
-        width: 700px;
-        height: 700px;
         box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
+        height: 700px;
+        width: 700px;
     }
     
     .gridChild {
@@ -59,7 +60,7 @@
     
     .mountains {
         background: rgb(29, 29, 29);
-        box-shadow: rgb(29, 29, 29) 0 0 12px 0;
+        box-shadow: rgb(29, 29, 29) 0 0 20px 0;
     }
     
     .enemyCommander {}
@@ -199,6 +200,7 @@
         box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
         overflow: hidden;
         max-width: 400px;
+        z-index: 1000;
     }
     
     .landingTopper {

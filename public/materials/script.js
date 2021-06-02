@@ -46,7 +46,7 @@ function generateMap() {
 
 function tryPlacing() {
 
-    console.log('hi')
+
 }
 
 let upPos = 0
@@ -170,7 +170,7 @@ let commandCentersMax = 1
 let barracks = 0
 let barracksMax = 5
 
-let pumpjacks = 0
+let pumpjacks = 1
 let pumpjacksMax = 3
 
 let plasmaTurrets = 0
@@ -181,6 +181,17 @@ let maxMountainAnchors = gridSize * 1.5
 
 let mountains = 0
 let maxMountains = maxMountainAnchors
+
+let gameObjects = [{}]
+
+setInterval(generateCredits, 250)
+
+function generateCredits() {
+
+    credits += 1 * pumpjacks
+
+    document.getElementById("creditAmount").innerText = credits
+}
 
 /*
 let gridSize = 0.01

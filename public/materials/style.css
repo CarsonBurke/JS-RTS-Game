@@ -72,28 +72,33 @@
     .sideBarItem {
         display: flex;
         align-items: center;
-        padding: 8px 12px;
-        margin: 10px 14px;
-        transition: all 0.3s;
-        border-radius: 6px;
+        padding: 6px;
+        margin: 2px 0;
+        margin-left: 8px;
         cursor: pointer;
         user-select: none;
         outline: none;
         pointer-events: all;
+        transition: all 0.2s;
     }
     
     .sideBarItem:hover {
-        padding: 8px 20px;
-        margin: 10px 6px;
-        background-color: rgb(61, 61, 61);
-        box-shadow: rgba(0, 0, 0, 0.2) 0 2px 26px 0;
+        padding: 6px 10px;
+        margin-left: 10px;
+        box-shadow: inset var(--primary) 4px 0 0 0, inset var(--primary) 0 0 0 0;
+    }
+    
+    .sideBarItem:focus {
+        padding: 6px 10px;
+        margin-left: 10px;
+        box-shadow: inset var(--primary) 4px 0 0 0, inset var(--primary) 0 0 0 0;
     }
     
     .itemImg {
         width: 45px;
         height: 45px;
         object-fit: cover;
-        margin: 0 15px;
+        margin: 0 10px;
     }
     
     .creditImg {
@@ -137,7 +142,8 @@
     
     .displayItem {
         display: flex;
-        margin: 20px;
+        margin: 20px 0;
+        margin-left: 16px;
         align-items: center;
     }
     

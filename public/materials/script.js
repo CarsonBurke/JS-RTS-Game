@@ -1,5 +1,6 @@
-let music = new Audio("materials/music.mp3");
-music.play();
+let music = new Audio("materials/music.mp3")
+music.loop = true
+music.play()
 
 let mapSizes = {
     small: 400,
@@ -49,7 +50,7 @@ function generateMap() {
 
 function tryPlacing() {
 
-
+    console.log("hi")
 }
 
 let upPos = 0
@@ -95,7 +96,6 @@ function startMove(direction) {
 
     if (direction == "up") {
 
-        upPos += 5
         move = {
             direction: "up",
             qualifier: "positive"
@@ -103,7 +103,6 @@ function startMove(direction) {
 
     } else if (direction == "down") {
 
-        upPos -= 5
         move = {
             direction: "up",
             qualifier: "negative"
@@ -112,7 +111,6 @@ function startMove(direction) {
     }
     if (direction == "left") {
 
-        leftPos += 5
         move = {
             direction: "left",
             qualifier: "positive"
@@ -120,7 +118,6 @@ function startMove(direction) {
 
     } else if (direction == "right") {
 
-        leftPos -= 5
         move = {
             direction: "left",
             qualifier: "negative"
@@ -142,21 +139,21 @@ function changeDirection() {
 
             if (move.qualifier == "positive") {
 
-                upPos += 50
+                upPos += 75
 
             } else {
 
-                upPos -= 50
+                upPos -= 75
             }
         } else {
 
             if (move.qualifier == "positive") {
 
-                leftPos += 50
+                leftPos += 75
 
             } else {
 
-                leftPos -= 50
+                leftPos -= 75
             }
         }
 

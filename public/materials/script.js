@@ -1,6 +1,11 @@
-let music = new Audio("materials/music.mp3")
-music.loop = true
-music.play()
+document.addEventListener("mousemove", playMusic)
+
+function playMusic() {
+
+    let music = new Audio("materials/music.mp3")
+    music.loop = true
+    music.play()
+}
 
 let mapSizes = {
     small: 400,

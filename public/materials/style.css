@@ -3,31 +3,26 @@
         margin: 0;
         padding: 0;
         font-family: "poppins", "sans-serif";
-        overflow: show;
         background: rgb(65, 65, 65);
         --primary: rgb(29, 92, 228);
         overflow: hidden;
     }
     
-    .gridParent {
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-        margin: auto;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 300px;
+    .map {
         background-color: rgb(46, 46, 46);
         display: flex;
         flex-wrap: wrap;
         box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
-        height: 700px;
-        width: 700px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: all 0.1s;
     }
     
-    .gridChild {
-        /*box-shadow: rgba(255, 255, 255, 0.08) inset 0 0 0 0.5px;*/
+    .gridParent {
+        box-shadow: rgba(255, 255, 255, 0.08) inset 0 0 0 0.5px;
         font-size: 6px;
         color: white;
         display: flex;
@@ -35,7 +30,7 @@
         align-items: center;
     }
     
-    .gridChild:hover {
+    .gridParent:hover {
         box-shadow: inset rgba(255, 255, 255, 0.15) 0 0 0 10000px;
     }
     
@@ -67,12 +62,11 @@
     /**/
     
     .sideBar {
-        width: 300px;
-        background-color: rgb(46, 46, 46);
+        background-color: rgba(0, 0, 0, 0);
         color: white;
         height: 100vh;
-        position: absolute;
-        box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
+        position: fixed;
+        pointer-events: none;
     }
     
     .sideBarItem {
@@ -85,12 +79,14 @@
         cursor: pointer;
         user-select: none;
         outline: none;
+        pointer-events: all;
     }
     
     .sideBarItem:hover {
         padding: 8px 20px;
         margin: 10px 6px;
         background-color: rgb(61, 61, 61);
+        box-shadow: rgba(0, 0, 0, 0.2) 0 2px 26px 0;
     }
     
     .itemImg {

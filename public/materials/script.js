@@ -1,4 +1,189 @@
-let gridSize = 20
+let mapSizes = {
+    small: 400,
+    medium: 3600,
+    large: 4900,
+    massive: 10000
+}
+
+let mapSize = mapSizes.massive
+
+gridSize = 20
+
+let grids = []
+
+let map = document.getElementById("map")
+
+generateMap()
+
+function generateMap() {
+
+    let dimensions = Math.sqrt(mapSize);
+
+    map.style.width = dimensions * gridSize + "px"
+    map.style.height = dimensions * gridSize + "px"
+
+    let z = 0
+
+    for (let y = 0; y < dimensions; y++) {
+        for (x = 0; x < dimensions; x++) {
+
+            z++
+
+            let gridParent = document.createElement("div")
+
+            gridParent.addEventListener('click', tryPlacing)
+
+            grids.push({ x: x, y: y, id: z, value: undefined })
+
+            map.appendChild(gridParent).className = "gridParent"
+            map.appendChild(gridParent).className = "gridParent"
+
+            gridParent.style.width = gridSize + "px"
+            gridParent.style.height = gridSize + "px"
+        }
+    }
+}
+
+function tryPlacing() {
+
+    console.log('hi')
+}
+
+let upPos = 0
+let leftPos = 0
+
+window.onkeydown = function(e) {
+
+    if (e.key == "w") {
+
+        startMove("up")
+    } else if (e.key == "s") {
+
+        startMove("down")
+    } else if (e.key == "a") {
+
+        startMove("left")
+    } else if (e.key == "d") {
+
+        startMove("right")
+    }
+}
+
+window.onkeyup = function(e) {
+
+    if (e.key == "w") {
+
+        endMove("up")
+    } else if (e.key == "s") {
+
+        endMove("down")
+    } else if (e.key == "a") {
+
+        endMove("left")
+    } else if (e.key == "d") {
+
+        endMove("right")
+    }
+}
+
+var move = false
+
+function startMove(direction) {
+
+    if (direction == "up") {
+
+        upPos += 5
+        move = {
+            direction: "up",
+            qualifier: "positive"
+        }
+
+    } else if (direction == "down") {
+
+        upPos -= 5
+        move = {
+            direction: "up",
+            qualifier: "negative"
+        }
+
+    }
+    if (direction == "left") {
+
+        leftPos += 5
+        move = {
+            direction: "left",
+            qualifier: "positive"
+        }
+
+    } else if (direction == "right") {
+
+        leftPos -= 5
+        move = {
+            direction: "left",
+            qualifier: "negative"
+        }
+    }
+}
+
+function endMove() {
+
+    move = false
+}
+
+setInterval(changeDirection, 100)
+
+function changeDirection() {
+
+    if (move && move.direction) {
+        if (move.direction == "up") {
+
+            if (move.qualifier == "positive") {
+
+                upPos += 50
+
+            } else {
+
+                upPos -= 50
+            }
+        } else {
+
+            if (move.qualifier == "positive") {
+
+                leftPos += 50
+
+            } else {
+
+                leftPos -= 50
+            }
+        }
+
+        map.style.top = upPos + "px"
+        map.style.left = leftPos + "px"
+    }
+}
+
+let credits = 0
+
+let commandCenters = 0
+let commandCentersMax = 1
+
+let barracks = 0
+let barracksMax = 5
+
+let pumpjacks = 0
+let pumpjacksMax = 3
+
+let plasmaTurrets = 0
+let plasmaTurretsMax = 8
+
+let mountainAnchors = 0
+let maxMountainAnchors = gridSize * 1.5
+
+let mountains = 0
+let maxMountains = maxMountainAnchors
+
+/*
+let gridSize = 0.01
 
 let gridParent = document.getElementById("gridParent")
 
@@ -7,8 +192,8 @@ let vpHeight = gridParent.offsetHeight
 
 //console.log(vpWidth)
 
-let rows = vpWidth / gridSize
-let cols = vpHeight / gridSize
+let rows = vpWidth * gridSize
+let cols = vpHeight * gridSize
 
 //console.log(rows)
 
@@ -46,7 +231,6 @@ function generateMap(rows, cols, gridParent, grids) {
         }
     }
 }
-/*Begin game logic*/
 
 let credits = 0
 
@@ -595,7 +779,8 @@ window.onkeydown = function closeInfoParent(key) {
         /*for (let element of bodyelements) {
             doStuff.stuff()
         }*/
-    }
+/*
+}
 }
 
 function commandCenter(closeInfoParent) {
@@ -686,3 +871,4 @@ function updateText() {
         creditAmount.innerText = credits
     }
 }
+*/

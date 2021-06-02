@@ -1,3 +1,6 @@
+let music = new Audio("materials/music.mp3");
+music.play();
+
 let mapSizes = {
     small: 400,
     medium: 3600,

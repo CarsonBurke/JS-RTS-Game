@@ -25,22 +25,23 @@
         box-shadow: rgba(255, 255, 255, 0.08) inset 0 0 0 0.5px;
         font-size: 6px;
         color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: grid;
+        place-items: center;
     }
     
     .gridParent:hover {
         box-shadow: inset rgba(255, 255, 255, 0.15) 0 0 0 10000px;
     }
     
-    .playerCommander {
+    .commandCenter {
         background: rgb(4, 214, 4);
     }
     
-    .barracks {
+    .barrack {
         background: rgb(30, 131, 75);
-        border-radius: 2px;
+        border-radius: 4px;
+        height: 55px;
+        width: 55px;
     }
     
     .pumpjacks {

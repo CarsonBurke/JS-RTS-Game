@@ -60,9 +60,6 @@ function generateMap() {
 
             gridParent.appendChild(gridChild).className = "gridChild"
 
-            gridChild.style.width = gridSize + "px"
-            gridChild.style.height = gridSize + "px"
-
             gridChilds.push({ id: z, x: x, y: y })
         }
     }
@@ -183,25 +180,13 @@ function changeDirection() {
 
 let credits = 0
 
-let commandCenters = 0
-let commandCentersMax = 1
-
-let barracks = 0
-let barracksMax = 5
-
-let pumpjacks = 1
-let pumpjacksMax = 3
-
-let plasmaTurrets = 0
-let plasmaTurretsMax = 8
-
-let mountainAnchors = 0
-let maxMountainAnchors = gridSize * 1.5
-
-let mountains = 0
-let maxMountains = maxMountainAnchors
-
 let gameObjects = {
+    resources: {
+        "credits": {
+            amount: 0,
+            income: 10,
+        }
+    },
     structures: {
         "commandCenter": {
             amount: 0,
@@ -220,7 +205,7 @@ let gameObjects = {
             tag: "barrackTag"
         },
         "pumpjack": {
-            amount: 0,
+            amount: 1,
             amountMax: 2,
             dimensions: 2,
             amountId: "pumpjackAmount",
@@ -268,7 +253,7 @@ function buildMode(structureName) {
     }
 }
 
-function tryPlacingStructure() {
+function tryPlacingStructure(e) {
 
     for (let structure of Object.keys(gameObjects.structures)) {
 
@@ -285,10 +270,18 @@ function placeStructure(e, structure) {
 
     if (gameObjects.structures[structure].dimensions == 3) {
 
-        console.log(e.id)
-        for (let gridParent of gridParents) {
+        if (e.target.id && e.target.id > 0) {
 
+            for (let gridParent of gridParents) {
 
+                if (e.target.id == gridParent.id) {
+
+                    e.target.childNodes[0].classList.add(structure)
+
+                    gameObjects.structures[structure].amount += 1
+                    document.getElementById(gameObjects.structures[structure].amountId).innerText = gameObjects.structures[structure].amount + " / " + gameObjects.structures[structure].amountMax
+                }
+            }
         }
     }
 }
@@ -309,9 +302,11 @@ setInterval(generateCredits, 250)
 
 function generateCredits() {
 
-    credits += 1 * pumpjacks
+    gameObjects.resources.credits.income = 1 * gameObjects.structures.pumpjack.amount
 
-    document.getElementById("creditAmount").innerText = credits
+    gameObjects.resources.credits.amount += gameObjects.resources.credits.income
+
+    document.getElementById("creditAmount").innerText = gameObjects.resources.credits.amount
 }
 
 
@@ -319,13 +314,10 @@ addText()
 
 function addText() {
 
-    document.getElementById("commandCenterAmount").innerText = commandCenters + " / " + commandCentersMax
+    for (let structure of Object.keys(gameObjects.structures)) {
 
-    document.getElementById("barrackAmount").innerText = barracks + " / " + barracksMax
-
-    document.getElementById("pumpjackAmount").innerText = pumpjacks + " / " + pumpjacksMax
-
-    document.getElementById("plasmaTurretAmount").innerText = plasmaTurrets + " / " + plasmaTurretsMax
+        document.getElementById(gameObjects.structures[structure].amountId).innerText = gameObjects.structures[structure].amount + " / " + gameObjects.structures[structure].amountMax
+    }
 }
 
 /*

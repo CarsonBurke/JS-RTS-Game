@@ -22,7 +22,8 @@ let mapSize = mapSizes.massive
 
 gridSize = 20
 
-let grids = []
+let gridParents = []
+let gridChilds = []
 
 let map = document.getElementById("map")
 
@@ -44,15 +45,25 @@ function generateMap() {
 
             let gridParent = document.createElement("div")
 
-            gridParent.addEventListener('click', tryPlacing)
+            gridParent.addEventListener('click', tryPlacingStructure)
 
-            grids.push({ x: x, y: y, id: z, value: undefined })
+            gridParent.id = z
 
-            map.appendChild(gridParent).className = "gridParent"
+            gridParents.push({ id: z, value: "plains", x: x, y: y })
+
             map.appendChild(gridParent).className = "gridParent"
 
             gridParent.style.width = gridSize + "px"
             gridParent.style.height = gridSize + "px"
+
+            let gridChild = document.createElement("div")
+
+            gridParent.appendChild(gridChild).className = "gridChild"
+
+            gridChild.style.width = gridSize + "px"
+            gridChild.style.height = gridSize + "px"
+
+            gridChilds.push({ id: z, x: x, y: y })
         }
     }
 }
@@ -74,6 +85,10 @@ window.onkeydown = function(e) {
     } else if (e.key == "d") {
 
         startMove("right")
+    }
+    if (e.key == "x") {
+
+        stopPlacing()
     }
 }
 
@@ -186,15 +201,109 @@ let maxMountainAnchors = gridSize * 1.5
 let mountains = 0
 let maxMountains = maxMountainAnchors
 
-let gameObjects = [{
+let gameObjects = {
     structures: {
-        name: "commandCenter",
-        amount: 0,
-        amountMax: 2,
-        amountId: "commandCenterAmount",
-        onclickEvent,
+        "commandCenter": {
+            amount: 0,
+            amountMax: 2,
+            dimensions: 4,
+            amountId: "commandCenterAmount",
+            onClickEvent: "placeCommandCenter",
+            tag: "commandCenterTag"
+        },
+        "barrack": {
+            amount: 0,
+            amountMax: 2,
+            dimensions: 3,
+            amountId: "barrackAmount",
+            onClickEvent: "placeBarrack",
+            tag: "barrackTag"
+        },
+        "pumpjack": {
+            amount: 0,
+            amountMax: 2,
+            dimensions: 2,
+            amountId: "pumpjackAmount",
+            onClickEvent: "placePumpjack",
+            tag: "pumpjackTag"
+        },
+        "plasmaTurret": {
+            amount: 0,
+            amountMax: 2,
+            dimensions: 2,
+            amountId: "plasmaTurretAmount",
+            onClickEvent: "placePlasmaTurret",
+            tag: "plasmaTurretTag"
+        },
+    },
+}
+
+let placingStructure = {}
+
+function buildMode(structureName) {
+
+    for (let property of Object.keys(placingStructure)) {
+
+        if (placingStructure[property] == true) {
+
+            return
+        }
     }
-}]
+
+    for (let structure of Object.keys(gameObjects.structures)) {
+
+        if (structure == structureName) {
+
+            if (gameObjects.structures[structure].amount < gameObjects.structures[structure].amountMax) {
+
+                document.getElementById(gameObjects.structures[structure].tag).classList.add("sideBarItemActive")
+
+                closeInfoParent.classList.add("closeInfoParentShow")
+
+                placingStructure[structure] = true
+            }
+
+            break
+        }
+    }
+}
+
+function tryPlacingStructure() {
+
+    for (let structure of Object.keys(gameObjects.structures)) {
+
+        if (placingStructure[structure] == true) {
+
+            placeStructure(e, structure)
+
+            break
+        }
+    }
+}
+
+function placeStructure(e, structure) {
+
+    if (gameObjects.structures[structure].dimensions == 3) {
+
+        console.log(e.id)
+        for (let gridParent of gridParents) {
+
+
+        }
+    }
+}
+
+function stopPlacing() {
+
+    for (let structure of Object.keys(gameObjects.structures)) {
+
+        placingStructure[structure] = false
+
+        document.getElementById(gameObjects.structures[structure].tag).classList.remove("sideBarItemActive")
+    }
+
+    closeInfoParent.classList.remove("closeInfoParentShow")
+}
 
 setInterval(generateCredits, 250)
 
@@ -205,24 +314,6 @@ function generateCredits() {
     document.getElementById("creditAmount").innerText = credits
 }
 
-function tryPlacing() {
-
-    console.log("hi")
-
-
-}
-
-function commandCenter() {
-
-    let commandCenterTag = document.getElementById("commandCenterTag")
-
-    if (commandCenters < commandCentersMax) {
-
-        commandCenterTag.classList.add("sideBarItemActive")
-
-        closeInfoParent.classList.add("closeInfoParentShow")
-    }
-}
 
 addText()
 

@@ -87,16 +87,18 @@
         transition: all 0.2s;
         position: relative;
         left: 0;
+        opacity: 0.8;
     }
     
     .sideBarItemActive {
         left: 8px;
         box-shadow: inset var(--primary) 4px 0 0 0, inset var(--primary) 0 0 0 0;
+        opacity: 1;
     }
     
     .sideBarItem:hover {
         left: 8px;
-        box-shadow: inset var(--primary) 4px 0 0 0, inset var(--primary) 0 0 0 0;
+        opacity: 1;
     }
     
     .tooltipParent {

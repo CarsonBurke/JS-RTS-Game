@@ -1,314 +1,318 @@
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "poppins", "sans-serif";
-        background: rgb(65, 65, 65);
-        --primary: rgb(29, 92, 228);
-        overflow: hidden;
-    }
-    
-    .map {
-        background-color: rgb(46, 46, 46);
-        display: flex;
-        flex-wrap: wrap;
-        box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        transition: all 0.1s;
-    }
-    
-    .gridParent {
-        box-shadow: rgba(255, 255, 255, 0.08) inset 0 0 0 0.5px;
-        font-size: 6px;
-        color: white;
-        display: grid;
-        place-items: center;
-    }
-    
-    .gridParent:hover {
-        box-shadow: inset rgba(255, 255, 255, 0.15) 0 0 0 10000px;
-    }
-    
-    .commandCenter {
-        background: rgba(4, 214, 4, 0.85);
-        margin: 2.5px;
-        height: 75px;
-        width: 75px;
-        border: white;
-    }
-    
-    .barrack {
-        background: rgb(30, 131, 75);
-        margin: 2.5px;
-        border-radius: 4px;
-        height: 55px;
-        width: 55px;
-    }
-    
-    .pumpjack {
-        background: rgba(0, 0, 0, 0.8);
-        margin: 2.5px;
-        border-radius: 6px;
-        height: 35px;
-        width: 35px;
-    }
-    
-    .plasmaTurret {
-        border-radius: 100%;
-        background: rgba(129, 129, 129, 0.9);
-        margin: 2.5px;
-        height: 35px;
-        width: 35px;
-    }
-    
-    .mountains {
-        background: rgb(29, 29, 29);
-        box-shadow: rgb(29, 29, 29) 0 0 20px 0;
-    }
-    
-    .enemyCommander {}
-    /**/
-    
-    .sideBar {
-        color: white;
-        height: calc(100vh - 20px);
-        position: fixed;
-        pointer-events: none;
-        background: rgba( 255, 255, 255, 0.12);
-        backdrop-filter: blur( 10px);
-        -webkit-backdrop-filter: blur( 10px);
-        padding-right: 16px;
-        margin: 10px 0;
-        border-radius: 4px;
-    }
-    
-    .sideBarItem {
-        display: flex;
-        align-items: center;
-        padding: 8px;
-        margin: 2px 0;
-        margin-left: 8px;
-        cursor: pointer;
-        user-select: none;
-        outline: none;
-        pointer-events: all;
-        transition: all 0.2s;
-        position: relative;
-        left: 0;
-        color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .sideBarItemActive {
-        left: 8px;
-        box-shadow: inset var(--primary) 4px 0 0 0, inset var(--primary) 0 0 0 0;
-        color: rgba(255, 255, 255, 1);
-    }
-    
-    .sideBarItem:hover {
-        left: 8px;
-        color: rgba(255, 255, 255, 1);
-    }
-    
-    .tooltipParent {
-        padding: 8px 12px;
-        position: absolute;
-        left: 16px;
-        background: rgb(65, 65, 65);
-        box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
-        opacity: 0;
-        pointer-events: none;
-        top: -90px;
-        transition: all 0.3s;
-        width: max-content;
-        max-width: 300px;
-    }
-    
-    .sideBarItem:hover .tooltipParent {
-        opacity: 1;
-        top: -60px;
-    }
-    
-    .tooltipText {
-        margin: 0;
-        font-size: 14px;
-    }
-    
-    .itemImg {
-        width: 45px;
-        height: 45px;
-        object-fit: cover;
-        margin: 0 10px;
-    }
-    
-    .creditImg {
-        background: white;
-    }
-    
-    .commandCenterImg {
-        background: rgb(4, 214, 4);
-    }
-    
-    .barrackImg {
-        background: rgb(30, 131, 75);
-        border-radius: 2px;
-    }
-    
-    .pumpjackImg {
-        background: black;
-        border-radius: 6px;
-    }
-    
-    .plasmaTurretImg {
-        border-radius: 100%;
-        background: rgb(129, 129, 129);
-    }
-    
-    .tagParent {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .itemTag {
-        font-size: 17px;
-        margin: 0;
-    }
-    
-    .itemAmount {
-        font-size: 16px;
-        margin: 0;
-        opacity: 0.7;
-    }
-    
-    .displayItem {
-        display: flex;
-        margin: 20px 0;
-        margin-left: 16px;
-        align-items: center;
-    }
-    
-    .displayImg {
-        width: 35px;
-        height: 35px;
-        margin: 10px;
-        border-radius: 100%;
-    }
-    
-    .displayTagParent {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .displayTag {
-        margin: 0;
-        font-size: 15px;
-    }
-    
-    .displayAmount {
-        margin: 0;
-        font-size: 13px;
-    }
-    /**/
-    
-    .closeInfoParent {
-        opacity: 0;
-        pointer-events: none;
-        position: fixed;
-        margin: auto;
-        bottom: 30px;
-        left: 0;
-        right: 0;
-        width: fit-content;
-        padding: 10px 30px;
-        color: white;
-        transition: all 0.3s;
-        font-size: 20px;
-        user-select: none;
-        background: rgba( 255, 255, 255, 0.12);
-        backdrop-filter: blur( 10px);
-        -webkit-backdrop-filter: blur( 10px);
-        border-radius: 4px;
-    }
-    
-    .closeInfoParentShow {
-        bottom: 10px;
-        opacity: 1;
-        pointer-events: all;
-    }
-    /**/
-    
-    .landingContainer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-    }
-    
-    .landingParent {
-        display: flex;
-        flex-direction: column;
-        width: fit-content;
-        color: white;
-        border-radius: 6px;
-        box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
-        overflow: hidden;
-        max-width: 400px;
-        z-index: 1000;
-    }
-    
-    .landingTopper {
-        padding: 30px 60px;
-        background: rgb(39, 39, 39);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .landingHeader {
-        margin: 0;
-    }
-    
-    .landingContent {
-        padding: 10px 20px;
-        background-color: rgb(46, 46, 46);
-    }
-    
-    .landingText {
-        padding: 20px;
-    }
-    
-    .landingButton {
-        width: 90%;
-        text-transform: uppercase;
-    }
-    
-    .button {
-        outline: none;
-        user-select: none;
-        text-decoration: none;
-        border: none;
-        border-radius: 6px;
-        padding: 10px 22px;
-        font-size: 16px;
-        margin: 10px auto;
-        display: block;
-        background: var(--primary);
-        color: white;
-        cursor: pointer;
-        font-family: "poppins";
-        font-weight: bold;
-        box-shadow: rgba(0, 0, 0, 0.2) 0 14px 22px 0, rgba(255, 255, 255, 0) inset 0 0 0 0;
-        transition: all 0.3s;
-        text-align: center;
-    }
-    
-    .button:hover {
-        box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0, rgba(255, 255, 255, 0) inset 0 0 0 10000px, rgba(0, 0, 0, 0.2) inset 0 0 0 10000px;
-    }
-    
-    .button:focus {
-        box-shadow: rgba(0, 0, 0, 0.25) 0 14px 18px 0, rgba(255, 255, 255, 0.12) inset 0 0 0 10000px, rgba(0, 0, 0, 0) inset 0 0 0 10000px;
-    }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "poppins", "sans-serif";
+            background: rgb(51, 39, 39);
+            --primary: rgb(29, 92, 228);
+            overflow: hidden;
+        }
+        
+        .map {
+            background-color: rgb(46, 46, 46);
+            display: flex;
+            flex-wrap: wrap;
+            box-shadow: rgba(0, 0, 0, 0.35) 0 12px 90px 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transition: all 0.1s;
+        }
+        
+        .gridParent {
+            /*box-shadow: rgba(255, 255, 255, 0.08) inset 0 0 0 0.5px;*/
+            font-size: 6px;
+            color: white;
+            display: grid;
+            place-items: center;
+        }
+        
+        .gridParent:hover {
+            box-shadow: inset rgba(255, 255, 255, 0.15) 0 0 0 10000px;
+        }
+        
+        .commandCenter {
+            background: rgba(4, 214, 4);
+            margin: 2.5px;
+            height: 75px;
+            width: 75px;
+            border: 1px solid white;
+            box-shadow: rgba(0, 0, 0, 0.6) 0 0 160px 0;
+            border-radius: 2px;
+        }
+        
+        .barrack {
+            background: rgb(30, 131, 75);
+            margin: 2.5px;
+            height: 55px;
+            width: 55px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0 0 80px 0;
+            border-radius: 4px;
+        }
+        
+        .pumpjack {
+            background: rgb(24, 24, 24);
+            margin: 2.5px;
+            height: 35px;
+            width: 35px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0 0 80px 0;
+            border-radius: 6px;
+        }
+        
+        .plasmaTurret {
+            border-radius: 100%;
+            background: rgba(129, 129, 129);
+            margin: 2.5px;
+            height: 35px;
+            width: 35px;
+        }
+        
+        .mountains {
+            background: rgb(29, 29, 29);
+            box-shadow: rgb(29, 29, 29) 0 0 20px 0;
+        }
+        
+        .enemyCommander {}
+        /**/
+        
+        .sideBar {
+            color: white;
+            height: calc(100vh - 20px);
+            position: fixed;
+            pointer-events: none;
+            background: rgba( 255, 255, 255, 0.12);
+            backdrop-filter: blur( 10px);
+            -webkit-backdrop-filter: blur( 10px);
+            padding-right: 16px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .sideBarItem {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            margin: 2px 0;
+            margin-left: 8px;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+            pointer-events: all;
+            transition: all 0.2s;
+            position: relative;
+            left: 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .sideBarItemActive {
+            left: 8px;
+            box-shadow: inset var(--primary) 4px 0 0 0, inset var(--primary) 0 0 0 0;
+            color: rgba(255, 255, 255, 1);
+        }
+        
+        .sideBarItem:hover {
+            left: 8px;
+            color: rgba(255, 255, 255, 1);
+        }
+        
+        .tooltipParent {
+            padding: 8px 12px;
+            position: absolute;
+            left: 16px;
+            background: rgb(65, 65, 65);
+            box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
+            opacity: 0;
+            pointer-events: none;
+            top: -90px;
+            transition: all 0.3s;
+            width: max-content;
+            max-width: 300px;
+        }
+        
+        .sideBarItem:hover .tooltipParent {
+            opacity: 1;
+            top: -60px;
+        }
+        
+        .tooltipText {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .itemImg {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            margin: 0 10px;
+        }
+        
+        .creditImg {
+            background: white;
+        }
+        
+        .commandCenterImg {
+            background: rgb(4, 214, 4);
+        }
+        
+        .barrackImg {
+            background: rgb(30, 131, 75);
+            border-radius: 2px;
+        }
+        
+        .pumpjackImg {
+            background: black;
+            border-radius: 6px;
+        }
+        
+        .plasmaTurretImg {
+            border-radius: 100%;
+            background: rgb(129, 129, 129);
+        }
+        
+        .tagParent {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .itemTag {
+            font-size: 17px;
+            margin: 0;
+        }
+        
+        .itemAmount {
+            font-size: 16px;
+            margin: 0;
+            opacity: 0.7;
+        }
+        
+        .displayItem {
+            display: flex;
+            margin: 20px 0;
+            margin-left: 16px;
+            align-items: center;
+        }
+        
+        .displayImg {
+            width: 35px;
+            height: 35px;
+            margin: 10px;
+            border-radius: 100%;
+        }
+        
+        .displayTagParent {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .displayTag {
+            margin: 0;
+            font-size: 15px;
+        }
+        
+        .displayAmount {
+            margin: 0;
+            font-size: 13px;
+        }
+        /**/
+        
+        .closeInfoParent {
+            opacity: 0;
+            pointer-events: none;
+            position: fixed;
+            margin: auto;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            width: fit-content;
+            padding: 10px 30px;
+            color: white;
+            transition: all 0.3s;
+            font-size: 20px;
+            user-select: none;
+            background: rgba( 255, 255, 255, 0.12);
+            backdrop-filter: blur( 10px);
+            -webkit-backdrop-filter: blur( 10px);
+            border-radius: 4px;
+        }
+        
+        .closeInfoParentShow {
+            bottom: 10px;
+            opacity: 1;
+            pointer-events: all;
+        }
+        /**/
+        
+        .landingContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .landingParent {
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            color: white;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 12px 90px 0;
+            overflow: hidden;
+            max-width: 400px;
+            z-index: 1000;
+        }
+        
+        .landingTopper {
+            padding: 30px 60px;
+            background: rgb(39, 39, 39);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .landingHeader {
+            margin: 0;
+        }
+        
+        .landingContent {
+            padding: 10px 20px;
+            background-color: rgb(46, 46, 46);
+        }
+        
+        .landingText {
+            padding: 20px;
+        }
+        
+        .landingButton {
+            width: 90%;
+            text-transform: uppercase;
+        }
+        
+        .button {
+            outline: none;
+            user-select: none;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 22px;
+            font-size: 16px;
+            margin: 10px auto;
+            display: block;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            font-family: "poppins";
+            font-weight: bold;
+            box-shadow: rgba(0, 0, 0, 0.2) 0 14px 22px 0, rgba(255, 255, 255, 0) inset 0 0 0 0;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .button:hover {
+            box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0, rgba(255, 255, 255, 0) inset 0 0 0 10000px, rgba(0, 0, 0, 0.2) inset 0 0 0 10000px;
+        }
+        
+        .button:focus {
+            box-shadow: rgba(0, 0, 0, 0.25) 0 14px 18px 0, rgba(255, 255, 255, 0.12) inset 0 0 0 10000px, rgba(0, 0, 0, 0) inset 0 0 0 10000px;
+        }

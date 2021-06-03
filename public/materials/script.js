@@ -3,7 +3,7 @@ document.addEventListener('keydown', playMusic)
 
 function playMusic() {
 
-    let music = new Audio("materials/music.mp3")
+    let music = new Audio("materials/song1.mp3")
     music.loop = true
     music.play()
 
@@ -55,11 +55,6 @@ function generateMap() {
             gridParent.style.height = gridSize + "px"
         }
     }
-}
-
-function tryPlacing() {
-
-    console.log("hi")
 }
 
 let upPos = 0
@@ -191,7 +186,15 @@ let maxMountainAnchors = gridSize * 1.5
 let mountains = 0
 let maxMountains = maxMountainAnchors
 
-let gameObjects = [{}]
+let gameObjects = [{
+    structures: {
+        name: "commandCenter",
+        amount: 0,
+        amountMax: 2,
+        amountId: "commandCenterAmount",
+        onclickEvent,
+    }
+}]
 
 setInterval(generateCredits, 250)
 
@@ -200,6 +203,38 @@ function generateCredits() {
     credits += 1 * pumpjacks
 
     document.getElementById("creditAmount").innerText = credits
+}
+
+function tryPlacing() {
+
+    console.log("hi")
+
+
+}
+
+function commandCenter() {
+
+    let commandCenterTag = document.getElementById("commandCenterTag")
+
+    if (commandCenters < commandCentersMax) {
+
+        commandCenterTag.classList.add("sideBarItemActive")
+
+        closeInfoParent.classList.add("closeInfoParentShow")
+    }
+}
+
+addText()
+
+function addText() {
+
+    document.getElementById("commandCenterAmount").innerText = commandCenters + " / " + commandCentersMax
+
+    document.getElementById("barrackAmount").innerText = barracks + " / " + barracksMax
+
+    document.getElementById("pumpjackAmount").innerText = pumpjacks + " / " + pumpjacksMax
+
+    document.getElementById("plasmaTurretAmount").innerText = plasmaTurrets + " / " + plasmaTurretsMax
 }
 
 /*

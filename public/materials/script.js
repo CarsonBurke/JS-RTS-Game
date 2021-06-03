@@ -70,6 +70,8 @@ let leftPos = 0
 
 window.onkeydown = function(e) {
 
+    console.log(e.key)
+
     if (e.key == "w") {
 
         startMove("up")
@@ -268,18 +270,65 @@ function tryPlacingStructure(e) {
 
 function placeStructure(e, structure) {
 
-    if (gameObjects.structures[structure].dimensions == 3) {
+    if (e.target.id && e.target.id > 0) {
 
-        if (e.target.id && e.target.id > 0) {
+        for (let gridParent of gridParents) {
 
-            for (let gridParent of gridParents) {
+            if (e.target.id == gridParent.id) {
 
-                if (e.target.id == gridParent.id) {
+                if (gridParent.value == "plains") {
 
-                    e.target.childNodes[0].classList.add(structure)
+                    let z = 0
 
-                    gameObjects.structures[structure].amount += 1
-                    document.getElementById(gameObjects.structures[structure].amountId).innerText = gameObjects.structures[structure].amount + " / " + gameObjects.structures[structure].amountMax
+                    let x = 0
+
+                    for (let y = gridParent.y; y < gridParent.y + gameObjects.structures[structure].dimensions; y++) {
+                        for (x = gridParent.x; x < gridParent.x + gameObjects.structures[structure].dimensions; x++) {
+
+                            z += 1
+
+                            for (let gridParentAlt of gridParents) {
+
+                                if (x == gridParentAlt.x && y == gridParentAlt.y) {
+                                    console.log(gridParentAlt.value)
+                                    if (gridParentAlt.value != "plains") {
+
+                                        return
+                                        document.getElementById(gridParentAlt.id).innerText = x + ", " + y
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (z == gameObjects.structures[structure].dimensions * gameObjects.structures[structure].dimensions) {
+
+                        z = 0
+
+                        let x = 0
+
+                        e.target.value = structure
+
+                        e.target.childNodes[0].classList.add(structure)
+                        gameObjects.structures[structure].amount += 1
+
+                        //document.getElementById(gameObjects.structures[structure].amountId).innerText = gameObjects.structures[structure].amount + " / " + gameObjects.structures[structure].amountMax
+
+                        for (let y = gridParent.y; y < gridParent.y + gameObjects.structures[structure].dimensions; y++) {
+                            for (x = gridParent.x; x < gridParent.x + gameObjects.structures[structure].dimensions; x++) {
+
+                                z += 1
+
+                                for (let gridParentAlt of gridParents) {
+
+                                    if (x == gridParentAlt.x && y == gridParentAlt.y) {
+
+                                        gridParentAlt.value = structure
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

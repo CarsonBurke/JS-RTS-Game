@@ -34,24 +34,35 @@
     }
     
     .commandCenter {
-        background: rgb(4, 214, 4);
+        background: rgba(4, 214, 4, 0.85);
+        margin: 2.5px;
+        height: 75px;
+        width: 75px;
+        border: white;
     }
     
     .barrack {
         background: rgb(30, 131, 75);
+        margin: 2.5px;
         border-radius: 4px;
         height: 55px;
         width: 55px;
     }
     
-    .pumpjacks {
-        background: black;
+    .pumpjack {
+        background: rgba(0, 0, 0, 0.8);
+        margin: 2.5px;
         border-radius: 6px;
+        height: 35px;
+        width: 35px;
     }
     
-    .plasmaTurrets {
+    .plasmaTurret {
         border-radius: 100%;
-        background: rgb(129, 129, 129);
+        background: rgba(129, 129, 129, 0.9);
+        margin: 2.5px;
+        height: 35px;
+        width: 35px;
     }
     
     .mountains {
@@ -88,18 +99,18 @@
         transition: all 0.2s;
         position: relative;
         left: 0;
-        opacity: 0.8;
+        color: rgba(255, 255, 255, 0.7);
     }
     
     .sideBarItemActive {
         left: 8px;
         box-shadow: inset var(--primary) 4px 0 0 0, inset var(--primary) 0 0 0 0;
-        opacity: 1;
+        color: rgba(255, 255, 255, 1);
     }
     
     .sideBarItem:hover {
         left: 8px;
-        opacity: 1;
+        color: rgba(255, 255, 255, 1);
     }
     
     .tooltipParent {

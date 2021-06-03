@@ -1,10 +1,14 @@
-document.addEventListener("mousemove", playMusic)
+document.addEventListener('click', playMusic)
+document.addEventListener('keydown', playMusic)
 
 function playMusic() {
 
     let music = new Audio("materials/music.mp3")
     music.loop = true
     music.play()
+
+    document.removeEventListener("click", playMusic)
+    document.removeEventListener('keydown', playMusic)
 }
 
 let mapSizes = {

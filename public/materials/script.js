@@ -12,6 +12,17 @@ document.onclick = function() {
     }
 }
 
+startingCreditOptions = {
+    low: 2000,
+    medium: 5000,
+    large: 12000,
+    massive: 100000,
+    aTon: 1000000,
+    infinite: 1000000000000000000
+}
+
+let startingCredits = startingCreditOptions.aTon
+
 let mapSizes = {
     small: 900,
     medium: 3600,
@@ -199,7 +210,7 @@ let credits = 0
 let gameObjects = {
     resources: {
         "credits": {
-            amount: 0,
+            amount: 9000 + (startingCredits),
             income: 10,
         }
     },
@@ -307,7 +318,7 @@ function tryPlacingStructure(e) {
 
     for (let structure of Object.keys(gameObjects.structures)) {
 
-        if (placingStructure[structure] == true && gameObjects.structures[structure].amount < gameObjects.structures[structure].amountMax) {
+        if (placingStructure[structure] == true && gameObjects.resources.credits.amount >= gameObjects.structures[structure].cost && gameObjects.structures[structure].amount < gameObjects.structures[structure].amountMax) {
 
             placeStructure(e, structure)
 
@@ -355,8 +366,6 @@ function placeStructure(e, structure) {
                                 return
                             }
 
-                            console.log(gridParent.x + gameObjects.structures[structure].dimensions)
-
                             z += 1
 
                             for (let gridParentAlt of gridParents) {
@@ -376,10 +385,6 @@ function placeStructure(e, structure) {
 
                         let x = 0
 
-                        e.target.value = structure
-
-                        e.target.childNodes[0].classList.add(structure)
-
                         if (structure == "commandCenter" || structure == "plasmaTurret") {
 
                             let gridChildShadow = document.createElement("div")
@@ -390,6 +395,12 @@ function placeStructure(e, structure) {
 
                             gridChildShadow.style.boxShadow = "rgb(29, 92, 228, 0.1) 0 0 0 " + gameObjects.structures[structure].range * 20 + "px"
                         }
+
+                        e.target.value = structure
+
+                        e.target.childNodes[0].classList.add(structure)
+
+                        gameObjects.resources.credits.amount -= gameObjects.structures[structure].cost
 
                         gameObjects.structures[structure].amount += 1
 

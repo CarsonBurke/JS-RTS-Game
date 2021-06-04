@@ -50,9 +50,7 @@
             99.99% {
                 opacity: 0;
             }
-            100% {
-                opacity: 1;
-            }
+            to {}
         }
         
         .gridChildShadow {
@@ -63,7 +61,7 @@
             left: 0;
             right: 0;
             z-index: -1;
-            animation: gridChildShadowShow 0.1s;
+            animation: gridChildShadowShow 0.9s;
             border-radius: 100%;
         }
         

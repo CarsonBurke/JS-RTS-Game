@@ -215,7 +215,7 @@ let gameObjects = {
         }
     },
     structures: {
-        "commandCenters": {
+        "commandCenter": {
             amount: 0,
             amountMax: 8,
             cost: 9000,
@@ -223,7 +223,7 @@ let gameObjects = {
             openedStructure: {
                 teir2: {
                     displayName: "Teir 2",
-                    class: "teir2Tag",
+                    class: "",
                     cost: 14000,
                 },
                 builder: {
@@ -234,7 +234,7 @@ let gameObjects = {
                 },
                 basicDriod: {
                     displayName: "Basic Driod",
-                    class: "basicDriodTag",
+                    class: "",
                     cost: 450,
                 }
             },
@@ -243,7 +243,7 @@ let gameObjects = {
             onClickEvent: "placeCommandCenter",
             tag: "commandCenterTag"
         },
-        "barracks": {
+        "barrack": {
             amount: 0,
             amountMax: 100,
             cost: 900,
@@ -271,7 +271,7 @@ let gameObjects = {
             onClickEvent: "placeBarrack",
             tag: "barrackTag"
         },
-        "pumpjacks": {
+        "pumpjack": {
             amount: 1,
             amountMax: 100,
             cost: 400,
@@ -294,7 +294,7 @@ let gameObjects = {
             onClickEvent: "placePumpjack",
             tag: "pumpjackTag"
         },
-        "plasmaTurrets": {
+        "plasmaTurret": {
             amount: 0,
             amountMax: 100,
             cost: 1600,
@@ -335,15 +335,15 @@ let gameObjects = {
 
         },
         resources: {
-            "oilWells": {
+            "oi": {
 
 
             },
-            "fish": {
+            "fishs": {
 
 
             },
-            "trees": {
+            "tree": {
 
 
             },
@@ -366,14 +366,14 @@ generateStartingBases()
 
 function generateStartingBases() {
 
-    while (gameObjects.structures["commandCenters"].amount < 1) {
+    while (gameObjects.structures["commandCenter"].amount < 1) {
 
         let x = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
         let y = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
 
         let element = document.getElementById(x + y)
 
-        placeStructure(element, "commandCenters")
+        placeStructure(element, "commandCenter")
     }
 }
 
@@ -471,7 +471,7 @@ function placeStructure(e, structure) {
 
                         let x = 0
 
-                        if (structure == "commandCenters") {
+                        if (structure == "commandCenter") {
 
                             let structureData = document.createElement("div")
 
@@ -495,7 +495,7 @@ function placeStructure(e, structure) {
                             }
                         }
 
-                        if (structure == "commandCenters" || structure == "plasmaTurrets") {
+                        if (structure == "commandCenter" || structure == "plasmaTurret") {
 
                             let gridChildShadow = document.createElement("div")
 
@@ -623,7 +623,7 @@ setInterval(generateCredits, 250)
 
 function generateCredits() {
 
-    gameObjects.resources.credits.income = (gameObjects.structures.pumpjacks.amount * 1) + (gameObjects.structures.commandCenters.amount * 15)
+    gameObjects.resources.credits.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
 
     gameObjects.resources.credits.amount += gameObjects.resources.credits.income
 

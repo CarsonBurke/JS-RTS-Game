@@ -21,6 +21,7 @@
             left: 0;
             transition: all 0.1s;
             overflow: hidden;
+            z-index: -1;
         }
         
         .gridParent {
@@ -36,7 +37,34 @@
         }
         
         .gridChild {
-            transition: box-shadow 1s;
+            transition: width 1s, height 1s, box-shadow 1s;
+            height: 0;
+            width: 0;
+            position: relative;
+        }
+        
+        @keyframes gridChildShadowShow {
+            0% {
+                opacity: 0;
+            }
+            99.99% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        .gridChildShadow {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+            animation: gridChildShadowShow 0.1s;
+            border-radius: 100%;
         }
         
         .commandCenter {
@@ -45,8 +73,8 @@
             margin: 2.5px;
             height: 75px;
             width: 75px;
-            box-shadow: rgba(0, 0, 0, 0.2) 0 0 6px 0, rgba(0, 0, 0, 0.4) 0 0 40px 0;
             border-radius: 2px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0 0 6px 0, rgba(0, 0, 0, 0.4) 0 0 40px 0;
         }
         
         .barrack {

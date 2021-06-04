@@ -1,14 +1,15 @@
-document.addEventListener('click', playMusic)
-document.addEventListener('keydown', playMusic)
+notMusicPlaying = true
 
-function playMusic() {
+document.onclick = function() {
 
-    let music = new Audio("materials/song1.mp4")
-    music.loop = true
-    music.play()
+    if (notMusicPlaying) {
 
-    document.removeEventListener("click", playMusic)
-    document.removeEventListener('keydown', playMusic)
+        let music = new Audio("materials/song1.mp4")
+        music.loop = true
+        music.play()
+
+        notMusicPlaying = false
+    }
 }
 
 let mapSizes = {
@@ -45,7 +46,7 @@ function generateMap() {
 
             let gridParent = document.createElement("div")
 
-            gridParent.addEventListener('click', tryPlacingStructure)
+            gridParent.addEventListener('mousedown', tryPlacingStructure)
 
             gridParent.id = z
 
@@ -194,7 +195,7 @@ let gameObjects = {
             amount: 0,
             amountMax: 8,
             cost: 9000,
-            range: 9,
+            range: 6,
             dimensions: 4,
             amountId: "commandCenterAmount",
             onClickEvent: "placeCommandCenter",
@@ -222,7 +223,7 @@ let gameObjects = {
             amount: 0,
             amountMax: 100,
             cost: 1600,
-            range: 8,
+            range: 5,
             dimensions: 2,
             amountId: "plasmaTurretAmount",
             onClickEvent: "placePlasmaTurret",
@@ -311,12 +312,12 @@ function tryPlacingStructure(e) {
 
 function placeStructure(e, structure) {
 
-    if (!e.target) {
+    if (e && !e.target) {
 
         e.target = e
     }
 
-    if (e.target.id && e.target.id > 0) {
+    if (e && e.target.id && e.target.id > 0) {
 
         for (let gridParent of gridParents) {
 
@@ -328,15 +329,27 @@ function placeStructure(e, structure) {
 
                     let x = 0
 
+                    if (gridParent.x + gameObjects.structures[structure].dimensions > Math.sqrt(mapSize) || gridParent.y + gameObjects.structures[structure].dimensions > Math.sqrt(mapSize)) {
+
+                        return
+                    }
+
                     for (let y = gridParent.y; y < gridParent.y + gameObjects.structures[structure].dimensions; y++) {
                         for (x = gridParent.x; x < gridParent.x + gameObjects.structures[structure].dimensions; x++) {
+
+                            if (z == gameObjects.structures[structure].dimensions * gameObjects.structures[structure].dimensions) {
+
+                                return
+                            }
+
+                            console.log(gridParent.x + gameObjects.structures[structure].dimensions)
 
                             z += 1
 
                             for (let gridParentAlt of gridParents) {
 
                                 if (x == gridParentAlt.x && y == gridParentAlt.y) {
-                                    console.log(gridParentAlt.value)
+
                                     if (gridParentAlt.value != "plains") {
 
                                         return
@@ -356,7 +369,13 @@ function placeStructure(e, structure) {
 
                         if (structure == "commandCenter" || structure == "plasmaTurret") {
 
-                            e.target.childNodes[0].style.boxShadow = "rgb(29, 92, 228, 0.1) 0 0 0 " + gameObjects.structures[structure].range * 20 + "px"
+                            let gridChildShadow = document.createElement("div")
+
+                            gridChildShadow.className = "gridChildShadow"
+
+                            e.target.childNodes[0].appendChild(gridChildShadow)
+
+                            gridChildShadow.style.boxShadow = "rgb(29, 92, 228, 0.1) 0 0 0 " + gameObjects.structures[structure].range * 20 + "px"
                         }
 
                         gameObjects.structures[structure].amount += 1

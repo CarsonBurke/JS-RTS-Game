@@ -70,8 +70,6 @@ let leftPos = 0
 
 window.onkeydown = function(e) {
 
-    console.log(e.key)
-
     if (e.key == "w") {
 
         startMove("up")
@@ -194,6 +192,7 @@ let gameObjects = {
             amount: 0,
             amountMax: 8,
             cost: 9000,
+            range: 9,
             dimensions: 4,
             amountId: "commandCenterAmount",
             onClickEvent: "placeCommandCenter",
@@ -221,6 +220,7 @@ let gameObjects = {
             amount: 0,
             amountMax: 100,
             cost: 1600,
+            range: 8,
             dimensions: 2,
             amountId: "plasmaTurretAmount",
             onClickEvent: "placePlasmaTurret",
@@ -288,7 +288,7 @@ function tryPlacingStructure(e) {
             placeStructure(e, structure)
 
             break
-        } else {
+        } else if (gameObjects.structures[structure].amount >= gameObjects.structures[structure].amountMax) {
 
             placingStructure[structure] = false
 
@@ -338,6 +338,12 @@ function placeStructure(e, structure) {
                         e.target.value = structure
 
                         e.target.childNodes[0].classList.add(structure)
+
+                        if (structure == "commandCenter" || structure == "plasmaTurret") {
+
+                            e.target.childNodes[0].style.boxShadow = "rgb(29, 92, 228, 0.1) 0 0 0 " + gameObjects.structures[structure].range * 20 + "px"
+                        }
+
                         gameObjects.structures[structure].amount += 1
 
                         document.getElementById(gameObjects.structures[structure].amountId).innerText = gameObjects.structures[structure].amount + " / " + gameObjects.structures[structure].amountMax

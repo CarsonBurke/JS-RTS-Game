@@ -12,13 +12,14 @@
             background-color: rgb(46, 46, 46);
             display: flex;
             flex-wrap: wrap;
-            box-shadow: rgba(0, 0, 0, 0.35) 0 12px 90px 0;
+            box-shadow: rgba(0, 0, 0, 0.15) 0 12px 90px 0;
             position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
             left: 0;
             transition: all 0.1s;
+            overflow: hidden;
         }
         
         .gridParent {
@@ -33,40 +34,48 @@
             box-shadow: inset rgba(255, 255, 255, 0.15) 0 0 0 10000px;
         }
         
+        .gridChild {
+            transition: box-shadow 1s;
+        }
+        
         .commandCenter {
+            opacity: 1;
             background: rgba(4, 214, 4);
             margin: 2.5px;
             height: 75px;
             width: 75px;
-            border: 1px solid white;
-            box-shadow: rgba(0, 0, 0, 0.6) 0 0 160px 0;
+            box-shadow: rgba(0, 0, 0, 0.2) 0 0 6px 0, rgba(0, 0, 0, 0.4) 0 0 40px 0;
             border-radius: 2px;
         }
         
         .barrack {
+            opacity: 1;
             background: rgb(30, 131, 75);
             margin: 2.5px;
             height: 55px;
             width: 55px;
-            box-shadow: rgba(0, 0, 0, 0.2) 0 0 80px 0;
+            box-shadow: rgba(0, 0, 0, 0.4) 0 0 40px 0;
             border-radius: 4px;
         }
         
         .pumpjack {
+            opacity: 1;
             background: rgb(24, 24, 24);
             margin: 2.5px;
             height: 35px;
             width: 35px;
-            box-shadow: rgba(0, 0, 0, 0.2) 0 0 80px 0;
+            box-shadow: rgba(0, 0, 0, 0.4) 0 0 40px 0;
             border-radius: 6px;
         }
         
         .plasmaTurret {
+            opacity: 1;
             border-radius: 100%;
             background: rgba(129, 129, 129);
             margin: 2.5px;
             height: 35px;
             width: 35px;
+            box-shadow: rgba(0, 0, 0, 0.6) 0 0 40px 0;
         }
         
         .mountains {
@@ -83,19 +92,15 @@
             position: fixed;
             pointer-events: none;
             background: rgba( 255, 255, 255, 0.12);
-            backdrop-filter: blur( 10px);
-            -webkit-backdrop-filter: blur( 10px);
-            padding-right: 16px;
-            margin: 10px 0;
+            backdrop-filter: blur( 5px);
+            margin: 10px;
             border-radius: 4px;
         }
         
         .sideBarItem {
             display: flex;
             align-items: center;
-            padding: 8px;
-            margin: 2px 0;
-            margin-left: 8px;
+            padding: 8px 16px;
             cursor: pointer;
             user-select: none;
             outline: none;
@@ -103,12 +108,12 @@
             transition: all 0.2s;
             position: relative;
             left: 0;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.85);
         }
         
         .sideBarItemActive {
             left: 8px;
-            box-shadow: inset var(--primary) 4px 0 0 0, inset var(--primary) 0 0 0 0;
+            box-shadow: inset var(--primary) 3px 0 0 0, inset var(--primary) 0 0 0 0;
             color: rgba(255, 255, 255, 1);
         }
         
@@ -138,14 +143,15 @@
         
         .tooltipText {
             margin: 0;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .itemImg {
             width: 45px;
             height: 45px;
             object-fit: cover;
-            margin: 0 10px;
+            margin-right: 10px;
+            transition: all 0.2s;
         }
         
         .creditImg {
@@ -177,12 +183,12 @@
         }
         
         .itemTag {
-            font-size: 17px;
+            font-size: 15px;
             margin: 0;
         }
         
         .itemAmount {
-            font-size: 16px;
+            font-size: 14px;
             margin: 0;
             opacity: 0.7;
         }
@@ -190,14 +196,14 @@
         .displayItem {
             display: flex;
             margin: 20px 0;
-            margin-left: 16px;
             align-items: center;
+            padding: 0 16px;
         }
         
         .displayImg {
             width: 35px;
             height: 35px;
-            margin: 10px;
+            margin-right: 10px;
             border-radius: 100%;
         }
         
@@ -232,8 +238,7 @@
             font-size: 20px;
             user-select: none;
             background: rgba( 255, 255, 255, 0.12);
-            backdrop-filter: blur( 10px);
-            -webkit-backdrop-filter: blur( 10px);
+            backdrop-filter: blur( 5px);
             border-radius: 4px;
         }
         

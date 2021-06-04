@@ -3,7 +3,7 @@
             margin: 0;
             padding: 0;
             font-family: "poppins", "sans-serif";
-            background: rgb(51, 39, 39);
+            background: rgb(0, 0, 0);
             --primary: rgb(29, 92, 228);
             overflow: hidden;
         }

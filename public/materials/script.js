@@ -3,7 +3,7 @@ document.addEventListener('keydown', playMusic)
 
 function playMusic() {
 
-    let music = new Audio("materials/song1.mp3")
+    let music = new Audio("materials/song1.mp4")
     music.loop = true
     music.play()
 

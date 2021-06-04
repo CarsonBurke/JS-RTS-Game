@@ -68,6 +68,19 @@ function generateMap() {
     }
 }
 
+let scale = 1
+
+map.onwheel = function zoom(event) {
+
+    event.preventDefault();
+
+    scale += event.deltaY * -0.0005;
+
+    scale = Math.min(Math.max(0.75, scale), 2);
+
+    map.style.transform = `scale(${scale})`
+}
+
 let upPos = 0
 let leftPos = 0
 

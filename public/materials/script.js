@@ -215,39 +215,110 @@ let gameObjects = {
         }
     },
     structures: {
-        "commandCenter": {
+        "commandCenters": {
             amount: 0,
             amountMax: 8,
             cost: 9000,
             range: 6,
+            openedStructure: {
+                teir2: {
+                    displayName: "Teir 2",
+                    class: "teir2Tag",
+                    cost: 14000,
+                },
+                builder: {
+                    displayName: "Builder",
+                    class: "builderTag",
+
+                    cost: 200,
+                },
+                basicDriod: {
+                    displayName: "Basic Driod",
+                    class: "basicDriodTag",
+                    cost: 450,
+                }
+            },
             dimensions: 4,
             amountId: "commandCenterAmount",
             onClickEvent: "placeCommandCenter",
             tag: "commandCenterTag"
         },
-        "barrack": {
+        "barracks": {
             amount: 0,
             amountMax: 100,
             cost: 900,
+            openedStructure: {
+                teir2: {
+                    displayName: "Teir 2",
+                    class: "",
+
+                    cost: 2400,
+                },
+                builder: {
+                    displayName: "Builder",
+                    class: "",
+
+                    cost: 200,
+                },
+                basicDriod: {
+                    displayName: "Basic Driod",
+                    class: "",
+                    cost: 450,
+                }
+            },
             dimensions: 3,
             amountId: "barrackAmount",
             onClickEvent: "placeBarrack",
             tag: "barrackTag"
         },
-        "pumpjack": {
+        "pumpjacks": {
             amount: 1,
             amountMax: 100,
             cost: 400,
+            openedStructure: {
+                teir3: {
+                    displayName: "Teir 3",
+                    class: "",
+
+                    cost: 6500,
+                },
+                teir2: {
+                    displayName: "Teir 2",
+                    class: "",
+
+                    cost: 2200,
+                }
+            },
             dimensions: 2,
             amountId: "pumpjackAmount",
             onClickEvent: "placePumpjack",
             tag: "pumpjackTag"
         },
-        "plasmaTurret": {
+        "plasmaTurrets": {
             amount: 0,
             amountMax: 100,
             cost: 1600,
             range: 5,
+            openedStructure: {
+                rapid: {
+                    displayName: "Rapid Fire",
+                    class: "",
+
+                    cost: 1800,
+                },
+                antiAir: {
+                    displayName: "Anti Air",
+                    class: "",
+
+                    cost: 1100,
+                },
+                railgun: {
+                    displayName: "Railgun",
+                    class: "",
+
+                    cost: 1500,
+                }
+            },
             dimensions: 2,
             amountId: "plasmaTurretAmount",
             onClickEvent: "placePlasmaTurret",
@@ -255,9 +326,31 @@ let gameObjects = {
         },
     },
     terrain: {
-        mountains: {
+        "mountains": {
             mountainsAmount: mapSize / 1000,
             mountainsSize: mapSize / 1000
+        },
+        "water": {
+
+
+        },
+        resources: {
+            "oilWells": {
+
+
+            },
+            "fish": {
+
+
+            },
+            "trees": {
+
+
+            },
+            "rocks": {
+
+
+            },
         },
     },
 }
@@ -273,14 +366,14 @@ generateStartingBases()
 
 function generateStartingBases() {
 
-    while (gameObjects.structures["commandCenter"].amount < 1) {
+    while (gameObjects.structures["commandCenters"].amount < 1) {
 
         let x = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
         let y = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
 
         let element = document.getElementById(x + y)
 
-        placeStructure(element, "commandCenter")
+        placeStructure(element, "commandCenters")
     }
 }
 
@@ -323,13 +416,6 @@ function tryPlacingStructure(e) {
             placeStructure(e, structure)
 
             break
-        } else if (gameObjects.structures[structure].amount >= gameObjects.structures[structure].amountMax) {
-
-            placingStructure[structure] = false
-
-            document.getElementById(gameObjects.structures[structure].tag).classList.remove("sideBarItemActive")
-
-            closeInfoParent.classList.remove("closeInfoParentShow")
         }
     }
 }
@@ -385,7 +471,31 @@ function placeStructure(e, structure) {
 
                         let x = 0
 
-                        if (structure == "commandCenter" || structure == "plasmaTurret") {
+                        if (structure == "commandCenters") {
+
+                            let structureData = document.createElement("div")
+
+                            structureData.className = "structureDataParent"
+
+                            structureData.id = gridParent.id
+
+                            document.body.appendChild(structureData)
+
+                            for (let item of Object.keys(gameObjects.structures[structure].openedStructure)) {
+
+                                let itemDisplay = document.createElement("div")
+
+                                itemDisplay.innerText = gameObjects.structures[structure].openedStructure[item].displayName
+
+                                itemDisplay.className = "structureDataItem"
+
+                                itemDisplay.classList.add(gameObjects.structures[structure].openedStructure[item].class)
+
+                                structureData.appendChild(itemDisplay)
+                            }
+                        }
+
+                        if (structure == "commandCenters" || structure == "plasmaTurrets") {
 
                             let gridChildShadow = document.createElement("div")
 
@@ -398,7 +508,11 @@ function placeStructure(e, structure) {
 
                         e.target.value = structure
 
+                        e.target.addEventListener('mousedown', openStructure)
+
                         e.target.childNodes[0].classList.add(structure)
+
+                        e.target.childNodes[0].id = e.target.id
 
                         gameObjects.resources.credits.amount -= gameObjects.structures[structure].cost
 
@@ -418,12 +532,16 @@ function placeStructure(e, structure) {
                                 }
                             }
                         }
+
+                        break
                     }
                 }
             }
         }
     }
 }
+
+document.getElementById("closeInfoParent").onclick = stopPlacing
 
 function stopPlacing() {
 
@@ -437,11 +555,75 @@ function stopPlacing() {
     closeInfoParent.classList.remove("closeInfoParentShow")
 }
 
+let openedStructure
+
+function openStructure(e) {
+
+    if (!openedStructure || !openedStructure.opened) {
+
+        let elements = document.getElementsByClassName("structureDataParent")
+
+        for (let element of elements) {
+
+            if (e.target.id == element.id) {
+
+                e.target.style.outline = "2px solid white"
+
+                element.classList.add("structureDataParentShow")
+
+                document.getElementsByClassName("sideBar")[0].classList.add("sideBarHide")
+
+                e.target.removeEventListener('mousedown', openStructure)
+
+                setTimeout(function() {
+                    document.addEventListener('mousedown', closeStructure)
+                }, 100)
+
+                openedStructure = {
+                    opened: true,
+                    target: e.target
+                }
+
+                break
+            }
+        }
+    }
+}
+
+function closeStructure(e) {
+
+    let elements = document.getElementsByClassName("structureDataParentShow")
+    let elementChildren = document.getElementsByClassName("structureDataItem")
+
+    for (let element of elements) {
+
+        if (e.target != element && Array.from(elementChildren).indexOf(e.target) == -1) {
+
+            openedStructure.target.style.outline = "none"
+
+            element.classList.remove("structureDataParentShow")
+
+            document.getElementsByClassName("sideBar")[0].classList.remove("sideBarHide")
+
+            setTimeout(function() {
+                document.removeEventListener('mousedown', closeStructure)
+            }, 100)
+
+            openedStructure = {
+                opened: false,
+                target: undefined
+            }
+        }
+    }
+}
+
+
+
 setInterval(generateCredits, 250)
 
 function generateCredits() {
 
-    gameObjects.resources.credits.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+    gameObjects.resources.credits.income = (gameObjects.structures.pumpjacks.amount * 1) + (gameObjects.structures.commandCenters.amount * 15)
 
     gameObjects.resources.credits.amount += gameObjects.resources.credits.income
 

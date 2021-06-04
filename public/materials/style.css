@@ -1,4 +1,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+        @keyframes animateIn {
+            0% {
+                opacity: 0;
+            }
+            30% {
+                opacity: 0;
+            }
+            to {}
+        }
+        
         body {
             margin: 0;
             padding: 0;
@@ -6,6 +16,7 @@
             background: rgb(66, 66, 66);
             --primary: rgb(29, 92, 228);
             overflow: hidden;
+            animation: animateIn 1s;
         }
         
         .map {
@@ -72,7 +83,7 @@
             height: 75px;
             width: 75px;
             border-radius: 2px;
-            box-shadow: rgba(0, 0, 0, 0.2) 0 0 6px 0, rgba(0, 0, 0, 0.4) 0 0 40px 0;
+            box-shadow: rgba(0, 0, 0, 0.3) 0 0 6px 0, rgba(0, 0, 0, 0.6) 0 0 40px 0;
         }
         
         .barrack {
@@ -113,6 +124,41 @@
         .enemyCommander {}
         /**/
         
+        .structureDataParent {
+            color: white;
+            height: calc(100vh - 20px);
+            position: fixed;
+            pointer-events: none;
+            background: rgba( 255, 255, 255, 0.12);
+            backdrop-filter: blur( 5px);
+            margin: 10px;
+            border-radius: 4px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 1000;
+            left: 50px;
+        }
+        
+        .structureDataParentShow {
+            left: 0;
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .structureDataItem {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+            transition: all 0.2s;
+            position: relative;
+            left: 0;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
         .sideBar {
             color: white;
             height: calc(100vh - 20px);
@@ -122,6 +168,16 @@
             backdrop-filter: blur( 5px);
             margin: 10px;
             border-radius: 4px;
+            transition: all 0.3s;
+            opacity: 1;
+            pointer-events: all;
+            left: 0;
+        }
+        
+        .sideBarHide {
+            left: 50px;
+            opacity: 0;
+            pointer-events: none;
         }
         
         .sideBarItem {
@@ -131,7 +187,6 @@
             cursor: pointer;
             user-select: none;
             outline: none;
-            pointer-events: all;
             transition: all 0.2s;
             position: relative;
             left: 0;
@@ -262,7 +317,7 @@
             padding: 10px 30px;
             color: white;
             transition: all 0.3s;
-            font-size: 20px;
+            font-size: 18px;
             user-select: none;
             background: rgba( 255, 255, 255, 0.12);
             backdrop-filter: blur( 5px);

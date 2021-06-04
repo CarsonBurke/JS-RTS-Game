@@ -61,7 +61,7 @@
             left: 0;
             right: 0;
             z-index: -1;
-            animation: gridChildShadowShow 0.9s;
+            animation: gridChildShadowShow 0.075s;
             border-radius: 100%;
         }
         

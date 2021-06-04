@@ -12,13 +12,13 @@ function playMusic() {
 }
 
 let mapSizes = {
-    small: 400,
+    small: 900,
     medium: 3600,
     large: 4900,
     massive: 10000
 }
 
-let mapSize = mapSizes.massive
+let mapSize = mapSizes.small
 
 gridSize = 20
 
@@ -48,6 +48,8 @@ function generateMap() {
             gridParent.addEventListener('click', tryPlacingStructure)
 
             gridParent.id = z
+
+            //gridParent.innerText = x + ", " + y
 
             gridParents.push({ id: z, value: "plains", x: x, y: y })
 
@@ -246,7 +248,15 @@ generateStartingBases()
 
 function generateStartingBases() {
 
+    while (gameObjects.structures["commandCenter"].amount < 1) {
 
+        let x = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
+        let y = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
+
+        let element = document.getElementById(x + y)
+
+        placeStructure(element, "commandCenter")
+    }
 }
 
 let placingStructure = {}
@@ -300,6 +310,11 @@ function tryPlacingStructure(e) {
 }
 
 function placeStructure(e, structure) {
+
+    if (!e.target) {
+
+        e.target = e
+    }
 
     if (e.target.id && e.target.id > 0) {
 

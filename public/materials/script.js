@@ -223,18 +223,17 @@ let gameObjects = {
             openedStructure: {
                 teir2: {
                     displayName: "Teir 2",
-                    class: "",
+                    class: "tier2Tag",
                     cost: 14000,
                 },
                 builder: {
                     displayName: "Builder",
                     class: "builderTag",
-
                     cost: 200,
                 },
                 basicDriod: {
                     displayName: "Basic Driod",
-                    class: "",
+                    class: "basicDriodTag",
                     cost: 450,
                 }
             },
@@ -503,7 +502,7 @@ function placeStructure(e, structure) {
 
                             e.target.childNodes[0].appendChild(gridChildShadow)
 
-                            gridChildShadow.style.boxShadow = "rgb(29, 92, 228, 0.1) 0 0 0 " + gameObjects.structures[structure].range * 20 + "px"
+                            gridChildShadow.style.boxShadow = "rgb(29, 92, 228, 0.075) 0 0 0 " + gameObjects.structures[structure].range * 20 + "px"
                         }
 
                         e.target.value = structure

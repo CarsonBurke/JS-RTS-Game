@@ -361,9 +361,7 @@ function generateTerrain() {
 
 }
 
-generateStartingBases()
-
-function generateStartingBases() {
+setTimeout(function generateStartingBases() {
 
     while (gameObjects.structures["commandCenter"].amount < 1) {
 
@@ -374,7 +372,7 @@ function generateStartingBases() {
 
         placeStructure(element, "commandCenter")
     }
-}
+}, 750)
 
 let placingStructure = {}
 
@@ -565,6 +563,8 @@ function openStructure(e) {
         for (let element of elements) {
 
             if (e.target.id == element.id) {
+
+                stopPlacing()
 
                 e.target.style.outline = "2px solid white"
 

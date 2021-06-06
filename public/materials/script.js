@@ -212,6 +212,15 @@ let gameObjects = {
         "credits": {
             amount: 9000 + (startingCredits),
             income: 10,
+        },
+        "oil": {
+
+        },
+        "stone": {
+
+        },
+        "steel": {
+
         }
     },
     structures: {
@@ -480,15 +489,20 @@ function placeStructure(e, structure) {
 
                             for (let item of Object.keys(gameObjects.structures[structure].openedStructure)) {
 
-                                let itemDisplay = document.createElement("div")
+                                let itemDisplayParent = document.createElement("div")
 
-                                itemDisplay.innerText = gameObjects.structures[structure].openedStructure[item].displayName
+                                itemDisplayParent.innerText = gameObjects.structures[structure].openedStructure[item].displayName
 
-                                itemDisplay.className = "structureDataItem"
+                                itemDisplayParent.className = "structureDataItem"
 
-                                itemDisplay.classList.add(gameObjects.structures[structure].openedStructure[item].class)
+                                itemDisplayParent.classList.add(gameObjects.structures[structure].openedStructure[item].class)
 
-                                structureData.appendChild(itemDisplay)
+                                structureData.appendChild(itemDisplayParent)
+
+                                let itemDisplayImage = document.createElement("img")
+
+
+                                let itemDisplayText = document.createElement("img")
                             }
                         }
 

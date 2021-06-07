@@ -17,72 +17,101 @@
 
 <body oncontextmenu="return false;">
 
-    <div class="map" id="map"></div>
+    <section class="map" id="map">
 
-    <div class="sideBar">
+    </section>
+
+    <section class="sideBar" id="sideBar">
         <div class="sideBarTopper">
             <div class="unitCountParent">
                 <h3 class="economicUnitCount">0 Workers</h3>
                 <h3 class="totalUnitCount">0 / 500 Units</h3>
             </div>
-            <div class="displayItem">
-                <img class="displayImg creditImg">
+            <div class="displayContainer">
+                <div class="displayItem">
 
-                <div class="displayTagParent">
-                    <h3 class="displayTag">Credits</h3>
+                    <img class="displayImg creditImg">
+
                     <p class="displayAmount" id="creditAmount">0</p>
-                </div>
 
+                </div>
+                <div class="displayItem">
+                    <img class="displayImg oilImg">
+
+                    <p class="displayAmount" id="oilAmount">0</p>
+
+                </div>
+            </div>
+            <div class="displayContainer">
+                <div class="displayItem">
+                    <img class="displayImg concreteImg">
+
+                    <p class="displayAmount" id="concreteAmount">0</p>
+
+                </div>
+                <div class="displayItem">
+                    <img class="displayImg metalImg">
+
+                    <p class="displayAmount" id="metalAmount">0</p>
+
+                </div>
+            </div>
+            <div class="powerLevelParent">
+                <div class="powerLevelChild">
+
+                </div>
             </div>
         </div>
-        <div class="sideBarContent">
-            <div tabindex="0" class="sideBarItem" id="commandCenterTag" onclick="buildMode('commandCenter')">
+        <div class="sideBarContent" id="sideBarContent">
+            <div class="sideBarContentChild" id="sideBarContentChild">
+                <div tabindex="0" class="sideBarItem" id="commandCenterTag" onclick="buildMode('commandCenter')">
 
-                <div class="tooltipParent">
-                    <p class="tooltipText">Command centers cost 2500 credits</p>
+                    <div class="tooltipParent">
+                        <p class="tooltipText">Command centers cost 2500 credits</p>
+                    </div>
+
+                    <img alt="" class="itemImg commandCenterImg">
+
+                    <div class="tagParent">
+                        <h3 class="itemTag">Command Center</h3>
+                    </div>
+
                 </div>
+                <div tabindex="0" class="sideBarItem" id="barrackTag" onclick="buildMode('barrack')">
+                    <img alt="" class="itemImg barrackImg">
 
-                <img alt="" class="itemImg commandCenterImg">
+                    <div class="tagParent">
+                        <h3 class="itemTag">Barracks</h3>
+                    </div>
 
-                <div class="tagParent">
-                    <h3 class="itemTag">Command Center</h3>
                 </div>
+                <div tabindex="0" class="sideBarItem" id="pumpjackTag" onclick="buildMode('pumpjack')">
+                    <img alt="" class="itemImg pumpjackImg">
 
-            </div>
-            <div tabindex="0" class="sideBarItem" id="barrackTag" onclick="buildMode('barrack')">
-                <img alt="" class="itemImg barrackImg">
+                    <div class="tagParent">
+                        <h3 class="itemTag">Pumpjack</h3>
+                    </div>
 
-                <div class="tagParent">
-                    <h3 class="itemTag">Barracks</h3>
                 </div>
+                <div tabindex="0" class="sideBarItem" id="plasmaTurretTag" onclick="buildMode('plasmaTurret')">
+                    <img alt="" class="itemImg plasmaTurretImg">
 
-            </div>
-            <div tabindex="0" class="sideBarItem" id="pumpjackTag" onclick="buildMode('pumpjack')">
-                <img alt="" class="itemImg pumpjackImg">
+                    <div class="tagParent">
+                        <h3 class="itemTag">Plasma Turrets</h3>
+                    </div>
 
-                <div class="tagParent">
-                    <h3 class="itemTag">Pumpjack</h3>
                 </div>
+                <div tabindex="0" class="sideBarItem" id="generatorTag" onclick="buildMode('generator')">
+                    <img alt="" class="itemImg generatorImg">
 
-            </div>
-            <div tabindex="0" class="sideBarItem" id="plasmaTurretTag" onclick="buildMode('plasmaTurret')">
-                <img alt="" class="itemImg plasmaTurretImg">
+                    <div class="tagParent">
+                        <h3 class="itemTag">Generator</h3>
+                    </div>
 
-                <div class="tagParent">
-                    <h3 class="itemTag">Plasma Turrets</h3>
                 </div>
-
-            </div>
-            <div tabindex="0" class="sideBarItem" id="generatorTag" onclick="buildMode('generator')">
-                <img alt="" class="itemImg generatorImg">
-
-                <div class="tagParent">
-                    <h3 class="itemTag">Generator</h3>
-                </div>
-
             </div>
         </div>
-    </div>
+    </section>
 
     <div class="closeInfoParent" id="closeInfoParent">Press X or click here to exit build mode</div>
 

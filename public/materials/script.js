@@ -208,19 +208,22 @@ function changeDirection() {
 let credits = 0
 
 let gameObjects = {
+    factions: {
+
+    },
     resources: {
         "credits": {
             amount: 9000 + (startingCredits),
             income: 10,
         },
         "oil": {
-
+            amount: 200,
         },
         "stone": {
-
+            amount: 600,
         },
         "steel": {
-
+            amount: 50,
         }
     },
     structures: {
@@ -234,11 +237,13 @@ let gameObjects = {
                     displayName: "Tier 2",
                     class: "tier2Tag",
                     cost: 14000,
+                    purchased: false,
                 },
                 workerDroid: {
                     displayName: "Worker Droid",
                     class: "workerDroidTag",
                     cost: 450,
+                    purchased: 0,
                 }
             },
             dimensions: 4,
@@ -254,16 +259,19 @@ let gameObjects = {
                     displayName: "Tier 2",
                     class: "tier2Tag",
                     cost: 2400,
+                    purchased: false,
                 },
                 workerDroid: {
                     displayName: "Worker Droid",
                     class: "workerDroidTag",
                     cost: 200,
+                    purchased: 0,
                 },
                 combatDroid: {
                     displayName: "Combat Droid",
                     class: "combatDroidTag",
                     cost: 450,
+                    purchased: 0,
                 }
             },
             dimensions: 3,
@@ -279,11 +287,13 @@ let gameObjects = {
                     displayName: "Tier 3",
                     class: "tier3Tag",
                     cost: 6500,
+                    purchased: false,
                 },
                 tier2: {
                     displayName: "Tier 2",
                     class: "tier2Tag",
                     cost: 2200,
+                    purchased: false,
                 }
             },
             dimensions: 2,
@@ -300,16 +310,19 @@ let gameObjects = {
                     displayName: "Rapid Fire",
                     class: "rapidFireTag",
                     cost: 1800,
+                    purchased: false,
                 },
                 antiAir: {
                     displayName: "Anti Air",
                     class: "antiAirTag",
                     cost: 1100,
+                    purchased: false,
                 },
                 railgun: {
                     displayName: "Railgun",
                     class: "railgunTag",
                     cost: 1500,
+                    purchased: false,
                 }
             },
             dimensions: 2,
@@ -326,11 +339,13 @@ let gameObjects = {
                     displayName: "Tier 2",
                     class: "tier2Tag",
                     cost: 2400,
+                    purchased: false,
                 },
                 overdrive: {
                     displayName: "Overdrive",
                     class: "overdrive",
                     cost: 1500,
+                    purchased: false,
                 }
             },
             dimensions: 2,
@@ -348,6 +363,10 @@ let gameObjects = {
 
         },
         resources: {
+            "settlements": {
+                //Mechanical faction can aquire parts
+                //Alien faction can plunder for resources
+            },
             "oiWells": {
 
 
@@ -484,7 +503,7 @@ function placeStructure(e, structure) {
 
                         structureData.id = gridParent.id
 
-                        document.body.appendChild(structureData)
+                        document.getElementById("sideBarContent").appendChild(structureData)
 
                         for (let item of Object.keys(gameObjects.structures[structure].openedStructure)) {
 
@@ -589,7 +608,7 @@ function openStructure(e) {
 
                 element.classList.add("structureDataParentShow")
 
-                document.getElementsByClassName("sideBar")[0].classList.add("sideBarHide")
+                document.getElementsByClassName("sideBarContentChild")[0].classList.add("sideBarContentChildHide")
 
                 e.target.removeEventListener('mousedown', openStructure)
 
@@ -621,7 +640,7 @@ function closeStructure(e) {
 
             element.classList.remove("structureDataParentShow")
 
-            document.getElementsByClassName("sideBar")[0].classList.remove("sideBarHide")
+            document.getElementsByClassName("sideBarContentChild")[0].classList.remove("sideBarContentChildHide")
 
             setTimeout(function() {
                 document.removeEventListener('mousedown', closeStructure)
@@ -639,7 +658,11 @@ function closeStructure(e) {
 
 setInterval(generateCredits, 250)
 
-function generateCredits() {
+function generateResources() {
+
+    gameObjects.resources.credits.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+
+    gameObjects.resources.credits.amount += gameObjects.resources.credits.income
 
     gameObjects.resources.credits.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
 

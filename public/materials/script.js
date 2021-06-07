@@ -230,24 +230,18 @@ let gameObjects = {
             cost: 9000,
             range: 6,
             openedStructure: {
-                teir2: {
-                    displayName: "Teir 2",
+                tier2: {
+                    displayName: "Tier 2",
                     class: "tier2Tag",
                     cost: 14000,
                 },
-                builder: {
-                    displayName: "Builder",
-                    class: "builderTag",
-                    cost: 200,
-                },
-                basicDriod: {
-                    displayName: "Basic Driod",
-                    class: "basicDriodTag",
+                workerDroid: {
+                    displayName: "Worker Droid",
+                    class: "workerDroidTag",
                     cost: 450,
                 }
             },
             dimensions: 4,
-            amountId: "commandCenterAmount",
             onClickEvent: "placeCommandCenter",
             tag: "commandCenterTag"
         },
@@ -256,26 +250,23 @@ let gameObjects = {
             amountMax: 100,
             cost: 900,
             openedStructure: {
-                teir2: {
-                    displayName: "Teir 2",
-                    class: "",
-
+                tier2: {
+                    displayName: "Tier 2",
+                    class: "tier2Tag",
                     cost: 2400,
                 },
-                builder: {
-                    displayName: "Builder",
-                    class: "",
-
+                workerDroid: {
+                    displayName: "Worker Droid",
+                    class: "workerDroidTag",
                     cost: 200,
                 },
-                basicDriod: {
-                    displayName: "Basic Driod",
-                    class: "",
+                combatDroid: {
+                    displayName: "Combat Droid",
+                    class: "combatDroidTag",
                     cost: 450,
                 }
             },
             dimensions: 3,
-            amountId: "barrackAmount",
             onClickEvent: "placeBarrack",
             tag: "barrackTag"
         },
@@ -284,21 +275,18 @@ let gameObjects = {
             amountMax: 100,
             cost: 400,
             openedStructure: {
-                teir3: {
-                    displayName: "Teir 3",
-                    class: "",
-
+                tier3: {
+                    displayName: "Tier 3",
+                    class: "tier3Tag",
                     cost: 6500,
                 },
-                teir2: {
-                    displayName: "Teir 2",
-                    class: "",
-
+                tier2: {
+                    displayName: "Tier 2",
+                    class: "tier2Tag",
                     cost: 2200,
                 }
             },
             dimensions: 2,
-            amountId: "pumpjackAmount",
             onClickEvent: "placePumpjack",
             tag: "pumpjackTag"
         },
@@ -310,28 +298,45 @@ let gameObjects = {
             openedStructure: {
                 rapid: {
                     displayName: "Rapid Fire",
-                    class: "",
-
+                    class: "rapidFireTag",
                     cost: 1800,
                 },
                 antiAir: {
                     displayName: "Anti Air",
-                    class: "",
-
+                    class: "antiAirTag",
                     cost: 1100,
                 },
                 railgun: {
                     displayName: "Railgun",
-                    class: "",
-
+                    class: "railgunTag",
                     cost: 1500,
                 }
             },
             dimensions: 2,
-            amountId: "plasmaTurretAmount",
             onClickEvent: "placePlasmaTurret",
             tag: "plasmaTurretTag"
         },
+        "generator": {
+            amount: 0,
+            amountMax: 100,
+            cost: 1600,
+            range: 5,
+            openedStructure: {
+                tier2: {
+                    displayName: "Tier 2",
+                    class: "tier2Tag",
+                    cost: 2400,
+                },
+                overdrive: {
+                    displayName: "Overdrive",
+                    class: "overdrive",
+                    cost: 1500,
+                }
+            },
+            dimensions: 2,
+            onClickEvent: "placeGenerator",
+            tag: "generatorTag"
+        }
     },
     terrain: {
         "mountains": {
@@ -343,15 +348,7 @@ let gameObjects = {
 
         },
         resources: {
-            "oi": {
-
-
-            },
-            "fishs": {
-
-
-            },
-            "tree": {
+            "oiWells": {
 
 
             },
@@ -359,6 +356,10 @@ let gameObjects = {
 
 
             },
+            "metalRocks": {
+
+
+            }
         },
     },
 }
@@ -477,34 +478,40 @@ function placeStructure(e, structure) {
 
                         let x = 0
 
-                        if (structure == "commandCenter") {
+                        let structureData = document.createElement("div")
 
-                            let structureData = document.createElement("div")
+                        structureData.className = "structureDataParent"
 
-                            structureData.className = "structureDataParent"
+                        structureData.id = gridParent.id
 
-                            structureData.id = gridParent.id
+                        document.body.appendChild(structureData)
 
-                            document.body.appendChild(structureData)
+                        for (let item of Object.keys(gameObjects.structures[structure].openedStructure)) {
 
-                            for (let item of Object.keys(gameObjects.structures[structure].openedStructure)) {
+                            let itemDisplayParent = document.createElement("div")
 
-                                let itemDisplayParent = document.createElement("div")
+                            itemDisplayParent.className = "structureDataItem"
 
-                                itemDisplayParent.innerText = gameObjects.structures[structure].openedStructure[item].displayName
+                            itemDisplayParent.classList.add(gameObjects.structures[structure].openedStructure[item].class)
 
-                                itemDisplayParent.className = "structureDataItem"
+                            structureData.appendChild(itemDisplayParent)
 
-                                itemDisplayParent.classList.add(gameObjects.structures[structure].openedStructure[item].class)
+                            let itemDisplayImage = document.createElement("img")
 
-                                structureData.appendChild(itemDisplayParent)
+                            itemDisplayImage.className = "structureDataImage"
 
-                                let itemDisplayImage = document.createElement("img")
+                            itemDisplayParent.appendChild(itemDisplayImage)
 
 
-                                let itemDisplayText = document.createElement("img")
-                            }
+                            let itemDisplayText = document.createElement("h3")
+
+                            itemDisplayText.innerText = gameObjects.structures[structure].openedStructure[item].displayName
+
+                            itemDisplayText.className = "structureDataText"
+
+                            itemDisplayParent.appendChild(itemDisplayText)
                         }
+
 
                         if (structure == "commandCenter" || structure == "plasmaTurret") {
 
@@ -528,8 +535,6 @@ function placeStructure(e, structure) {
                         gameObjects.resources.credits.amount -= gameObjects.structures[structure].cost
 
                         gameObjects.structures[structure].amount += 1
-
-                        document.getElementById(gameObjects.structures[structure].amountId).innerText = gameObjects.structures[structure].amount + " / " + gameObjects.structures[structure].amountMax
 
                         for (let y = gridParent.y; y < gridParent.y + gameObjects.structures[structure].dimensions; y++) {
                             for (x = gridParent.x; x < gridParent.x + gameObjects.structures[structure].dimensions; x++) {
@@ -648,8 +653,5 @@ addText()
 
 function addText() {
 
-    for (let structure of Object.keys(gameObjects.structures)) {
 
-        document.getElementById(gameObjects.structures[structure].amountId).innerText = gameObjects.structures[structure].amount + " / " + gameObjects.structures[structure].amountMax
-    }
 }

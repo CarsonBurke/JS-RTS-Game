@@ -77,8 +77,10 @@
         }
         
         .commandCenter {
+            background-image: url("commandCenter.png");
+            background-size: cover;
+            background-position: center;
             opacity: 1;
-            background: rgba(4, 214, 4);
             margin: 2.5px;
             height: 75px;
             width: 75px;
@@ -88,28 +90,34 @@
         
         .barrack {
             opacity: 1;
-            background: rgb(30, 131, 75);
+            background-image: url("barrack.png");
+            background-size: cover;
+            background-position: center;
             margin: 2.5px;
             height: 55px;
             width: 55px;
-            box-shadow: rgba(0, 0, 0, 0.4) 0 0 40px 0;
+            box-shadow: rgba(0, 0, 0, 0.6) 0 0 40px 0;
             border-radius: 4px;
         }
         
         .pumpjack {
             opacity: 1;
-            background: rgb(24, 24, 24);
+            background-image: url("pumpjack.png");
+            background-size: cover;
+            background-position: center;
+            filter: brightness(150%);
             margin: 2.5px;
             height: 35px;
             width: 35px;
-            box-shadow: rgba(0, 0, 0, 0.4) 0 0 40px 0;
             border-radius: 6px;
         }
         
         .plasmaTurret {
             opacity: 1;
             border-radius: 100%;
-            background: rgba(129, 129, 129);
+            background-image: url("plasmaTurret.png");
+            background-size: cover;
+            background-position: center;
             margin: 2.5px;
             height: 35px;
             width: 35px;
@@ -118,8 +126,10 @@
         
         .generator {
             opacity: 1;
+            background-image: url("generator.png");
+            background-size: cover;
+            background-position: center;
             border-radius: 10px;
-            background: rgb(170, 7, 211);
             margin: 2.5px;
             height: 35px;
             width: 35px;
@@ -137,13 +147,17 @@
         .structureDataParent {
             transition: all 0.3s;
             max-height: 0px;
+            overflow: hidden;
             opacity: 0;
         }
         
         .structureDataParentShow {
             max-height: 100vh;
-            overflow: hidden;
             opacity: 1;
+        }
+        
+        .structureDataParent .structureDataitem {
+            height: 0;
         }
         
         .structureDataItem {
@@ -194,15 +208,18 @@
         }
         
         .sideBar {
+            top: 0;
+            bottom: 0;
             color: white;
             height: calc(100vh - 20px);
             position: fixed;
             pointer-events: none;
             margin: 10px;
-            border-radius: 8px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
             transition: all 0.3s;
             opacity: 1;
-            pointer-events: all;
+            pointer-events: none;
             left: 0;
             overflow-x: hidden;
             overflow-y: scroll;
@@ -225,7 +242,9 @@
             padding: 15px 0;
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur( 5px);
-            height: 100vh;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            pointer-events: all;
         }
         
         .sideBarContentChild {
@@ -256,19 +275,19 @@
             font-size: 14px;
         }
         
-        .powerLevelContainer {
+        .factionResourcesContainer {
             color: rgba(255, 255, 255, 0);
             cursor: default;
             transition: all 0.2s;
         }
         
-        .powerLevelContainer:hover {
+        .factionResourcesContainer:hover {
             color: rgba(255, 255, 255, 0.8);
         }
         
-        .powerLevelParent {
+        .factionResourceParent {
             background: rgba(255, 255, 255, 0.07);
-            height: 10px;
+            height: 8px;
             width: calc(100% + 32px);
             margin-left: -16px;
             position: relative;
@@ -279,10 +298,10 @@
             font-size: 13px;
         }
         
-        .powerLevelChild {
+        .factionResourceChild {
             background: rgb(170, 7, 211);
-            height: 10px;
-            width: 20%;
+            height: 8px;
+            width: 0%;
         }
         
         .displayContainer {
@@ -361,11 +380,12 @@
         }
         
         .itemImg {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             margin-right: 10px;
             transition: all 0.2s;
+            border: none;
         }
         
         .creditImg {}
@@ -376,29 +396,15 @@
         
         .steelImg {}
         
-        .commandCenterImg {
-            background: rgb(4, 214, 4);
-        }
+        .commandCenterImg {}
         
-        .barrackImg {
-            background: rgb(30, 131, 75);
-            border-radius: 2px;
-        }
+        .barrackImg {}
         
-        .pumpjackImg {
-            background: black;
-            border-radius: 6px;
-        }
+        .pumpjackImg {}
         
-        .plasmaTurretImg {
-            border-radius: 100%;
-            background: rgb(129, 129, 129);
-        }
+        .plasmaTurretImg {}
         
-        .generatorImg {
-            border-radius: 10px;
-            background: rgb(170, 7, 211);
-        }
+        .generatorImg {}
         
         .tagParent {
             display: flex;

@@ -1,3 +1,283 @@
+// Define settings for map
+
+let economicUnits = 0
+let units = 0
+let unitsMax = 750
+
+let factions = {
+    "humanoid": {
+        name: "humanoid",
+        resources: {
+            "food": {
+                amount: 0,
+                amountUsed: 0,
+            }
+        }
+    },
+    "mechanical": {
+        name: "Mechanical",
+        resources: {
+            "power": {
+                amount: 0,
+                amountUsed: 0,
+            }
+        }
+    },
+    "alien": {
+        name: "Alien",
+        resources: {
+            "hiveSpace": {
+                amount: 0,
+                amountUsed: 0,
+                amountMax: unitsMax,
+            }
+        }
+    },
+}
+
+let startingOptions = {
+    "low": 2000,
+    "medium": 5000,
+    "large": 12000,
+    "massive": 100000,
+    "aTon": 1000000,
+    "infinite": 1000000000000000000
+}
+
+let startingCredits = startingOptions["aTon"]
+
+let mapSizes = {
+    "small": 900,
+    "medium": 3600,
+    "large": 4900,
+    "massive": 10000
+}
+
+let mapSize = mapSizes["small"]
+
+let players = {
+    player1: {
+        faction: "mechanical",
+        factionSpecificResources: undefined,
+        resources: {
+            "credits": {
+                amount: 9000 + startingOptions[startingCredits],
+                income: 10,
+            },
+            "oil": {
+                amount: 200,
+                income: 10,
+            },
+            "concrete": {
+                amount: 600,
+                income: 10,
+            },
+            "steel": {
+                amount: 50,
+                income: 10,
+            }
+        }
+    }
+}
+
+for (let player of Object.keys(players)) {
+
+    players[player].factionSpecificResources = factions[players[player].faction].resources
+}
+
+// Create variables used in the game
+
+let gameObjects = {
+    resources: {
+        "credits": {
+            amount: 9000 + startingCredits,
+            income: 10,
+        },
+        "oil": {
+            amount: 200,
+            income: 10,
+        },
+        "concrete": {
+            amount: 600,
+            income: 10,
+        },
+        "steel": {
+            amount: 50,
+            income: 10,
+        }
+    },
+    structures: {
+        "commandCenter": {
+            amount: 0,
+            amountMax: 8,
+            cost: 9000,
+            creditsAdd: 25,
+            powerAdd: 10,
+            range: 6,
+            openedStructure: {
+                tier2: {
+                    displayName: "Tier 2",
+                    class: "tier2Tag",
+                    cost: 14000,
+                    purchased: false,
+                },
+                workerDroid: {
+                    displayName: "Worker Droid",
+                    class: "workerDroidTag",
+                    cost: 450,
+                    purchased: 0,
+                }
+            },
+            dimensions: 4,
+            onClickEvent: "placeCommandCenter",
+            tag: "commandCenterTag"
+        },
+        "barrack": {
+            amount: 0,
+            amountMax: 100,
+            cost: 900,
+            powerCost: 2,
+            openedStructure: {
+                tier2: {
+                    displayName: "Tier 2",
+                    class: "tier2Tag",
+                    cost: 2400,
+                    purchased: false,
+                },
+                workerDroid: {
+                    displayName: "Worker Droid",
+                    class: "workerDroidTag",
+                    cost: 200,
+                    purchased: 0,
+                },
+                combatDroid: {
+                    displayName: "Combat Droid",
+                    class: "combatDroidTag",
+                    cost: 450,
+                    purchased: 0,
+                }
+            },
+            dimensions: 3,
+            onClickEvent: "placeBarrack",
+            tag: "barrackTag"
+        },
+        "pumpjack": {
+            amount: 1,
+            amountMax: 100,
+            cost: 400,
+            creditsAdd: 10,
+            powerCost: 2,
+            openedStructure: {
+                tier3: {
+                    displayName: "Tier 3",
+                    class: "tier3Tag",
+                    cost: 6500,
+                    purchased: false,
+                },
+                tier2: {
+                    displayName: "Tier 2",
+                    class: "tier2Tag",
+                    cost: 2200,
+                    purchased: false,
+                }
+            },
+            dimensions: 2,
+            onClickEvent: "placePumpjack",
+            tag: "pumpjackTag"
+        },
+        "plasmaTurret": {
+            amount: 0,
+            amountMax: 100,
+            cost: 1600,
+            powerCost: 3,
+            range: 5,
+            openedStructure: {
+                rapid: {
+                    displayName: "Rapid Fire",
+                    class: "rapidFireTag",
+                    cost: 1800,
+                    purchased: false,
+                },
+                antiAir: {
+                    displayName: "Anti Air",
+                    class: "antiAirTag",
+                    cost: 1100,
+                    purchased: false,
+                },
+                railgun: {
+                    displayName: "Railgun",
+                    class: "railgunTag",
+                    cost: 1500,
+                    purchased: false,
+                }
+            },
+            dimensions: 2,
+            onClickEvent: "placePlasmaTurret",
+            tag: "plasmaTurretTag"
+        },
+        "generator": {
+            amount: 0,
+            amountMax: 100,
+            cost: 1600,
+            powerAdd: 7,
+            openedStructure: {
+                tier2: {
+                    displayName: "Tier 2",
+                    class: "tier2Tag",
+                    cost: 2400,
+                    purchased: false,
+                },
+                overdrive: {
+                    displayName: "Overdrive",
+                    class: "overdrive",
+                    cost: 1500,
+                    purchased: false,
+                }
+            },
+            dimensions: 2,
+            onClickEvent: "placeGenerator",
+            tag: "generatorTag"
+        }
+    },
+    terrain: {
+        "mountains": {
+            mountainsAmount: mapSize / 1000,
+            mountainsSize: mapSize / 1000
+        },
+        "water": {
+
+
+        },
+        resources: {
+            "settlements": {
+                //Mechanical faction can aquire parts
+                //Alien faction can plunder for resources
+            },
+            "oiWells": {
+
+
+            },
+            "rocks": {
+
+
+            },
+            "steelRocks": {
+
+
+            }
+        },
+    },
+    hotkeys: {
+        panUp: "w",
+        panDown: "s",
+        panLeft: "a",
+        panRight: "d",
+        stopPlacing: "x",
+    },
+}
+
+// Play music
+
 notMusicPlaying = true
 
 document.onclick = function() {
@@ -12,25 +292,7 @@ document.onclick = function() {
     }
 }
 
-startingCreditOptions = {
-    low: 2000,
-    medium: 5000,
-    large: 12000,
-    massive: 100000,
-    aTon: 1000000,
-    infinite: 1000000000000000000
-}
-
-let startingCredits = startingCreditOptions.aTon
-
-let mapSizes = {
-    small: 900,
-    medium: 3600,
-    large: 4900,
-    massive: 10000
-}
-
-let mapSize = mapSizes.small
+// Create the map
 
 gridSize = 20
 
@@ -79,6 +341,8 @@ function generateMap() {
     }
 }
 
+// Allows user to scroll to zoom
+
 let scale = 1
 
 map.onwheel = function zoom(event) {
@@ -92,25 +356,27 @@ map.onwheel = function zoom(event) {
     map.style.transform = `scale(${scale})`
 }
 
+// Define events for when user presses a key
+
 let upPos = 0
 let leftPos = 0
 
 window.onkeydown = function(e) {
 
-    if (e.key == "w") {
+    if (e.key == gameObjects.hotkeys.panUp) {
 
         startMove("up")
-    } else if (e.key == "s") {
+    } else if (e.key == gameObjects.hotkeys.panDown) {
 
         startMove("down")
-    } else if (e.key == "a") {
+    } else if (e.key == gameObjects.hotkeys.panLeft) {
 
         startMove("left")
-    } else if (e.key == "d") {
+    } else if (e.key == gameObjects.hotkeys.panRight) {
 
         startMove("right")
     }
-    if (e.key == "x") {
+    if (e.key == gameObjects.hotkeys.stopPlacing) {
 
         stopPlacing()
     }
@@ -118,16 +384,16 @@ window.onkeydown = function(e) {
 
 window.onkeyup = function(e) {
 
-    if (e.key == "w") {
+    if (e.key == gameObjects.hotkeys.panUp) {
 
         endMove("up")
-    } else if (e.key == "s") {
+    } else if (e.key == gameObjects.hotkeys.panDown) {
 
         endMove("down")
-    } else if (e.key == "a") {
+    } else if (e.key == gameObjects.hotkeys.panLeft) {
 
         endMove("left")
-    } else if (e.key == "d") {
+    } else if (e.key == gameObjects.hotkeys.panRight) {
 
         endMove("right")
     }
@@ -205,187 +471,6 @@ function changeDirection() {
     }
 }
 
-let credits = 0
-
-let gameObjects = {
-    factions: {
-
-    },
-    resources: {
-        "credits": {
-            amount: 9000 + (startingCredits),
-            income: 10,
-        },
-        "oil": {
-            amount: 200,
-            income: 10,
-        },
-        "concrete": {
-            amount: 600,
-            income: 10,
-        },
-        "steel": {
-            amount: 50,
-            income: 10,
-        }
-    },
-    structures: {
-        "commandCenter": {
-            amount: 0,
-            amountMax: 8,
-            cost: 9000,
-            range: 6,
-            openedStructure: {
-                tier2: {
-                    displayName: "Tier 2",
-                    class: "tier2Tag",
-                    cost: 14000,
-                    purchased: false,
-                },
-                workerDroid: {
-                    displayName: "Worker Droid",
-                    class: "workerDroidTag",
-                    cost: 450,
-                    purchased: 0,
-                }
-            },
-            dimensions: 4,
-            onClickEvent: "placeCommandCenter",
-            tag: "commandCenterTag"
-        },
-        "barrack": {
-            amount: 0,
-            amountMax: 100,
-            cost: 900,
-            openedStructure: {
-                tier2: {
-                    displayName: "Tier 2",
-                    class: "tier2Tag",
-                    cost: 2400,
-                    purchased: false,
-                },
-                workerDroid: {
-                    displayName: "Worker Droid",
-                    class: "workerDroidTag",
-                    cost: 200,
-                    purchased: 0,
-                },
-                combatDroid: {
-                    displayName: "Combat Droid",
-                    class: "combatDroidTag",
-                    cost: 450,
-                    purchased: 0,
-                }
-            },
-            dimensions: 3,
-            onClickEvent: "placeBarrack",
-            tag: "barrackTag"
-        },
-        "pumpjack": {
-            amount: 1,
-            amountMax: 100,
-            cost: 400,
-            openedStructure: {
-                tier3: {
-                    displayName: "Tier 3",
-                    class: "tier3Tag",
-                    cost: 6500,
-                    purchased: false,
-                },
-                tier2: {
-                    displayName: "Tier 2",
-                    class: "tier2Tag",
-                    cost: 2200,
-                    purchased: false,
-                }
-            },
-            dimensions: 2,
-            onClickEvent: "placePumpjack",
-            tag: "pumpjackTag"
-        },
-        "plasmaTurret": {
-            amount: 0,
-            amountMax: 100,
-            cost: 1600,
-            range: 5,
-            openedStructure: {
-                rapid: {
-                    displayName: "Rapid Fire",
-                    class: "rapidFireTag",
-                    cost: 1800,
-                    purchased: false,
-                },
-                antiAir: {
-                    displayName: "Anti Air",
-                    class: "antiAirTag",
-                    cost: 1100,
-                    purchased: false,
-                },
-                railgun: {
-                    displayName: "Railgun",
-                    class: "railgunTag",
-                    cost: 1500,
-                    purchased: false,
-                }
-            },
-            dimensions: 2,
-            onClickEvent: "placePlasmaTurret",
-            tag: "plasmaTurretTag"
-        },
-        "generator": {
-            amount: 0,
-            amountMax: 100,
-            cost: 1600,
-            range: 5,
-            openedStructure: {
-                tier2: {
-                    displayName: "Tier 2",
-                    class: "tier2Tag",
-                    cost: 2400,
-                    purchased: false,
-                },
-                overdrive: {
-                    displayName: "Overdrive",
-                    class: "overdrive",
-                    cost: 1500,
-                    purchased: false,
-                }
-            },
-            dimensions: 2,
-            onClickEvent: "placeGenerator",
-            tag: "generatorTag"
-        }
-    },
-    terrain: {
-        "mountains": {
-            mountainsAmount: mapSize / 1000,
-            mountainsSize: mapSize / 1000
-        },
-        "water": {
-
-
-        },
-        resources: {
-            "settlements": {
-                //Mechanical faction can aquire parts
-                //Alien faction can plunder for resources
-            },
-            "oiWells": {
-
-
-            },
-            "rocks": {
-
-
-            },
-            "steelRocks": {
-
-
-            }
-        },
-    },
-}
-
 generateTerrain()
 
 function generateTerrain() {
@@ -440,7 +525,7 @@ function tryPlacingStructure(e) {
 
     for (let structure of Object.keys(gameObjects.structures)) {
 
-        if (placingStructure[structure] == true && gameObjects.resources.credits.amount >= gameObjects.structures[structure].cost && gameObjects.structures[structure].amount < gameObjects.structures[structure].amountMax) {
+        if (placingStructure[structure] == true && gameObjects.resources.credits.amount >= gameObjects.structures[structure].cost) {
 
             placeStructure(e, structure)
 
@@ -500,6 +585,18 @@ function placeStructure(e, structure) {
 
                         let x = 0
 
+                        e.target.value = structure
+
+                        e.target.addEventListener('mousedown', openStructure)
+
+                        e.target.childNodes[0].classList.add(structure)
+
+                        e.target.childNodes[0].id = e.target.id
+
+                        gameObjects.resources.credits.amount -= gameObjects.structures[structure].cost
+
+                        gameObjects.structures[structure].amount += 1
+
                         let structureData = document.createElement("div")
 
                         structureData.className = "structureDataParent"
@@ -524,7 +621,6 @@ function placeStructure(e, structure) {
 
                             itemDisplayParent.appendChild(itemDisplayImage)
 
-
                             let itemDisplayText = document.createElement("h3")
 
                             itemDisplayText.innerText = gameObjects.structures[structure].openedStructure[item].displayName
@@ -533,7 +629,6 @@ function placeStructure(e, structure) {
 
                             itemDisplayParent.appendChild(itemDisplayText)
                         }
-
 
                         if (structure == "commandCenter" || structure == "plasmaTurret") {
 
@@ -546,17 +641,27 @@ function placeStructure(e, structure) {
                             gridChildShadow.style.boxShadow = "rgb(29, 92, 228, 0.075) 0 0 0 " + gameObjects.structures[structure].range * 20 + "px"
                         }
 
-                        e.target.value = structure
+                        for (let player of Object.keys(players)) {
 
-                        e.target.addEventListener('mousedown', openStructure)
+                            if (players[player].faction == "mechanical") {
+                                if (gameObjects.structures[structure].powerAdd) {
 
-                        e.target.childNodes[0].classList.add(structure)
+                                    players[player].factionSpecificResources.power.amount += gameObjects.structures[structure].powerAdd
 
-                        e.target.childNodes[0].id = e.target.id
+                                    document.getElementById("factionResourceChild").style.width = players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed + "%"
 
-                        gameObjects.resources.credits.amount -= gameObjects.structures[structure].cost
+                                } else if (gameObjects.structures[structure].powerCost) {
 
-                        gameObjects.structures[structure].amount += 1
+                                    players[player].factionSpecificResources.power.amountUsed += gameObjects.structures[structure].powerCost
+
+                                    document.getElementById("factionResourceChild").style.width = players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed + "%"
+                                }
+                            }
+                            if ((players[player].faction == "mechanical" || players[player].faction == "humanoid") && gameObjects.structures[structure].creditsAdd) {
+
+                                gameObjects.resources.credits.income += gameObjects.structures[structure].creditsAdd
+                            }
+                        }
 
                         for (let y = gridParent.y; y < gridParent.y + gameObjects.structures[structure].dimensions; y++) {
                             for (x = gridParent.x; x < gridParent.x + gameObjects.structures[structure].dimensions; x++) {
@@ -663,11 +768,13 @@ setInterval(generateResources, 250)
 
 function generateResources() {
 
-    gameObjects.resources.credits.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+    // Credits
 
     gameObjects.resources.credits.amount += gameObjects.resources.credits.income
 
     document.getElementById("creditAmount").innerText = gameObjects.resources.credits.amount
+
+    // Oil
 
     gameObjects.resources.oil.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
 
@@ -675,17 +782,24 @@ function generateResources() {
 
     document.getElementById("oilAmount").innerText = gameObjects.resources.oil.amount
 
+    // Concrete
+
     gameObjects.resources.concrete.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
 
     gameObjects.resources.concrete.amount += gameObjects.resources.concrete.income
 
     document.getElementById("concreteAmount").innerText = gameObjects.resources.concrete.amount
 
+    // Steel
+
     gameObjects.resources.steel.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
 
     gameObjects.resources.steel.amount += gameObjects.resources.steel.income
 
     document.getElementById("steelAmount").innerText = gameObjects.resources.steel.amount
+
+    // Faction Specific
+
 }
 
 
@@ -693,5 +807,7 @@ addText()
 
 function addText() {
 
+    document.getElementById("economicUnitCount").innerHTML = economicUnits + " Workers"
 
+    document.getElementById("totalUnitCount").innerHTML = units + " / " + unitsMax + " Units"
 }

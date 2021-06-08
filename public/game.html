@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" oncontextmenu="return false;">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     Tier 4 is thematically red
 -->
 
-<body oncontextmenu="return false;">
+<body>
 
     <section class="map" id="map">
 
@@ -53,13 +53,13 @@
                 </div>
             </div>
             <div class="unitCountParent">
-                <h3 class="economicUnitCount">0 Workers</h3>
-                <h3 class="totalUnitCount">0 / 500 Units</h3>
+                <h3 class="economicUnitCount" id="economicUnitCount"></h3>
+                <h3 class="totalUnitCount" id="totalUnitCount"></h3>
             </div>
-            <div class="powerLevelContainer">
+            <div class="factionResourcesContainer">
 
-                <div class="powerLevelParent">
-                    <div class="powerLevelChild">
+                <div class="factionResourceParent">
+                    <div class="factionResourceChild" id="factionResourceChild">
 
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         <p class="tooltipText">Command centers cost 2500 credits</p>
                     </div>
 
-                    <img alt="" class="itemImg commandCenterImg">
+                    <img src="materials/commandCenter.png" alt="" class="itemImg commandCenterImg">
 
                     <div class="tagParent">
                         <h3 class="itemTag">Command Center</h3>
@@ -81,7 +81,7 @@
 
                 </div>
                 <div tabindex="0" class="sideBarItem" id="barrackTag" onclick="buildMode('barrack')">
-                    <img alt="" class="itemImg barrackImg">
+                    <img src="materials/barrack.png" alt="" class="itemImg barrackImg">
 
                     <div class="tagParent">
                         <h3 class="itemTag">Barracks</h3>
@@ -89,7 +89,7 @@
 
                 </div>
                 <div tabindex="0" class="sideBarItem" id="pumpjackTag" onclick="buildMode('pumpjack')">
-                    <img alt="" class="itemImg pumpjackImg">
+                    <img src="materials/pumpjack.png" alt="" class="itemImg pumpjackImg">
 
                     <div class="tagParent">
                         <h3 class="itemTag">Pumpjack</h3>
@@ -97,7 +97,7 @@
 
                 </div>
                 <div tabindex="0" class="sideBarItem" id="plasmaTurretTag" onclick="buildMode('plasmaTurret')">
-                    <img alt="" class="itemImg plasmaTurretImg">
+                    <img src="materials/plasmaTurret.png" alt="" class="itemImg plasmaTurretImg">
 
                     <div class="tagParent">
                         <h3 class="itemTag">Plasma Turret</h3>
@@ -105,7 +105,7 @@
 
                 </div>
                 <div tabindex="0" class="sideBarItem" id="generatorTag" onclick="buildMode('generator')">
-                    <img alt="" class="itemImg generatorImg">
+                    <img src="materials/generator.png" alt="" class="itemImg generatorImg">
 
                     <div class="tagParent">
                         <h3 class="itemTag">Generator</h3>

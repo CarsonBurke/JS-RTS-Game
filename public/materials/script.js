@@ -218,12 +218,15 @@ let gameObjects = {
         },
         "oil": {
             amount: 200,
+            income: 10,
         },
-        "stone": {
+        "concrete": {
             amount: 600,
+            income: 10,
         },
         "steel": {
             amount: 50,
+            income: 10,
         }
     },
     structures: {
@@ -375,7 +378,7 @@ let gameObjects = {
 
 
             },
-            "metalRocks": {
+            "steelRocks": {
 
 
             }
@@ -656,7 +659,7 @@ function closeStructure(e) {
 
 
 
-setInterval(generateCredits, 250)
+setInterval(generateResources, 250)
 
 function generateResources() {
 
@@ -664,11 +667,25 @@ function generateResources() {
 
     gameObjects.resources.credits.amount += gameObjects.resources.credits.income
 
-    gameObjects.resources.credits.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
-
-    gameObjects.resources.credits.amount += gameObjects.resources.credits.income
-
     document.getElementById("creditAmount").innerText = gameObjects.resources.credits.amount
+
+    gameObjects.resources.oil.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+
+    gameObjects.resources.oil.amount += gameObjects.resources.oil.income
+
+    document.getElementById("oilAmount").innerText = gameObjects.resources.oil.amount
+
+    gameObjects.resources.concrete.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+
+    gameObjects.resources.concrete.amount += gameObjects.resources.concrete.income
+
+    document.getElementById("concreteAmount").innerText = gameObjects.resources.concrete.amount
+
+    gameObjects.resources.steel.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+
+    gameObjects.resources.steel.amount += gameObjects.resources.steel.income
+
+    document.getElementById("steelAmount").innerText = gameObjects.resources.steel.amount
 }
 
 

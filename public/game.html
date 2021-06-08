@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="materials/style.css">
-    <title>Index</title>
+    <title>JS RTS Game</title>
 </head>
 
 <!--
@@ -23,42 +23,45 @@
 
     <section class="sideBar" id="sideBar">
         <div class="sideBarTopper">
+            <div class="displayContainer">
+                <div class="displayItem">
+
+                    <img class="displayImg creditImg" src="materials/credits.png">
+
+                    <p class="displayAmount" id="creditAmount"></p>
+
+                </div>
+                <div class="displayItem">
+                    <img class="displayImg oilImg" src="materials/oil.png">
+
+                    <p class="displayAmount" id="oilAmount"></p>
+
+                </div>
+            </div>
+            <div class="displayContainer">
+                <div class="displayItem">
+                    <img class="displayImg concreteImg" src="materials/concrete.png">
+
+                    <p class="displayAmount" id="concreteAmount"></p>
+
+                </div>
+                <div class="displayItem">
+                    <img class="displayImg steelImg" src="materials/steel.png">
+
+                    <p class="displayAmount" id="steelAmount"></p>
+
+                </div>
+            </div>
             <div class="unitCountParent">
                 <h3 class="economicUnitCount">0 Workers</h3>
                 <h3 class="totalUnitCount">0 / 500 Units</h3>
             </div>
-            <div class="displayContainer">
-                <div class="displayItem">
+            <div class="powerLevelContainer">
 
-                    <img class="displayImg creditImg">
+                <div class="powerLevelParent">
+                    <div class="powerLevelChild">
 
-                    <p class="displayAmount" id="creditAmount">0</p>
-
-                </div>
-                <div class="displayItem">
-                    <img class="displayImg oilImg">
-
-                    <p class="displayAmount" id="oilAmount">0</p>
-
-                </div>
-            </div>
-            <div class="displayContainer">
-                <div class="displayItem">
-                    <img class="displayImg concreteImg">
-
-                    <p class="displayAmount" id="concreteAmount">0</p>
-
-                </div>
-                <div class="displayItem">
-                    <img class="displayImg metalImg">
-
-                    <p class="displayAmount" id="metalAmount">0</p>
-
-                </div>
-            </div>
-            <div class="powerLevelParent">
-                <div class="powerLevelChild">
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,7 +100,7 @@
                     <img alt="" class="itemImg plasmaTurretImg">
 
                     <div class="tagParent">
-                        <h3 class="itemTag">Plasma Turrets</h3>
+                        <h3 class="itemTag">Plasma Turret</h3>
                     </div>
 
                 </div>

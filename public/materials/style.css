@@ -240,8 +240,9 @@
         }
         
         .unitCountParent {
-            margin-bottom: 20px;
+            margin: 20px 0;
             text-align: center;
+            color: rgba(255, 255, 255, 0.85);
         }
         
         .economicUnitCount {
@@ -255,17 +256,32 @@
             font-size: 14px;
         }
         
+        .powerLevelContainer {
+            color: rgba(255, 255, 255, 0);
+            cursor: default;
+            transition: all 0.2s;
+        }
+        
+        .powerLevelContainer:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
         .powerLevelParent {
-            margin-top: 16px;
             background: rgba(255, 255, 255, 0.07);
-            height: 8px;
+            height: 10px;
             width: calc(100% + 32px);
             margin-left: -16px;
+            position: relative;
+        }
+        
+        .powerLevelText {
+            text-align: center;
+            font-size: 13px;
         }
         
         .powerLevelChild {
             background: rgb(170, 7, 211);
-            height: 8px;
+            height: 10px;
             width: 20%;
         }
         
@@ -273,6 +289,7 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+            user-select: none;
         }
         
         .displayItem {
@@ -351,21 +368,13 @@
             transition: all 0.2s;
         }
         
-        .creditImg {
-            background: white;
-        }
+        .creditImg {}
         
-        .oilImg {
-            background: black;
-        }
+        .oilImg {}
         
-        .concreteImg {
-            background: rgb(129, 129, 129);
-        }
+        .concreteImg {}
         
-        .metalImg {
-            background: rgb(97, 100, 112);
-        }
+        .steelImg {}
         
         .commandCenterImg {
             background: rgb(4, 214, 4);

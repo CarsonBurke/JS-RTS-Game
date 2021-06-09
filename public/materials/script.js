@@ -128,7 +128,7 @@ let gameObjects = {
                     purchased: 0,
                 }
             },
-            dimensions: 4,
+            dimensions: 5,
             onClickEvent: "placeCommandCenter",
             tag: "commandCenterTag"
         },

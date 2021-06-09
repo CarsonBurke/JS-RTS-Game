@@ -321,7 +321,7 @@
         
         .displayItem:hover .tooltipParent {
             opacity: 1;
-            top: -20px;
+            top: -25px;
         }
         
         .displayImg {

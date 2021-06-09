@@ -91,19 +91,19 @@ let gameObjects = {
     resources: {
         "credits": {
             amount: 9000 + startingCredits,
-            income: 10,
+            income: 0,
         },
         "oil": {
-            amount: 200,
-            income: 10,
+            amount: 350,
+            income: 0,
         },
         "concrete": {
-            amount: 600,
-            income: 10,
+            amount: 200,
+            income: 0,
         },
         "steel": {
             amount: 50,
-            income: 10,
+            income: 0,
         }
     },
     structures: {
@@ -111,7 +111,7 @@ let gameObjects = {
             amount: 0,
             amountMax: 8,
             creditCost: 9000,
-            creditsAdd: 25,
+            creditsAdd: 6,
             powerAdd: 10,
             range: 6,
             damage: 10,
@@ -189,7 +189,7 @@ let gameObjects = {
             amountMax: 100,
             creditCost: 400,
             creditsAdd: 10,
-            powerCost: 2,
+            powerCost: 2.5,
             image: "materials/pumpjack.png",
             openedStructure: {
                 "tier3": {
@@ -865,32 +865,35 @@ function generateResources() {
 
     gameObjects.resources.credits.amount += gameObjects.resources.credits.income
 
-    document.getElementById("creditAmount").innerText = gameObjects.resources.credits.amount
+    document.getElementById("creditAmount").innerText = (gameObjects.resources.credits.amount).toFixed(0)
+    document.getElementById("creditIncome").innerText = (gameObjects.resources.credits.income * 4).toFixed(0) + " / Sec"
 
     // Oil
 
-    gameObjects.resources.oil.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+    gameObjects.resources.oil.income = (gameObjects.structures.pumpjack.amount * 1.2) + (gameObjects.structures.commandCenter.amount * 2)
 
     gameObjects.resources.oil.amount += gameObjects.resources.oil.income
 
-    document.getElementById("oilAmount").innerText = gameObjects.resources.oil.amount
+    document.getElementById("oilAmount").innerText = (gameObjects.resources.oil.amount).toFixed(0)
+    document.getElementById("oilIncome").innerText = (gameObjects.resources.oil.income * 4).toFixed(0) + " / Sec"
 
     // Concrete
 
-    gameObjects.resources.concrete.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+    gameObjects.resources.concrete.income = (gameObjects.structures.commandCenter.amount * 1.8)
 
     gameObjects.resources.concrete.amount += gameObjects.resources.concrete.income
 
-    document.getElementById("concreteAmount").innerText = gameObjects.resources.concrete.amount
+    document.getElementById("concreteAmount").innerText = (gameObjects.resources.concrete.amount).toFixed(0)
+    document.getElementById("concreteIncome").innerText = (gameObjects.resources.concrete.income * 4).toFixed(0) + " / Sec"
 
     // Steel
 
-    gameObjects.resources.steel.income = (gameObjects.structures.pumpjack.amount * 1) + (gameObjects.structures.commandCenter.amount * 15)
+    gameObjects.resources.steel.income = (gameObjects.structures.commandCenter.amount * 0.5)
 
     gameObjects.resources.steel.amount += gameObjects.resources.steel.income
 
-    document.getElementById("steelAmount").innerText = gameObjects.resources.steel.amount
-
+    document.getElementById("steelAmount").innerText = (gameObjects.resources.steel.amount).toFixed(0)
+    document.getElementById("steelIncome").innerText = (gameObjects.resources.steel.income * 4).toFixed(0) + " / Sec"
 }
 
 

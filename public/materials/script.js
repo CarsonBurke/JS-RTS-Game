@@ -110,74 +110,104 @@ let gameObjects = {
         "commandCenter": {
             amount: 0,
             amountMax: 8,
-            cost: 9000,
+            creditCost: 9000,
             creditsAdd: 25,
             powerAdd: 10,
             range: 6,
+            damage: 10,
+            units: ["workerDroid"],
+            image: "materials/commandCenter.png",
             openedStructure: {
-                tier2: {
-                    displayName: "Tier 2",
-                    class: "tier2Tag",
-                    cost: 14000,
+                "tier3": {
+                    displayName: "Tier 3",
+                    effects: {
+                        image: "materials/commandCenterTier3.png",
+                        creditsAdd: 52,
+                        range: 8.5,
+                        damage: 16,
+                        powerAdd: 19,
+                    },
+                    creditCost: 32000,
                     purchased: false,
                 },
-                workerDroid: {
+                "tier2": {
+                    displayName: "Tier 2",
+                    effects: {
+                        image: "materials/commandCenterTier2.png",
+                        creditsAdd: 32,
+                        range: 7,
+                        damage: 13,
+                        powerAdd: 14,
+                    },
+                    creditCost: 11000,
+                    purchased: false,
+                },
+                "workerDroid": {
                     displayName: "Worker Droid",
-                    class: "workerDroidTag",
-                    cost: 450,
+                    creditCost: 450,
                     purchased: 0,
                 }
             },
-            dimensions: 5,
+            dimensions: 6,
             onClickEvent: "placeCommandCenter",
             tag: "commandCenterTag"
         },
         "barrack": {
             amount: 0,
             amountMax: 100,
-            cost: 900,
+            creditCost: 900,
             powerCost: 2,
+            units: ["workerDroid", "combatDroid"],
+            image: "materials/barrack.png",
             openedStructure: {
-                tier2: {
+                "tier2": {
                     displayName: "Tier 2",
-                    class: "tier2Tag",
-                    cost: 2400,
+                    creditCost: 2400,
+                    effects: {
+                        image: "materials/barrackTier2.png",
+                        units: ["workerDroid", "combatDroid"],
+                    },
                     purchased: false,
                 },
-                workerDroid: {
+                "workerDroid": {
                     displayName: "Worker Droid",
-                    class: "workerDroidTag",
-                    cost: 200,
+                    creditCost: 200,
                     purchased: 0,
                 },
-                combatDroid: {
+                "combatDroid": {
                     displayName: "Combat Droid",
-                    class: "combatDroidTag",
-                    cost: 450,
+                    creditCost: 450,
                     purchased: 0,
                 }
             },
-            dimensions: 3,
+            dimensions: 4,
             onClickEvent: "placeBarrack",
             tag: "barrackTag"
         },
         "pumpjack": {
             amount: 1,
             amountMax: 100,
-            cost: 400,
+            creditCost: 400,
             creditsAdd: 10,
             powerCost: 2,
+            image: "materials/pumpjack.png",
             openedStructure: {
-                tier3: {
+                "tier3": {
                     displayName: "Tier 3",
-                    class: "tier3Tag",
-                    cost: 6500,
+                    creditCost: 6500,
+                    effects: {
+                        image: "materials/pumpjackTier3.png",
+                        powerCost: 5,
+                    },
                     purchased: false,
                 },
-                tier2: {
+                "tier2": {
                     displayName: "Tier 2",
-                    class: "tier2Tag",
-                    cost: 2200,
+                    creditCost: 2200,
+                    effects: {
+                        image: "materials/pumpjackTier2.png",
+                        powerCost: 3,
+                    },
                     purchased: false,
                 }
             },
@@ -188,26 +218,32 @@ let gameObjects = {
         "plasmaTurret": {
             amount: 0,
             amountMax: 100,
-            cost: 1600,
+            creditCost: 1600,
             powerCost: 3,
             range: 5,
+            damage: 3,
+            image: "materials/plasmaTurret.png",
             openedStructure: {
-                rapid: {
+                "rapidFire": {
                     displayName: "Rapid Fire",
-                    class: "rapidFireTag",
-                    cost: 1800,
+                    creditCost: 1800,
+                    effects: {
+                        image: "materials/plasmaTurretRapidFire.png",
+                        range: 6,
+                        damage: 4,
+                        powerCost: 4.5,
+                    },
                     purchased: false,
                 },
-                antiAir: {
-                    displayName: "Anti Air",
-                    class: "antiAirTag",
-                    cost: 1100,
-                    purchased: false,
-                },
-                railgun: {
+                "railgun": {
                     displayName: "Railgun",
-                    class: "railgunTag",
-                    cost: 1500,
+                    creditCost: 1500,
+                    effects: {
+                        image: "materials/plasmaTurretRailgun.png",
+                        range: 9.5,
+                        damage: 8,
+                        powerCost: 5,
+                    },
                     purchased: false,
                 }
             },
@@ -218,19 +254,26 @@ let gameObjects = {
         "generator": {
             amount: 0,
             amountMax: 100,
-            cost: 1600,
+            creditCost: 1600,
             powerAdd: 7,
+            image: "materials/generator.png",
             openedStructure: {
-                tier2: {
+                "tier3": {
                     displayName: "Tier 2",
-                    class: "tier2Tag",
-                    cost: 2400,
+                    creditCost: 4200,
+                    effects: {
+                        image: "materials/generatorTier3.png",
+                        powerAdd: 18,
+                    },
                     purchased: false,
                 },
-                overdrive: {
-                    displayName: "Overdrive",
-                    class: "overdrive",
-                    cost: 1500,
+                "tier2": {
+                    displayName: "Tier 2",
+                    creditCost: 2500,
+                    effects: {
+                        image: "materials/generatorTier2.png",
+                        powerAdd: 11,
+                    },
                     purchased: false,
                 }
             },
@@ -525,7 +568,7 @@ function tryPlacingStructure(e) {
 
     for (let structure of Object.keys(gameObjects.structures)) {
 
-        if (placingStructure[structure] == true && gameObjects.resources.credits.amount >= gameObjects.structures[structure].cost) {
+        if (placingStructure[structure] == true && gameObjects.resources.credits.amount >= gameObjects.structures[structure].creditCost) {
 
             placeStructure(e, structure)
 
@@ -591,9 +634,11 @@ function placeStructure(e, structure) {
 
                         e.target.childNodes[0].classList.add(structure)
 
+                        e.target.childNodes[0].style.backgroundImage = "url(" + gameObjects.structures[structure].image + ")"
+
                         e.target.childNodes[0].id = e.target.id
 
-                        gameObjects.resources.credits.amount -= gameObjects.structures[structure].cost
+                        gameObjects.resources.credits.amount -= gameObjects.structures[structure].creditCost
 
                         gameObjects.structures[structure].amount += 1
 
@@ -607,27 +652,29 @@ function placeStructure(e, structure) {
 
                         for (let item of Object.keys(gameObjects.structures[structure].openedStructure)) {
 
-                            let itemDisplayParent = document.createElement("div")
+                            let structureDataItem = document.createElement("div")
 
-                            itemDisplayParent.className = "structureDataItem"
+                            structureDataItem.className = "structureDataItem"
 
-                            itemDisplayParent.classList.add(gameObjects.structures[structure].openedStructure[item].class)
+                            structureDataItem.classList.add(item)
 
-                            structureData.appendChild(itemDisplayParent)
+                            structureDataItem.onclick = purchaseFromStructure
 
-                            let itemDisplayImage = document.createElement("img")
+                            structureData.appendChild(structureDataItem)
 
-                            itemDisplayImage.className = "structureDataImage"
+                            let structureDataImage = document.createElement("img")
 
-                            itemDisplayParent.appendChild(itemDisplayImage)
+                            structureDataImage.className = "structureDataImage"
 
-                            let itemDisplayText = document.createElement("h3")
+                            structureDataItem.appendChild(structureDataImage)
 
-                            itemDisplayText.innerText = gameObjects.structures[structure].openedStructure[item].displayName
+                            let structureDataText = document.createElement("h3")
 
-                            itemDisplayText.className = "structureDataText"
+                            structureDataText.innerText = gameObjects.structures[structure].openedStructure[item].displayName
 
-                            itemDisplayParent.appendChild(itemDisplayText)
+                            structureDataText.className = "structureDataText"
+
+                            structureDataItem.appendChild(structureDataText)
                         }
 
                         if (structure == "commandCenter" || structure == "plasmaTurret") {
@@ -644,18 +691,8 @@ function placeStructure(e, structure) {
                         for (let player of Object.keys(players)) {
 
                             if (players[player].faction == "mechanical") {
-                                if (gameObjects.structures[structure].powerAdd) {
 
-                                    players[player].factionSpecificResources.power.amount += gameObjects.structures[structure].powerAdd
-
-                                    document.getElementById("factionResourceChild").style.width = players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed + "%"
-
-                                } else if (gameObjects.structures[structure].powerCost) {
-
-                                    players[player].factionSpecificResources.power.amountUsed += gameObjects.structures[structure].powerCost
-
-                                    document.getElementById("factionResourceChild").style.width = players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed + "%"
-                                }
+                                updatePower(structure, player)
                             }
                             if ((players[player].faction == "mechanical" || players[player].faction == "humanoid") && gameObjects.structures[structure].creditsAdd) {
 
@@ -762,7 +799,63 @@ function closeStructure(e) {
     }
 }
 
+function purchaseFromStructure(e) {
 
+    let structure = document.getElementById(e.target.parentElement.id).childNodes[0]
+
+    let structureType = structure.classList[1]
+
+    let id = structure.id
+
+    let purchaseItem = e.target.classList[1]
+
+    let cost = gameObjects.structures[structureType].openedStructure[purchaseItem].creditCost
+
+    if (gameObjects.resources.credits.amount >= cost && gameObjects.structures[structureType].openedStructure[purchaseItem].purchased != true) {
+
+        gameObjects.resources.credits.amount -= cost
+        gameObjects.structures[structureType].openedStructure[purchaseItem].purchased = true
+
+        for (let effect of Object.keys(gameObjects.structures[structureType].openedStructure[purchaseItem].effects)) {
+
+            if (Object.keys(gameObjects.structures[structureType]).indexOf(effect) > 0) {
+
+                gameObjects.structures[structureType][effect] = gameObjects.structures[structureType].openedStructure[purchaseItem].effects[effect]
+
+                updateStats(structureType, id)
+                updatePower(structureType, "player1")
+            }
+        }
+    }
+}
+
+function updateStats(structure, id) {
+
+    if (structure == "commandCenter" || structure == "plasmaTurret") {
+
+        let element = document.getElementById(id).childNodes[0]
+
+        element.style.backgroundImage = "url(" + gameObjects.structures[structure].image + ")"
+
+        element.childNodes[0].style.boxShadow = "rgb(29, 92, 228, 0.075) 0 0 0 " + gameObjects.structures[structure].range * 20 + "px"
+    }
+}
+
+function updatePower(structure, player) {
+
+    if (gameObjects.structures[structure].powerAdd) {
+
+        players[player].factionSpecificResources.power.amount += gameObjects.structures[structure].powerAdd
+
+        document.getElementById("factionResourceChild").style.width = players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed + "%"
+
+    } else if (gameObjects.structures[structure].powerCost) {
+
+        players[player].factionSpecificResources.power.amountUsed += gameObjects.structures[structure].powerCost
+
+        document.getElementById("factionResourceChild").style.width = players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed + "%"
+    }
+}
 
 setInterval(generateResources, 250)
 
@@ -797,8 +890,6 @@ function generateResources() {
     gameObjects.resources.steel.amount += gameObjects.resources.steel.income
 
     document.getElementById("steelAmount").innerText = gameObjects.resources.steel.amount
-
-    // Faction Specific
 
 }
 

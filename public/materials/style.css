@@ -294,7 +294,7 @@
                     background-size: 200%;
                     background-position-x: 0%;
                     transition: all 0.3s;
-                    background: linear-gradient(90deg, rgb(90, 6, 110) 49.6%, rgb(255, 255, 255) 50%, rgb(170, 7, 211) 50.6%);
+                    background: linear-gradient(90deg, rgb(90, 6, 110) 50%, rgb(170, 7, 211) 50%);
                 }
                 
                 .displayContainer {

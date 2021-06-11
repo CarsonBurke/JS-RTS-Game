@@ -33,6 +33,7 @@
                     transition: all 0.1s;
                     overflow: hidden;
                     z-index: -1;
+                    border-radius: 4px;
                 }
                 
                 .gridParent {

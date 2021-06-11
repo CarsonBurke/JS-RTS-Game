@@ -575,11 +575,11 @@ function changeDirection() {
 
             if (move.qualifier == "positive") {
 
-                upPos += 75
+                upPos += 150
 
             } else {
 
-                upPos -= 75
+                upPos -= 150
             }
         } else {
 
@@ -598,11 +598,73 @@ function changeDirection() {
     }
 }
 
-generateTerrain()
+generateTerrain(100)
 
-function generateTerrain() {
+function generateTerrain(size, noise) {
 
+    // noise is number of times to have a chance to remove the value of Math.max or math.min
 
+let useNoise = Math.random() * 1
+
+    if (!noise) {
+
+        noise = 5
+    }
+
+    let startX = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
+    let startY = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
+
+    //console.log(startX + ", " + startY)
+
+    for (let gridParent of gridParents) {
+
+        if (gridParent.x == startX && gridParent.y == startY) {
+        
+        let terrainGrid = []
+
+        let z = 0
+
+        let x = 0
+
+    for (let y = gridParent.y; y < gridParent.y + size; y++) {
+        for (x = gridParent.x; x < gridParent.x + size; x++) {
+
+            document.getElementById(x * y).style.backgroundColor = "white"
+
+            terrainGrid.push({z: z, x: x, y: y})
+
+            z += 1
+
+            for (let gridParentAlt of gridParents) {
+
+                if (x == gridParentAlt.x && y == gridParentAlt.y) {
+
+                    if (gridParentAlt.value != "plains") {
+
+                        break
+                    }
+                }
+            }
+        }
+    }
+
+    let i
+
+    for (let object of terrainGrid) {
+
+        i++
+
+        if (1 == 2) {
+
+            terrainGrid.slice(i, i + 1)
+        }
+    }
+
+    console.log(terrainGrid)
+}
+}
+
+    
 }
 
 setTimeout(function generateStartingBases() {
@@ -982,7 +1044,7 @@ function generateResources() {
 
     // Oil
 
-    resources.oil.income = (structures.pumpjack.amount * 1.2) + (structures.commandCenter.amount * 2)
+    resources.oil.income = (structures.pumpjack.amount * 1.2) + (structures.commandCenter.amount * 1)
 
     resources.oil.amount += resources.oil.income
 

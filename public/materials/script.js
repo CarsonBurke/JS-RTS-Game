@@ -88,7 +88,6 @@ for (let player of Object.keys(players)) {
 let structures = {
     "commandCenter": {
         amount: 0,
-        amountMax: 8,
         creditCost: 9000,
         creditsAdd: 6,
         powerAdd: 10,
@@ -133,7 +132,6 @@ let structures = {
     },
     "barrack": {
         amount: 0,
-        amountMax: 100,
         creditCost: 900,
         powerCost: 2,
         units: ["workerDroid", "combatDroid"],
@@ -164,8 +162,7 @@ let structures = {
         tag: "barrackTag"
     },
     "pumpjack": {
-        amount: 1,
-        amountMax: 100,
+        amount: 0,
         creditCost: 400,
         creditsAdd: 10,
         powerCost: 2.5,
@@ -194,9 +191,98 @@ let structures = {
         onClickEvent: "placePumpjack",
         tag: "pumpjackTag"
     },
+    "mineshaft": {
+        amount: 0,
+        creditCost: 400,
+        creditsAdd: 10,
+        powerCost: 2,
+        image: "materials/mineshaft.png",
+        openedStructure: {
+            "tier3": {
+                displayName: "Tier 3",
+                creditCost: 6500,
+                effects: {
+                    image: "materials/pumpjackTier3.png",
+                    powerCost: 5,
+                },
+                purchased: false,
+            },
+            "tier2": {
+                displayName: "Tier 2",
+                creditCost: 2200,
+                effects: {
+                    image: "materials/pumpjackTier2.png",
+                    powerCost: 3,
+                },
+                purchased: false,
+            }
+        },
+        dimensions: 3,
+        onClickEvent: "placeMineshaft",
+        tag: "mineshaftTag"
+    },
+    "concretePlant": {
+        amount: 0,
+        creditCost: 400,
+        creditsAdd: 10,
+        powerCost: 3.75,
+        image: "materials/concretePlant.png",
+        openedStructure: {
+            "tier3": {
+                displayName: "Tier 3",
+                creditCost: 6500,
+                effects: {
+                    image: "materials/pumpjackTier3.png",
+                    powerCost: 5,
+                },
+                purchased: false,
+            },
+            "tier2": {
+                displayName: "Tier 2",
+                creditCost: 2200,
+                effects: {
+                    image: "materials/pumpjackTier2.png",
+                    powerCost: 3,
+                },
+                purchased: false,
+            }
+        },
+        dimensions: 4,
+        onClickEvent: "placeConcretePlant",
+        tag: "concretePlantTag"
+    },
+    "steelRefinery": {
+        amount: 0,
+        creditCost: 400,
+        creditsAdd: 10,
+        powerCost: 2.5,
+        image: "materials/steelRefinery.png",
+        openedStructure: {
+            "tier3": {
+                displayName: "Tier 3",
+                creditCost: 6500,
+                effects: {
+                    image: "materials/pumpjackTier3.png",
+                    powerCost: 5,
+                },
+                purchased: false,
+            },
+            "tier2": {
+                displayName: "Tier 2",
+                creditCost: 2200,
+                effects: {
+                    image: "materials/pumpjackTier2.png",
+                    powerCost: 3,
+                },
+                purchased: false,
+            }
+        },
+        dimensions: 4,
+        onClickEvent: "placeSteelRefinery",
+        tag: "steelRefineryTag"
+    },
     "plasmaTurret": {
         amount: 0,
-        amountMax: 100,
         creditCost: 1600,
         powerCost: 3,
         range: 5,
@@ -232,7 +318,6 @@ let structures = {
     },
     "generator": {
         amount: 0,
-        amountMax: 100,
         creditCost: 1600,
         powerAdd: 7,
         image: "materials/generator.png",
@@ -549,7 +634,7 @@ function buildMode(structureName) {
 
         if (structure == structureName) {
 
-            if (structures[structure].amount < structures[structure].amountMax) {
+            if (1 == 1 /* check if structure is unlocked? */) {
 
                 document.getElementById(structures[structure].tag).classList.add("sideBarItemActive")
 
@@ -634,6 +719,12 @@ function placeStructure(e, structure) {
                         e.target.childNodes[0].classList.add(structure)
 
                         e.target.childNodes[0].style.backgroundImage = "url(" + structures[structure].image + ")"
+
+                        e.target.childNodes[0].style.width = structures[structure].dimensions * 20 - 5 + "px"
+
+                        e.target.childNodes[0].style.height = structures[structure].dimensions * 20 - 5 + "px"
+
+                        e.target.childNodes[0].style.margin =  "2.5px"
 
                         e.target.childNodes[0].id = e.target.id
 
@@ -852,7 +943,7 @@ function updatePower(structure, player) {
 
     }
 
-    document.getElementById("factionResourcesText").innerText = players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed + " Power"
+    document.getElementById("factionResourcesText").innerText = (players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed).toFixed(0) + " Power"
 
     let factionResourcesParent = document.getElementById("factionResourcesParent")
 
@@ -864,21 +955,16 @@ function updatePower(structure, player) {
 
         let requestedPosition = (players[player].factionSpecificResources.power.amount - players[player].factionSpecificResources.power.amountUsed)
 
-        console.log(requestedPosition + ", " + (factionResourcesParent.style.backgroundSize).replace('%', ''))
-
         if (requestedPosition > 100) {
 
-            console.log("Too big")
             return 100 + "%"
 
         }
         if (requestedPosition < 0) {
 
-            console.log("Too small")
             return 0 + "%"
         }
 
-        console.log("Just right")
         return requestedPosition + "%"
     }
 }

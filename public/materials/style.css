@@ -96,19 +96,19 @@
                     background-position: center;
                     border-radius: 6px;
                 }
-
+                
                 .mineshaft {
                     background-size: cover;
                     background-position: center;
                     border-radius: 6px;
                 }
-
+                
                 .concretePlant {
                     background-size: cover;
                     background-position: center;
                     border-radius: 6px;
                 }
-
+                
                 .steelRefinery {
                     opacity: 1;
                     background-size: cover;
@@ -219,12 +219,7 @@
                     opacity: 1;
                     pointer-events: none;
                     left: 0;
-                    overflow-x: hidden;
-                    overflow-y: scroll;
-                }
-                
-                .sideBar::-webkit-scrollbar {
-                    display: none;
+                    overflow: hidden;
                 }
                 
                 .sideBarTopper {
@@ -243,16 +238,15 @@
                     border-bottom-left-radius: 8px;
                     border-bottom-right-radius: 8px;
                     pointer-events: all;
+                    overflow: hidden;
                 }
                 
                 .sideBarContentChild {
-                    max-height: 100vh;
                     transition: all 0.3s;
                     overflow: hidden;
                 }
                 
                 .sideBarContentChildHide {
-                    max-height: 0px;
                     opacity: 0;
                 }
                 

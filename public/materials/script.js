@@ -598,13 +598,13 @@ function changeDirection() {
     }
 }
 
-generateTerrain(100)
+generateTerrain(10)
 
 function generateTerrain(size, noise) {
 
     // noise is number of times to have a chance to remove the value of Math.max or math.min
 
-let useNoise = Math.random() * 1
+    let useNoise = Math.random() * 1
 
     if (!noise) {
 
@@ -619,52 +619,43 @@ let useNoise = Math.random() * 1
     for (let gridParent of gridParents) {
 
         if (gridParent.x == startX && gridParent.y == startY) {
-        
-        let terrainGrid = []
 
-        let z = 0
+            let terrainGrid = []
 
-        let x = 0
+            for (let x = gridParent.x; x < gridParent.x + size; x++) {
+                for (let y = gridParent.y; y < gridParent.y + size; y++) {
+                    console.log(x + ", " + y)
 
-    for (let y = gridParent.y; y < gridParent.y + size; y++) {
-        for (x = gridParent.x; x < gridParent.x + size; x++) {
+                    terrainGrid.push({ x: x, y: y })
 
-            document.getElementById(x * y).style.backgroundColor = "white"
+                    for (let gridParentAlt of gridParents) {
 
-            terrainGrid.push({z: z, x: x, y: y})
+                        if (x == gridParentAlt.x && y == gridParentAlt.y) {
 
-            z += 1
+                            if (gridParentAlt.value != "plains") {
 
-            for (let gridParentAlt of gridParents) {
+                                break
+                            }
 
-                if (x == gridParentAlt.x && y == gridParentAlt.y) {
-
-                    if (gridParentAlt.value != "plains") {
-
-                        break
+                            document.getElementById(gridParentAlt.id).style.backgroundColor = "white"
+                        }
                     }
+                }
+            }
+
+            let i
+
+            for (let object of terrainGrid) {
+
+                i++
+
+                if (1 == 2) {
+
+                    terrainGrid.slice(i, i + 1)
                 }
             }
         }
     }
-
-    let i
-
-    for (let object of terrainGrid) {
-
-        i++
-
-        if (1 == 2) {
-
-            terrainGrid.slice(i, i + 1)
-        }
-    }
-
-    console.log(terrainGrid)
-}
-}
-
-    
 }
 
 setTimeout(function generateStartingBases() {
@@ -696,7 +687,7 @@ function buildMode(structureName) {
 
         if (structure == structureName) {
 
-            if (1 == 1 /* check if structure is unlocked? */) {
+            if (1 == 1 /* check if structure is unlocked? */ ) {
 
                 document.getElementById(structures[structure].tag).classList.add("sideBarItemActive")
 
@@ -786,7 +777,7 @@ function placeStructure(e, structure) {
 
                         e.target.childNodes[0].style.height = structures[structure].dimensions * 20 - 5 + "px"
 
-                        e.target.childNodes[0].style.margin =  "2.5px"
+                        e.target.childNodes[0].style.margin = "2.5px"
 
                         e.target.childNodes[0].id = e.target.id
 

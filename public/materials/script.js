@@ -643,7 +643,7 @@ function generateTerrain(size, noise) {
                             if ((Math.random() * noise).toFixed(0) != noise) {
 
                                 document.getElementById(gridParentAlt.id).style.backgroundColor = "#212121"
-                                document.getElementById(gridParentAlt.id).style.boxShadow = "#212121 0 0 8px 2px"
+                                document.getElementById(gridParentAlt.id).style.boxShadow = "#212121 0 0 12px 1px"
                             }
                         }
                     }

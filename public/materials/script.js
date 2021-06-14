@@ -598,9 +598,9 @@ function changeDirection() {
         map.style.left = leftPos + "px"
     }
 }
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 40; i++) {
 
-generateTerrain(10)
+generateTerrain(3)
 }
 
 function generateTerrain(size, noise) {
@@ -638,9 +638,12 @@ function generateTerrain(size, noise) {
                                 break
                             }
 
+                            gridParentAlt.value = "mountain"
+
                             if ((Math.random() * noise).toFixed(0) != noise) {
 
-                                document.getElementById(gridParentAlt.id).style.backgroundColor = "white"
+                                document.getElementById(gridParentAlt.id).style.backgroundColor = "#212121"
+                                document.getElementById(gridParentAlt.id).style.boxShadow = "#212121 0 0 8px 2px"
                             }
                         }
                     }

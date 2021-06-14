@@ -598,8 +598,10 @@ function changeDirection() {
         map.style.left = leftPos + "px"
     }
 }
+for (let i = 0; i < 10; i++) {
 
 generateTerrain(10)
+}
 
 function generateTerrain(size, noise) {
 

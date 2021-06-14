@@ -496,7 +496,8 @@ window.onkeydown = function(e) {
     } else if (e.key == hotkeys.panDown) {
 
         startMove("down")
-    } else if (e.key == hotkeys.panLeft) {
+    }
+    if (e.key == hotkeys.panLeft) {
 
         startMove("left")
     } else if (e.key == hotkeys.panRight) {
@@ -604,11 +605,9 @@ function generateTerrain(size, noise) {
 
     // noise is number of times to have a chance to remove the value of Math.max or math.min
 
-    let useNoise = Math.random() * 1
-
     if (!noise) {
 
-        noise = 5
+        noise = 2
     }
 
     let startX = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
@@ -637,7 +636,10 @@ function generateTerrain(size, noise) {
                                 break
                             }
 
-                            document.getElementById(gridParentAlt.id).style.backgroundColor = "white"
+                            if ((Math.random() * noise).toFixed(0) != noise) {
+
+                                document.getElementById(gridParentAlt.id).style.backgroundColor = "white"
+                            }
                         }
                     }
                 }

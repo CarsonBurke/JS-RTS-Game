@@ -586,11 +586,11 @@ function changeDirection() {
 
             if (move.qualifier == "positive") {
 
-                leftPos += 75
+                leftPos += 150
 
             } else {
 
-                leftPos -= 75
+                leftPos -= 150
             }
         }
 
@@ -600,7 +600,7 @@ function changeDirection() {
 }
 for (let i = 0; i < 40; i++) {
 
-generateTerrain(3)
+    generateTerrain(3)
 }
 
 function generateTerrain(size, noise) {

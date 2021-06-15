@@ -598,13 +598,13 @@ function changeDirection() {
         map.style.left = leftPos + "px"
     }
 }
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < Math.sqrt(mapSize) / 3; i++) {
 
-    let value1 =  (Math.random() * Math.sqrt(mapSize) / 10).toFixed(0)
+    let value1 =  Math.floor(Math.random() * Math.sqrt(mapSize) / 5)
 
-    let value2 = (Math.random() * Math.sqrt(mapSize) / 10).toFixed(0)
+    let value2 = Math.floor(Math.random() * Math.sqrt(mapSize) / 7.5)
 
-    console.log(value1 +", "+ value2)
+    //console.log(value1 + ", " + value2)
 
     generateTerrain(value1, value2, 2)
 }
@@ -616,8 +616,6 @@ function generateTerrain(xDimension, yDimension, noise) {
     let startX = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
     let startY = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
 
-    //console.log(startX + ", " + startY)
-
     for (let gridParent of gridParents) {
 
         if (gridParent.x == startX && gridParent.y == startY) {
@@ -627,10 +625,6 @@ function generateTerrain(xDimension, yDimension, noise) {
             for (let x = gridParent.x; x < gridParent.x + xDimension; x++) {
                 for (let y = gridParent.y; y < gridParent.y + yDimension; y++) {
                     
-                    //console.log(x + ", " + y)
-
-                    terrainGrid.push({ x: x, y: y })
-
                     for (let gridParentAlt of gridParents) {
 
                         if (x == gridParentAlt.x && y == gridParentAlt.y) {
@@ -640,9 +634,9 @@ function generateTerrain(xDimension, yDimension, noise) {
                                 break
                             }
 
-                            gridParentAlt.value = "mountain"
-
                             if ((Math.random() * noise).toFixed(0) != noise) {
+
+                                gridParentAlt.value = "mountain"
 
                                 document.getElementById(gridParentAlt.id).style.backgroundColor = "#212121"
                                 document.getElementById(gridParentAlt.id).style.boxShadow = "#212121 0 0 12px 1px"
@@ -653,27 +647,25 @@ function generateTerrain(xDimension, yDimension, noise) {
                     }
                 }
             }
-
-            let i
-
-            for (let object of terrainGrid) {
-
-                i++
-
-                if (1 == 2) {
-
-                    terrainGrid.slice(i, i + 1)
-                }
-            }
         }
     }
 }
 
-for (let gridParent of gridParents) {
+for (let i = 0; i < 2; i++) {
 
-    if (gridParent.value == "plains") {
+    fixTerrain()
+}
 
-        filIn(gridParent.x, gridParent.y)
+function fixTerrain() {
+
+    for (let gridParent of gridParents) {
+
+       filIn(gridParent.x, gridParent.y)
+        
+       if (gridParent.value == "mountain"){
+           
+        roundOff(gridParent.x, gridParent.y)
+        }
     }
 }
 
@@ -737,32 +729,130 @@ function filIn(x, y) {
             }
         }
     }
-    
 
-    if (top && bottom && left && right) {
+    if (!top && !bottom && !left && !right) {
 
-        //console.log(x +", "+ y)
+        for (let gridParent of gridParents) {
 
-        for (let gridParentAlt of gridParents) {
+        if (x == gridParent.x && y == gridParent.y) {
 
-            if (x == gridParentAlt.x && y == gridParentAlt.y) {
+            if (gridParent.value == "mountain") {
 
-                console.log("WORKED IT WORKED IT WORKED")
+                gridParent.value = "plains"
 
-                if (gridParentAlt.value != "plains") {
+                    document.getElementById(gridParent.id).style.backgroundColor = "transparent"
+                    document.getElementById(gridParent.id).style.boxShadow = "none"
+
+                break
+            }
+        }
+    }
+    }
+
+    if ((top && bottom) || (left && right)) {
+
+        for (let gridParent of gridParents) {
+
+            if (x == gridParent.x && y == gridParent.y) {
+
+                if (gridParent.value != "plains") {
 
                     break
                 }
 
-                gridParentAlt.value = "mountain"
+                gridParent.value = "mountain"
 
-                if ((Math.random() * noise).toFixed(0) != noise) {
-
-                    document.getElementById(gridParentAlt.id).style.backgroundColor = "#212121"
-                    document.getElementById(gridParentAlt.id).style.boxShadow = "#212121 0 0 12px 1px"
-                }
-
+                    //document.getElementById(gridParentAlt.id).style.backgroundColor = "#BDD41A"
+                    document.getElementById(gridParent.id).style.backgroundColor = "#212121"
+                    document.getElementById(gridParent.id).style.boxShadow = "#212121 0 0 12px 1px"
+                
                 break
+            }
+        }
+    }
+}
+
+function roundOff(x, y) {
+
+    let top
+    let bottom
+    let left
+    let right
+
+    for (let gridParent of gridParents) {
+
+        if (x == gridParent.x &&
+             y - 1 == gridParent.y &&
+             gridParent.value != "mountain") {
+    
+                top = true
+        }
+    }
+    for (let gridParent of gridParents) {
+
+        if (x == gridParent.x &&
+             y + 1 == gridParent.y &&
+             gridParent.value != "mountain") {
+    
+                bottom = true
+        }
+    }
+    for (let gridParent of gridParents) {
+
+        if (x - 1 == gridParent.x &&
+             y == gridParent.y &&
+             gridParent.value != "mountain") {
+    
+                left = true
+        }
+    }
+    for (let gridParent of gridParents) {
+
+        if (x + 1 == gridParent.x &&
+             y == gridParent.y &&
+             gridParent.value != "mountain") {
+    
+                right = true
+        }
+    }
+
+    if (top && left) {
+
+        for (let gridParent of gridParents) {
+
+            if (x == gridParent.x && y == gridParent.y) {
+
+                document.getElementById(gridParent.id).style.borderTopLeftRadius = "8px"
+            }
+        }
+    }
+    if (top && right) {
+
+        for (let gridParent of gridParents) {
+
+            if (x == gridParent.x && y == gridParent.y) {
+
+                document.getElementById(gridParent.id).style.borderTopRightRadius = "8px"
+            }
+        }
+    }
+    if (bottom && left) {
+
+        for (let gridParent of gridParents) {
+
+            if (x == gridParent.x && y == gridParent.y) {
+
+                document.getElementById(gridParent.id).style.borderBottomLeftRadius = "8px"
+            }
+        }
+    }
+    if (bottom && right) {
+
+        for (let gridParent of gridParents) {
+
+            if (x == gridParent.x && y == gridParent.y) {
+
+                document.getElementById(gridParent.id).style.borderBottomRightRadius = "8px"
             }
         }
     }

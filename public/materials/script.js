@@ -598,19 +598,20 @@ function changeDirection() {
         map.style.left = leftPos + "px"
     }
 }
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 2; i++) {
 
-    generateTerrain(3)
+    let value1 =  (Math.random() * Math.sqrt(mapSize) / 10).toFixed(0)
+
+    let value2 = (Math.random() * Math.sqrt(mapSize) / 10).toFixed(0)
+
+    console.log(value1 +", "+ value2)
+
+    generateTerrain(value1, value2, 2)
 }
 
-function generateTerrain(size, noise) {
+function generateTerrain(xDimension, yDimension, noise) {
 
     // noise is number of times to have a chance to remove the value of Math.max or math.min
-
-    if (!noise) {
-
-        noise = 2
-    }
 
     let startX = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
     let startY = (Math.random() * Math.sqrt(mapSize)).toFixed(0)
@@ -623,9 +624,10 @@ function generateTerrain(size, noise) {
 
             let terrainGrid = []
 
-            for (let x = gridParent.x; x < gridParent.x + size; x++) {
-                for (let y = gridParent.y; y < gridParent.y + size; y++) {
-                    console.log(x + ", " + y)
+            for (let x = gridParent.x; x < gridParent.x + xDimension; x++) {
+                for (let y = gridParent.y; y < gridParent.y + yDimension; y++) {
+                    
+                    //console.log(x + ", " + y)
 
                     terrainGrid.push({ x: x, y: y })
 
@@ -645,6 +647,8 @@ function generateTerrain(size, noise) {
                                 document.getElementById(gridParentAlt.id).style.backgroundColor = "#212121"
                                 document.getElementById(gridParentAlt.id).style.boxShadow = "#212121 0 0 12px 1px"
                             }
+
+                            break
                         }
                     }
                 }
@@ -660,6 +664,105 @@ function generateTerrain(size, noise) {
 
                     terrainGrid.slice(i, i + 1)
                 }
+            }
+        }
+    }
+}
+
+for (let gridParent of gridParents) {
+
+    if (gridParent.value == "plains") {
+
+        filIn(gridParent.x, gridParent.y)
+    }
+}
+
+function filIn(x, y) {
+
+    let top
+    let bottom
+    let left
+    let right
+
+    for (let gridParent of gridParents) {
+    
+        if (x == gridParent.x && y - 1 == gridParent.y) {
+    
+            if (gridParent.value == "mountain") {
+
+                top = true
+            }
+            else {
+
+                break
+            }
+        }
+    }
+    for (let gridParent of gridParents) {
+        if (x == gridParent.x && y + 1 == gridParent.y) {
+    
+            if (gridParent.value == "mountain") {
+
+                bottom = true
+            }
+            else {
+
+                break
+            }
+        }
+    }
+    for (let gridParent of gridParents) {
+        if (x - 1 == gridParent.x && y == gridParent.y) {
+    
+            if (gridParent.value == "mountain") {
+                
+                left = true
+            }
+            else {
+
+                break
+            }
+        }
+    }
+    for (let gridParent of gridParents) {
+        if (x + 1 == gridParent.x && y == gridParent.y) {
+    
+            if (gridParent.value == "mountain") {
+                
+                right = true
+            }
+            else {
+
+                break
+            }
+        }
+    }
+    
+
+    if (top && bottom && left && right) {
+
+        //console.log(x +", "+ y)
+
+        for (let gridParentAlt of gridParents) {
+
+            if (x == gridParentAlt.x && y == gridParentAlt.y) {
+
+                console.log("WORKED IT WORKED IT WORKED")
+
+                if (gridParentAlt.value != "plains") {
+
+                    break
+                }
+
+                gridParentAlt.value = "mountain"
+
+                if ((Math.random() * noise).toFixed(0) != noise) {
+
+                    document.getElementById(gridParentAlt.id).style.backgroundColor = "#212121"
+                    document.getElementById(gridParentAlt.id).style.boxShadow = "#212121 0 0 12px 1px"
+                }
+
+                break
             }
         }
     }

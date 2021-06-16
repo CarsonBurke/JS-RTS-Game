@@ -600,7 +600,7 @@ function changeDirection() {
 }
 for (let i = 0; i < Math.sqrt(mapSize) / 3; i++) {
 
-    let value1 =  Math.floor(Math.random() * Math.sqrt(mapSize) / 5)
+    let value1 = Math.floor(Math.random() * Math.sqrt(mapSize) / 5)
 
     let value2 = Math.floor(Math.random() * Math.sqrt(mapSize) / 7.5)
 
@@ -624,7 +624,7 @@ function generateTerrain(xDimension, yDimension, noise) {
 
             for (let x = gridParent.x; x < gridParent.x + xDimension; x++) {
                 for (let y = gridParent.y; y < gridParent.y + yDimension; y++) {
-                    
+
                     for (let gridParentAlt of gridParents) {
 
                         if (x == gridParentAlt.x && y == gridParentAlt.y) {
@@ -660,11 +660,11 @@ function fixTerrain() {
 
     for (let gridParent of gridParents) {
 
-       filIn(gridParent.x, gridParent.y)
-        
-       if (gridParent.value == "mountain"){
-           
-        roundOff(gridParent.x, gridParent.y)
+        filIn(gridParent.x, gridParent.y)
+
+        if (gridParent.value == "mountain") {
+
+            roundOff(gridParent.x, gridParent.y)
         }
     }
 }
@@ -677,14 +677,13 @@ function filIn(x, y) {
     let right
 
     for (let gridParent of gridParents) {
-    
+
         if (x == gridParent.x && y - 1 == gridParent.y) {
-    
+
             if (gridParent.value == "mountain") {
 
                 top = true
-            }
-            else {
+            } else {
 
                 break
             }
@@ -692,12 +691,11 @@ function filIn(x, y) {
     }
     for (let gridParent of gridParents) {
         if (x == gridParent.x && y + 1 == gridParent.y) {
-    
+
             if (gridParent.value == "mountain") {
 
                 bottom = true
-            }
-            else {
+            } else {
 
                 break
             }
@@ -705,12 +703,11 @@ function filIn(x, y) {
     }
     for (let gridParent of gridParents) {
         if (x - 1 == gridParent.x && y == gridParent.y) {
-    
+
             if (gridParent.value == "mountain") {
-                
+
                 left = true
-            }
-            else {
+            } else {
 
                 break
             }
@@ -718,12 +715,11 @@ function filIn(x, y) {
     }
     for (let gridParent of gridParents) {
         if (x + 1 == gridParent.x && y == gridParent.y) {
-    
+
             if (gridParent.value == "mountain") {
-                
+
                 right = true
-            }
-            else {
+            } else {
 
                 break
             }
@@ -734,19 +730,19 @@ function filIn(x, y) {
 
         for (let gridParent of gridParents) {
 
-        if (x == gridParent.x && y == gridParent.y) {
+            if (x == gridParent.x && y == gridParent.y) {
 
-            if (gridParent.value == "mountain") {
+                if (gridParent.value == "mountain") {
 
-                gridParent.value = "plains"
+                    gridParent.value = "plains"
 
                     document.getElementById(gridParent.id).style.backgroundColor = "transparent"
                     document.getElementById(gridParent.id).style.boxShadow = "none"
 
-                break
+                    break
+                }
             }
         }
-    }
     }
 
     if ((top && bottom) || (left && right)) {
@@ -762,10 +758,10 @@ function filIn(x, y) {
 
                 gridParent.value = "mountain"
 
-                    //document.getElementById(gridParentAlt.id).style.backgroundColor = "#BDD41A"
-                    document.getElementById(gridParent.id).style.backgroundColor = "#212121"
-                    document.getElementById(gridParent.id).style.boxShadow = "#212121 0 0 12px 1px"
-                
+                //document.getElementById(gridParentAlt.id).style.backgroundColor = "#BDD41A"
+                document.getElementById(gridParent.id).style.backgroundColor = "#212121"
+                document.getElementById(gridParent.id).style.boxShadow = "#212121 0 0 12px 1px"
+
                 break
             }
         }
@@ -774,45 +770,45 @@ function filIn(x, y) {
 
 function roundOff(x, y) {
 
-    let top
-    let bottom
-    let left
-    let right
+    let top = false
+    let bottom = false
+    let left = false
+    let right = false
 
     for (let gridParent of gridParents) {
 
         if (x == gridParent.x &&
-             y - 1 == gridParent.y &&
-             gridParent.value != "mountain") {
-    
-                top = true
+            y - 1 == gridParent.y &&
+            gridParent.value != "mountain") {
+
+            top = true
         }
     }
     for (let gridParent of gridParents) {
 
         if (x == gridParent.x &&
-             y + 1 == gridParent.y &&
-             gridParent.value != "mountain") {
-    
-                bottom = true
+            y + 1 == gridParent.y &&
+            gridParent.value != "mountain") {
+
+            bottom = true
         }
     }
     for (let gridParent of gridParents) {
 
         if (x - 1 == gridParent.x &&
-             y == gridParent.y &&
-             gridParent.value != "mountain") {
-    
-                left = true
+            y == gridParent.y &&
+            gridParent.value != "mountain") {
+
+            left = true
         }
     }
     for (let gridParent of gridParents) {
 
         if (x + 1 == gridParent.x &&
-             y == gridParent.y &&
-             gridParent.value != "mountain") {
-    
-                right = true
+            y == gridParent.y &&
+            gridParent.value != "mountain") {
+
+            right = true
         }
     }
 

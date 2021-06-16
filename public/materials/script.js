@@ -638,8 +638,8 @@ function generateTerrain(xDimension, yDimension, noise) {
 
                                 gridParentAlt.value = "mountain"
 
-                                document.getElementById(gridParentAlt.id).style.backgroundColor = "#212121"
-                                document.getElementById(gridParentAlt.id).style.boxShadow = "#212121 0 0 12px 1px"
+                                document.getElementById(gridParentAlt.id).style.backgroundColor = "#121212"
+                                document.getElementById(gridParentAlt.id).style.boxShadow = "#121212 0 0 12px 1px"
                             }
 
                             break
@@ -745,7 +745,7 @@ function filIn(x, y) {
         }
     }
 
-    if ((top && bottom) || (left && right)) {
+    if ((top && bottom) && (left && right)) {
 
         for (let gridParent of gridParents) {
 
@@ -759,8 +759,8 @@ function filIn(x, y) {
                 gridParent.value = "mountain"
 
                 //document.getElementById(gridParentAlt.id).style.backgroundColor = "#BDD41A"
-                document.getElementById(gridParent.id).style.backgroundColor = "#212121"
-                document.getElementById(gridParent.id).style.boxShadow = "#212121 0 0 12px 1px"
+                document.getElementById(gridParent.id).style.backgroundColor = "#121212"
+                document.getElementById(gridParent.id).style.boxShadow = "#121212 0 0 12px 1px"
 
                 break
             }
@@ -1266,3 +1266,5 @@ function addText() {
 
     document.getElementById("totalUnitCount").innerHTML = units + " / " + unitsMax + " Units"
 }
+
+// https://joeiddon.github.io/projects/javascript/perlin.html

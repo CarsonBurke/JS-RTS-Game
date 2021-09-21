@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", "sans-serif";
+    overflow-x: hidden;
+    overflow-y: scroll;
+    --primary: rgb(5, 228, 5);
+    --primaryShade: rgb(66, 66, 66);
+    --secondaryShade: rgb(38, 40, 43);
+    --tertiaryShade: white;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 90px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primaryShade);
+}
+
+::-webkit-scrollbar-thumb {
+    background: gray;
+    width: 5px;
+    border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: darkgray;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Outlined.eot);
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Outlined'), url(https://example.com/MaterialIcons-Outlined.woff2) format('woff2'), url(https://example.com/MaterialIcons-Outlined.woff) format('woff'), url(https://example.com/MaterialIcons-Outlined.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+
+/* Template */
+
+.button {
+    outline: none;
+    user-select: none;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 16px;
+    margin: 10px auto;
+    display: block;
+    width: fit-content;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    font-family: "poppins";
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 14px 22px 0, rgba(255, 255, 255, 0) inset 0 0 0 0;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.button:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0, rgba(255, 255, 255, 0) inset 0 0 0 10000px, rgba(0, 0, 0, 0.2) inset 0 0 0 10000px;
+}
+
+.button:focus {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 18px 0, rgba(255, 255, 255, 0.12) inset 0 0 0 10000px, rgba(0, 0, 0, 0) inset 0 0 0 10000px;
+}
+
+
+/* Hero */
+
+.heroContainer {
+    min-height: 100vh;
+    background: var(--secondaryShade);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroParent {
+    background: var(--primaryShade);
+    padding: 14px 8px;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 12px 60px 0;
+}
+
+.heroHeader {
+    font-size: 48px;
+    margin: 0 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.heroText {
+    text-align: center;
+    width: 90%;
+    margin: 30px 0;
+}
+
+.heroButton {
+    margin-bottom: 0;
+    width: 100%;
+    font-size: 19px;
+}
+
+
+/* UI */
+
+.goalReachedParent {
+    padding: 20px;
+    font-size: 50px;
+    margin: auto;
+    position: fixed;
+    bottom: -10px;
+    left: 10px;
+    right: 10px;
+    background: black;
+    opacity: 0;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.goalReachedParentShow {
+    opacity: 1;
+    bottom: 10px;
+}
+
+
+/* Game */
+
+.mapContainer {
+    background: var(--secondaryShade);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.map {
+    position: absolute;
+    background: var(--primaryShade);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0 90px 0;
+    transition: all 0.2s;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.gridPart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    box-shadow: inset rgba(255, 255, 255, 0.1) 0 0 0 0.5px;
+}
+
+.placePreview {
+    background: rgba(0, 0, 0, 0.3);
+    border: rgba(255, 255, 255, 0.4) 1.5px solid;
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 40px 0;
+}
+
+
+/*  */

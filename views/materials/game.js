@@ -214,7 +214,11 @@ function changeDirection() {
 // Place game objects
 
 let commandCenter = new Structure({
-    structureType: "commandCenter"
+    structureType: "commandCenter",
+    x: 1,
+    y: 2,
+    id: newId(),
+
 })
 
 function placeStructure(structure) {
@@ -289,9 +293,6 @@ function followCursor(e) {
     mapEl.style.cursor = "none"
 
     let el = placePreviewEl
-
-    /*     let top = Math.floor((e.pageY / scale - mapEl.getBoundingClientRect().top - el.scrollHeight / scale * 0.5) / 20) * 20
-        let left = Math.floor((e.pageX / scale - mapEl.getBoundingClientRect().left - el.scrollWidth / scale * 0.5) / 20) * 20 */
 
     // Get cursor distance from top and divide by map distance from top to get cursor distance from top of map
 

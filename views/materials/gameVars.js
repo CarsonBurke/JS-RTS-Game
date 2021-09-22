@@ -6,6 +6,11 @@ let properties = {
     nextId: 0,
     mapEl: document.getElementById("map"),
     cursorEl: document.getElementById("cursor"),
+    resourceTypes: {
+        credits: {
+
+        },
+    },
     positions: {
 
 
@@ -15,10 +20,31 @@ let properties = {
     },
     structureTypes: {
         commandCenter: {
-            owner: "",
+            owner: undefined,
             width: 5,
             height: 5,
-        }
+            income: {
+                credits: 15,
+                oil: 0.5,
+                steel: 0.25,
+            },
+            upgrades: {
+                tier2: {
+
+                },
+                tier3: {
+
+                },
+            },
+            units: {
+                harvester: {
+
+                },
+                scout: {
+
+                }
+            },
+        },
     },
     hotkeys: {
         moveUp: "ArrowUp",
@@ -32,6 +58,9 @@ let properties = {
         panRight: "d",
 
         stopPlacing: "x",
+    },
+    players: {
+
     },
     nextId: 0,
     findWithId(id) {
@@ -57,9 +86,12 @@ let properties = {
     Structure: class {
         constructor(opts) {
 
-            this.structureType = opts.structureType
+            this.x = opts.x
+            this.y = opts.y
 
-
+            this.type = opts.type
+            this.id = newId()
+            this.el = document.createElement("div")
         }
     },
     CommandCenter: class {
@@ -73,6 +105,12 @@ let properties = {
             }
         }
     }
+    Player: class {
+        constructor() {
+
+            this.resources
+        }
+    },
 }
 
 

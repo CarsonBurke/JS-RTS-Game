@@ -8,7 +8,28 @@ let properties = {
     cursorEl: document.getElementById("cursor"),
     resourceTypes: {
         credits: {
-
+            amount: 0,
+            income: 2,
+            description: "",
+            el: document.getElementById("creditsAmount"),
+        },
+        oil: {
+            amount: 0,
+            income: 0,
+            description: "",
+            el: document.getElementById("oilAmount"),
+        },
+        steel: {
+            amount: 0,
+            income: 0,
+            description: "",
+            el: document.getElementById("steelAmount"),
+        },
+        concrete: {
+            amount: 0,
+            income: 0,
+            description: "",
+            el: document.getElementById("concreteAmount"),
         },
     },
     positions: {
@@ -23,6 +44,7 @@ let properties = {
             owner: undefined,
             width: 5,
             height: 5,
+            image: "materials/images/commandCenter.png",
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -97,18 +119,44 @@ let properties = {
     CommandCenter: class {
         constructor(opts) {
 
-            for (let propertyName in opts) {
+            this.type = "commandCenter"
+            this.x = opts.x
+            this.y = opts.y
 
-                let property = opts[propertyName]
+            this.id = newId()
+            this.el = document.createElement("div")
+
+            for (let propertyName in structureTypes[this.type]) {
+
+                let property = structureTypes[this.type][propertyName]
 
                 this[propertyName] = property
             }
         }
-    }
+    },
     Player: class {
-        constructor() {
+        constructor(opts) {
 
-            this.resources
+            // Add options to player
+
+            this.name = opts.name
+
+            // 
+
+            this.id = newId()
+
+            // Add resources to player
+
+            this.resources = {}
+
+            for (let resourceName in resourceTypes) {
+
+                let resource = resourceTypes[resourceName]
+
+                this.resources[resourceName] = resource
+            }
+
+
         }
     },
 }

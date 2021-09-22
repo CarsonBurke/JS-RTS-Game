@@ -37,6 +37,23 @@ function createGrid() {
     }
 }
 
+
+// Create players
+
+let playerNames = ["Carson", "Hive"]
+
+createPlayers()
+
+function createPlayers() {
+
+    for (let playerName of playerNames) {
+
+        players[playerName] = new Player({
+            name: "Carson"
+        })
+    }
+}
+
 // Music
 
 let musicPlaying = false
@@ -213,24 +230,51 @@ function changeDirection() {
 
 // Place game objects
 
-let commandCenter = new Structure({
-    structureType: "commandCenter",
-    x: 1,
-    y: 2,
-    id: newId(),
+placeStartingStructures()
 
-})
+function placeStartingStructures() {
+
+    // Create starting command center
+
+    let commandCenter = new CommandCenter({
+        owner: "Carson",
+        x: 5,
+        y: 10,
+    })
+
+    placeStructure(commandCenter)
+}
 
 function placeStructure(structure) {
 
-    let el = document.createElement("div")
+    let el = structure.el
 
-    el.classList.add(this.structureType)
+    // Give class
 
-    el.style.width = structureTypes[this.structureType].width * gridPartDimensions + "px"
-    el.style.height = structureTypes[this.structureType].height * gridPartDimensions + "px"
+    el.classList.add(structure.type)
 
-    structures[id] = this
+    // Apply stylings
+
+    el.style.backgroundImage = "url(" + structure.image + ")"
+
+    el.style.position = "absolute"
+
+    el.style.backgroundPosition = "center"
+    el.style.backgroundSize = "cover"
+
+    el.style.width = structure.width * gridPartDimensions + "px"
+    el.style.height = structure.height * gridPartDimensions + "px"
+
+    el.style.top = structure.y * gridPartDimensions + "px"
+    el.style.left = structure.x * gridPartDimensions + "px"
+
+    // Add element to map
+
+    mapEl.appendChild(el)
+
+    // Add structure to structure list
+
+    structures[structure.id] = structure
 }
 
 /* function placeObject(opts) {
@@ -269,6 +313,13 @@ function placeCommandCenter() {
         y: pos.y,
     })
 } */
+
+// Destroying structures
+
+function destroyStructure(structure) {
+
+
+}
 
 // When placing structure show graphic
 
@@ -316,3 +367,36 @@ function followCursor(e) {
 window.addEventListener("mousemove", followCursor)
 window.addEventListener("wheel", followCursor)
 window.addEventListener("keydown", followCursor)
+
+// Draw outline for selecting units or buildings
+
+function createOutline() {
+
+
+}
+
+function drawOutline() {
+
+
+}
+
+// Generate resources
+
+setInterval(generateResources, 250)
+
+function generateResources() {
+
+    for (let playerName in players) {
+
+        let player = players[playerName]
+        let resources = player.resources
+
+        for (let resourceName in resources) {
+
+            let resource = resources[resourceName]
+
+            resource.amount += resource.income
+            resource.el.innerHTML = resource.amount
+        }
+    }
+}

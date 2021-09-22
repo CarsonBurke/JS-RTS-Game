@@ -286,7 +286,7 @@ function createPlacePreview() {
 
 function followCursor(e) {
 
-    /* document.body.style.cursor = "none" */
+    mapEl.style.cursor = "none"
 
     let el = placePreviewEl
 
@@ -294,8 +294,6 @@ function followCursor(e) {
         let left = Math.floor((e.pageX / scale - mapEl.getBoundingClientRect().left - el.scrollWidth / scale * 0.5) / 20) * 20 */
 
     // Get cursor distance from top and divide by map distance from top to get cursor distance from top of map
-
-    console.log(upPos)
 
     let top = Math.floor((((e.pageY - mapEl.getBoundingClientRect().top) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions) * gridPartDimensions
     let left = Math.floor((((e.pageX - mapEl.getBoundingClientRect().left) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions) * gridPartDimensions

@@ -13,13 +13,10 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "bcrypt": "^5.0.1",
-        "dotenv": "^10.0.0",
         "ejs": "^3.1.6",
         "express": "^4.17.1",
         "express-session": "^1.17.2",
-        "jquery": "^3.6.0",
-        "pg": "^8.6.0"
+        "jquery": "^3.6.0"
     },
     "bugs": {
         "url": "https://github.com/CarsonBurke/Improved-JS-RTS-Game/issues"

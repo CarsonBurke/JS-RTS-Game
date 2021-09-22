@@ -2,16 +2,16 @@ import "./gameVars.js"
 
 // Create map and implement values
 
+// Dimensions / number of tiles will give size, size should be 10px
+
+let gridSize = mapDimensions / gridPartDimensions
+
 map.style.width = mapDimensions + "px"
 map.style.height = mapDimensions + "px"
 
 createGrid()
 
 function createGrid() {
-
-    // Dimensions / number of tiles will give size, size should be 10px
-
-    let gridSize = mapDimensions / gridPartDimensions
 
     // Loop through each position
 
@@ -119,24 +119,26 @@ window.onkeydown = function(event) {
     }
 }
 
-window.onkeyup = function(e) {
+window.onkeyup = function(event) {
 
-    if (e.key == hotkeys.panUp) {
+    let key = event.key
+
+    if (key == hotkeys.panUp) {
 
         endMove("up")
-    } else if (e.key == hotkeys.panDown) {
+    } else if (key == hotkeys.panDown) {
 
         endMove("down")
-    } else if (e.key == hotkeys.panLeft) {
+    } else if (key == hotkeys.panLeft) {
 
         endMove("left")
-    } else if (e.key == hotkeys.panRight) {
+    } else if (key == hotkeys.panRight) {
 
         endMove("right")
     }
 }
 
-var move = false
+let move = false
 
 function startMove(direction) {
 
@@ -176,36 +178,37 @@ function endMove() {
     move = false
 }
 
-setInterval(changeDirection, 100)
+setInterval(changeDirection, 40)
 
 function changeDirection() {
 
-    if (move && move.direction) {
-        if (move.direction == "up") {
+    if (!move) return
 
-            if (move.qualifier == "positive") {
+    if (move.direction == "up") {
 
-                upPos += 150
+        if (move.qualifier == "positive") {
 
-            } else {
+            upPos += 40
 
-                upPos -= 150
-            }
         } else {
 
-            if (move.qualifier == "positive") {
-
-                leftPos += 150
-
-            } else {
-
-                leftPos -= 150
-            }
+            upPos -= 40
         }
+    } else {
 
-        map.style.top = upPos + "px"
-        map.style.left = leftPos + "px"
+        if (move.qualifier == "positive") {
+
+            leftPos += 40
+
+        } else {
+
+            leftPos -= 40
+        }
     }
+
+    map.style.top = upPos + "px"
+    map.style.left = leftPos + "px"
+
 }
 
 // Place game objects
@@ -283,14 +286,34 @@ function createPlacePreview() {
 
 function followCursor(e) {
 
+    /* document.body.style.cursor = "none" */
+
     let el = placePreviewEl
 
-    let top = Math.floor((e.pageY / scale - mapEl.getBoundingClientRect().top - el.scrollHeight / scale * 0.5) / 20) * 20
-    let left = Math.floor((e.pageX / scale - mapEl.getBoundingClientRect().left - el.scrollWidth / scale * 0.5) / 20) * 20
+    /*     let top = Math.floor((e.pageY / scale - mapEl.getBoundingClientRect().top - el.scrollHeight / scale * 0.5) / 20) * 20
+        let left = Math.floor((e.pageX / scale - mapEl.getBoundingClientRect().left - el.scrollWidth / scale * 0.5) / 20) * 20 */
+
+    // Get cursor distance from top and divide by map distance from top to get cursor distance from top of map
+
+    console.log(upPos)
+
+    let top = Math.floor((((e.pageY - mapEl.getBoundingClientRect().top) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions) * gridPartDimensions
+    let left = Math.floor((((e.pageX - mapEl.getBoundingClientRect().left) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions) * gridPartDimensions
+
+    // Make sure top stays inside the map
+
+    top = Math.min(top, gridPartDimensions * gridSize - gridPartDimensions * 3)
+    top = Math.max(top, 0)
+
+    // Make sure left stays inside the map
+
+    left = Math.min(left, gridPartDimensions * gridSize - gridPartDimensions * 3)
+    left = Math.max(left, 0)
 
     el.style.top = top + "px"
     el.style.left = left + "px"
 }
 
 window.addEventListener("mousemove", followCursor)
-window.addEventListener("onscroll", followCursor)
+window.addEventListener("wheel", followCursor)
+window.addEventListener("keydown", followCursor)

@@ -177,7 +177,7 @@ body {
 }
 
 .map {
-    position: absolute;
+    position: relative;
     background: var(--primaryShade);
     box-shadow: rgba(0, 0, 0, 0.2) 0 0 90px 0;
     transition: all 0.2s;

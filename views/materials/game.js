@@ -453,8 +453,8 @@ function enterBuildMode(structureTypeName) {
 
     function newStructure(event) {
 
-        let x = Math.floor((event.pageY - mapEl.getBoundingClientRect().top) / 20)
-        let y = Math.floor((event.pageX - mapEl.getBoundingClientRect().left) / 20)
+        let x = Math.floor((event.pageX - mapEl.getBoundingClientRect().left) / 20)
+        let y = Math.floor((event.pageY - mapEl.getBoundingClientRect().top) / 20)
 
         let structure = new Structure({
             type: structureTypeName,

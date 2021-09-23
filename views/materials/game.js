@@ -323,8 +323,6 @@ function followCursor(e) {
 
     // adjust placePreview size to match structure
 
-    console.log(placePreviewWidth)
-
     el.style.width = placePreviewWidth * gridPartDimensions + "px"
     el.style.height = placePreviewHeight * gridPartDimensions + "px"
 
@@ -405,7 +403,6 @@ function enterBuildMode(structureTypeName) {
     let structureType = structureTypes[structureTypeName]
 
     // place preview logic
-    console.log(structureType)
 
     placePreviewWidth = structureType.width
     placePreviewHeight = structureType.height
@@ -420,8 +417,6 @@ function enterBuildMode(structureTypeName) {
 function exitBuildMode() {
 
     if (!players.Carson.buildMode) return
-
-    console.log("hey")
 
     disablePlacePreview()
 

@@ -9,7 +9,7 @@ let properties = {
     resourceTypes: {
         credits: {
             amount: 0,
-            income: 2,
+            income: 0,
             description: "",
             el: document.getElementById("creditsAmount"),
         },
@@ -41,12 +41,15 @@ let properties = {
     },
     structureTypes: {
         commandCenter: {
-            owner: undefined,
+
             width: 5,
             height: 5,
             displayName: "Command Center",
-            creditCost: 300,
+            displayEl: document.getElementById("commandCenterDisplayChild"),
             image: "materials/images/commandCenter.png",
+            cost: {
+                credits: 1000,
+            },
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -70,12 +73,14 @@ let properties = {
             },
         },
         plasmaTurret: {
-            owner: undefined,
+
             width: 2,
             height: 2,
             displayName: "Plasma Turret",
-            creditCost: 300,
             image: "materials/images/plasmaTurret.png",
+            cost: {
+                credits: 1000,
+            },
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -91,12 +96,14 @@ let properties = {
             },
         },
         barrack: {
-            owner: undefined,
+
             width: 3,
             height: 3,
             displayName: "Barracks",
-            creditCost: 300,
             image: "materials/images/barrack.png",
+            cost: {
+                credits: 1000,
+            },
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -112,12 +119,14 @@ let properties = {
             },
         },
         pumpjack: {
-            owner: undefined,
+
             width: 2,
             height: 2,
             displayName: "Pumpjack",
-            creditCost: 300,
             image: "materials/images/pumpjack.png",
+            cost: {
+                credits: 1000,
+            },
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -133,12 +142,14 @@ let properties = {
             },
         },
         mineshaft: {
-            owner: undefined,
+
             width: 3,
             height: 4,
             displayName: "Mineshaft",
-            creditCost: 300,
             image: "materials/images/mineshaft.png",
+            cost: {
+                credits: 1000,
+            },
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -154,12 +165,14 @@ let properties = {
             },
         },
         generator: {
-            owner: undefined,
+
             width: 2,
             height: 1,
             displayName: "Generator",
-            creditCost: 300,
             image: "materials/images/generator.png",
+            cost: {
+                credits: 1000,
+            },
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -175,12 +188,14 @@ let properties = {
             },
         },
         steelRefinery: {
-            owner: undefined,
+
             width: 4,
             height: 3,
             displayName: "Steel Refinery",
-            creditCost: 300,
             image: "materials/images/steelRefinery.png",
+            cost: {
+                credits: 1000,
+            },
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -264,19 +279,10 @@ let properties = {
             this.el = document.createElement("div")
         }
     },
-    Structure: class {
-        constructor(opts) {
-
-            this.x = opts.x
-            this.y = opts.y
-
-            this.type = opts.type
-            this.id = newId()
-            this.el = document.createElement("div")
-        }
-    },
     CommandCenter: class {
         constructor(opts) {
+
+            this.owner = opts.owner
 
             this.type = "commandCenter"
             this.x = opts.x

@@ -193,6 +193,10 @@ body {
     background: rgba(255, 255, 255, 0.08);
 }
 
+.structureDisplayChildSelected {
+    background: rgba(255, 255, 255, 0.08);
+}
+
 .structureDisplayImage {
     width: 65px;
     height: 65px;

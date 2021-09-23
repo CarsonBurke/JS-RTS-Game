@@ -61,6 +61,8 @@ function addStructureDisplay() {
         let structureDisplayChild = document.createElement("div")
         structureDisplayChild.classList.add("structureDisplayChild")
 
+        structureDisplayChild.id = structureTypeName + "DisplayChild"
+
         structureDisplayChild.onclick = function() { enterBuildMode(structureTypeName) }
 
         structureDisplayParent.appendChild(structureDisplayChild)
@@ -407,6 +409,9 @@ function enterBuildMode(structureTypeName) {
     placePreviewWidth = structureType.width
     placePreviewHeight = structureType.height
 
+    let displayEl = document.getElementById(structureTypeName + "DisplayChild")
+    displayEl.classList.add("structureDisplayChildSelected")
+
     buildNotificationEl.classList.add("buildNofiticationParentShow")
 
     enablePlacePreview()
@@ -417,6 +422,12 @@ function enterBuildMode(structureTypeName) {
 function exitBuildMode() {
 
     if (!players.Carson.buildMode) return
+
+    for (let structureTypeName in structureTypes) {
+
+        let displayEl = document.getElementById(structureTypeName + "DisplayChild")
+        displayEl.classList.remove("structureDisplayChildSelected")
+    }
 
     disablePlacePreview()
 
@@ -452,17 +463,24 @@ setInterval(generateResources, 250)
 
 function generateResources() {
 
+    for (let structureId in structures) {
+
+        let structure = structures[structureId]
+
+        /*  console.log(structure) */
+    }
+
     for (let playerName in players) {
 
         let player = players[playerName]
         let resources = player.resources
 
-        for (let resourceName in resources) {
+        /* for (let resourceName in resources) {
 
             let resource = resources[resourceName]
 
             resource.amount += resource.income
             resource.el.innerHTML = resource.amount
-        }
+        } */
     }
 }

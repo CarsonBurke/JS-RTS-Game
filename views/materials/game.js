@@ -37,6 +37,47 @@ function createGrid() {
     }
 }
 
+//
+
+let el = buildNotificationEl
+el.innerText = "Press " + hotkeys.exitBuildMode + " to exit build mode"
+
+// Add structure display
+
+addStructureDisplay()
+
+function addStructureDisplay() {
+
+    let structureDisplayParent = document.createElement("div")
+    structureDisplayParent.classList.add("structureDisplayParent")
+
+    let interactionDisplayParent = document.getElementById("interactionDisplayParent")
+    interactionDisplayParent.appendChild(structureDisplayParent)
+
+    for (let structureTypeName in structureTypes) {
+
+        let structureType = structureTypes[structureTypeName]
+
+        let structureDisplayChild = document.createElement("div")
+        structureDisplayChild.classList.add("structureDisplayChild")
+
+        structureDisplayParent.appendChild(structureDisplayChild)
+
+        let structureDisplayImage = document.createElement("img")
+        structureDisplayImage.classList.add("structureDisplayImage")
+
+        structureDisplayImage.src = structureType.image
+
+        structureDisplayChild.appendChild(structureDisplayImage)
+
+        let structureDisplayHeader = document.createElement("h3")
+        structureDisplayHeader.classList.add("structureDisplayHeader")
+
+        structureDisplayHeader.innerHTML = structureType.displayName
+
+        structureDisplayChild.appendChild(structureDisplayHeader)
+    }
+}
 
 // Create players
 
@@ -77,8 +118,6 @@ function playMusic() {
 let scale = 1
 
 document.onwheel = function zoom(event) {
-
-    event.preventDefault();
 
     scale += event.deltaY * -0.001;
 

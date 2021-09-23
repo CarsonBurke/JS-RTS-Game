@@ -44,6 +44,8 @@ let properties = {
             owner: undefined,
             width: 5,
             height: 5,
+            displayName: "Command Center",
+            creditCost: 300,
             image: "materials/images/commandCenter.png",
             income: {
                 credits: 15,
@@ -71,6 +73,8 @@ let properties = {
             owner: undefined,
             width: 2,
             height: 2,
+            displayName: "Pumpjack",
+            creditCost: 300,
             image: "materials/images/pumpjack.png",
             income: {
                 credits: 15,
@@ -130,6 +134,7 @@ let properties = {
 
         exitBuildMode: "x",
     },
+    buildNotificationEl: document.getElementById("buildNotificationParent"),
     players: {
 
     },

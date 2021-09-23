@@ -8,26 +8,22 @@ let properties = {
     cursorEl: document.getElementById("cursor"),
     resourceTypes: {
         credits: {
-            amount: 0,
-            income: 0,
+            amount: 1000 + 1000,
             description: "",
             el: document.getElementById("creditsAmount"),
         },
         oil: {
             amount: 0,
-            income: 0,
             description: "",
             el: document.getElementById("oilAmount"),
         },
         steel: {
             amount: 0,
-            income: 0,
             description: "",
             el: document.getElementById("steelAmount"),
         },
         concrete: {
             amount: 0,
-            income: 0,
             description: "",
             el: document.getElementById("concreteAmount"),
         },
@@ -50,14 +46,21 @@ let properties = {
                 credits: 1000,
             },
             income: {
-                credits: 15,
-                concrete: 2,
+                credits: 3.5,
+                concrete: 1.5,
                 oil: 0.5,
                 steel: 0.25,
             },
             upgrades: {
                 tier2: {
+                    displayName: "Teir 2",
+                    image: "materials/images/commandCenterTier2.png",
+                    cost: {
+                        credits: 1000,
+                    },
+                    income: {
 
+                    },
                 },
                 tier3: {
 

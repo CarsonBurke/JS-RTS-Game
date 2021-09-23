@@ -366,6 +366,29 @@ function placeStartingStructures() {
 
 function placeStructure(structure) {
 
+    let cost = []
+
+    for (let resourceType in structure.cost) {
+
+        let resourceAmount = structure.cost[resourceType]
+
+        console.log(resourceAmount)
+
+        if (resourceAmount >= players[structure.owner].resources[resourceType].amount) {
+
+            return
+        }
+
+        cost[resourceType] = resourceAmount
+    }
+
+    for (let resourceType in cost) {
+
+        let resourceAmount = cost[resourceType]
+
+        players[structure.owner].resources[resourceType].amount -= resourceAmount
+    }
+
     let el = structure.el
 
     // Give class

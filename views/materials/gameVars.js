@@ -283,12 +283,12 @@ let properties = {
             this.el = document.createElement("div")
         }
     },
-    CommandCenter: class {
+    Structure: class {
         constructor(opts) {
 
             this.owner = opts.owner
 
-            this.type = "commandCenter"
+            this.type = opts.type
             this.x = opts.x
             this.y = opts.y
 
@@ -303,6 +303,26 @@ let properties = {
             }
         }
     },
+    /*     CommandCenter: class {
+            constructor(opts) {
+
+                this.owner = opts.owner
+
+                this.type = "commandCenter"
+                this.x = opts.x
+                this.y = opts.y
+
+                this.id = newId()
+                this.el = document.createElement("div")
+
+                for (let propertyName in structureTypes[this.type]) {
+
+                    let property = structureTypes[this.type][propertyName]
+
+                    this[propertyName] = property
+                }
+            }
+        }, */
     Player: class {
         constructor(opts) {
 

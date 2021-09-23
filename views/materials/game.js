@@ -355,13 +355,14 @@ function placeStartingStructures() {
 
     // Create starting command center
 
-    let commandCenter = new CommandCenter({
+    let structure = new Structure({
+        type: "commandCenter",
         owner: "Carson",
         x: 5,
         y: 10,
     })
 
-    placeStructure(commandCenter)
+    placeStructure(structure)
 }
 
 function placeStructure(structure) {
@@ -447,6 +448,22 @@ function enterBuildMode(structureTypeName) {
     buildNotificationEl.classList.add("buildNofiticationParentShow")
 
     enablePlacePreview()
+
+    document.addEventListener("click", newStructure)
+
+    function newStructure() {
+
+        let structure = new Structure({
+            type: structureTypeName,
+            owner: "Carson",
+            x: 20,
+            y: 10,
+        })
+
+        placeStructure(structure)
+
+        console.log("placed Structure")
+    }
 
     players.Carson.buildMode = true
 }

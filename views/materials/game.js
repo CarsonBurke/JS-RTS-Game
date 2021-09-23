@@ -467,20 +467,29 @@ function generateResources() {
 
         let structure = structures[structureId]
 
-        /*  console.log(structure) */
+        let owner = structure.owner
+
+        for (let resourceType in structure.income) {
+
+            let structureIncome = structure.income[resourceType]
+            let playerResources = players[owner].resources[resourceType]
+
+            playerResources.amount += structureIncome
+            playerResources.el.innerHTML = (playerResources.amount).toFixed(0)
+        }
     }
 
-    for (let playerName in players) {
+    /* for (let playerName in players) {
 
         let player = players[playerName]
         let resources = player.resources
 
-        /* for (let resourceName in resources) {
+        for (let resourceName in resources) {
 
             let resource = resources[resourceName]
 
             resource.amount += resource.income
             resource.el.innerHTML = resource.amount
-        } */
-    }
+        }
+    } */
 }

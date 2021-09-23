@@ -45,13 +45,13 @@ let properties = {
             width: 5,
             height: 5,
             displayName: "Command Center",
-            displayEl: document.getElementById("commandCenterDisplayChild"),
             image: "materials/images/commandCenter.png",
             cost: {
                 credits: 1000,
             },
             income: {
                 credits: 15,
+                concrete: 2,
                 oil: 0.5,
                 steel: 0.25,
             },

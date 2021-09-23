@@ -387,6 +387,11 @@ function placeStructure(structure) {
     el.style.top = structure.y * gridPartDimensions + "px"
     el.style.left = structure.x * gridPartDimensions + "px"
 
+
+    // Add ability to select structure
+
+    structure.el.onclick = function() { selectStructure(structure) }
+
     // Add element to map
 
     mapEl.appendChild(el)
@@ -438,6 +443,18 @@ function exitBuildMode() {
     players.Carson.buildMode = false
 }
 
+// Selecting structures
+
+function selectStructure(structure) {
+
+    structure.el.classList.add("structureOutline")
+}
+
+function deSelectStructure(structure) {
+
+    structure.el.classList.remove("structureOutline")
+}
+
 // Destroying structures
 
 function destroyStructure(structure) {
@@ -478,18 +495,4 @@ function generateResources() {
             playerResources.el.innerHTML = (playerResources.amount).toFixed(0)
         }
     }
-
-    /* for (let playerName in players) {
-
-        let player = players[playerName]
-        let resources = player.resources
-
-        for (let resourceName in resources) {
-
-            let resource = resources[resourceName]
-
-            resource.amount += resource.income
-            resource.el.innerHTML = resource.amount
-        }
-    } */
 }

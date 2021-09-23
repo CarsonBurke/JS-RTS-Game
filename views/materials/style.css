@@ -274,5 +274,9 @@ body {
     border-radius: 10px;
 }
 
+.structureOutline {
+    outline: 1.75px solid white;
+}
+
 
 /*  */

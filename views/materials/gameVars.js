@@ -8,7 +8,7 @@ let properties = {
     cursorEl: document.getElementById("cursor"),
     resourceTypes: {
         credits: {
-            amount: 1000 + 1000,
+            amount: 10000 + 1000,
             description: "",
             el: document.getElementById("creditsAmount"),
         },

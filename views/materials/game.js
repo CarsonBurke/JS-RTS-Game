@@ -451,13 +451,16 @@ function enterBuildMode(structureTypeName) {
 
     document.addEventListener("click", newStructure)
 
-    function newStructure() {
+    function newStructure(event) {
+
+        let x = Math.floor((event.pageY - mapEl.getBoundingClientRect().top) / 20)
+        let y = Math.floor((event.pageX - mapEl.getBoundingClientRect().left) / 20)
 
         let structure = new Structure({
             type: structureTypeName,
             owner: "Carson",
-            x: 20,
-            y: 10,
+            x: x,
+            y: y,
         })
 
         placeStructure(structure)

@@ -134,6 +134,8 @@ window.onkeydown = function(event) {
 
         movePlayer("right")
     }
+
+    if (key == hotkeys.exitBuildMode) exitBuildMode()
 }
 
 window.onkeyup = function(event) {
@@ -228,6 +230,71 @@ function changeDirection() {
 
 }
 
+// When placing something show graphic
+
+window.addEventListener("load", createPlacePreview)
+
+function createPlacePreview() {
+
+    let el = document.createElement("div")
+
+    el.classList.add("placePreview")
+
+    mapEl.appendChild(el)
+
+    globalThis.placePreviewEl = el
+}
+
+function enablePlacePreview() {
+
+    // Make place preview shadow follow the cursor
+
+    window.addEventListener("mousemove", followCursor)
+    window.addEventListener("wheel", followCursor)
+    window.addEventListener("keydown", followCursor)
+}
+
+function disablePlacePreview() {
+
+    // Disable place preview
+
+    window.removeEventListener("mousemove", followCursor)
+    window.removeEventListener("wheel", followCursor)
+    window.removeEventListener("keydown", followCursor)
+}
+
+let placePreviewSize = 0
+
+function followCursor(e) {
+
+    mapEl.style.cursor = "none"
+
+    let el = placePreviewEl
+
+    // adjust placePreview size to match structure
+
+    el.style.width = placePreviewSize * gridPartDimensions + "px"
+    el.style.height = placePreviewSize * gridPartDimensions + "px"
+
+    // Get cursor distance from top and divide by map distance from top to get cursor distance from top of map
+
+    let top = Math.floor((((e.pageY - mapEl.getBoundingClientRect().top) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions) * gridPartDimensions
+    let left = Math.floor((((e.pageX - mapEl.getBoundingClientRect().left) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions) * gridPartDimensions
+
+    // Make sure top stays inside the map
+
+    top = Math.min(top, gridPartDimensions * gridSize - gridPartDimensions * 3)
+    top = Math.max(top, 0)
+
+    // Make sure left stays inside the map
+
+    left = Math.min(left, gridPartDimensions * gridSize - gridPartDimensions * 3)
+    left = Math.max(left, 0)
+
+    el.style.top = top + "px"
+    el.style.left = left + "px"
+}
+
 // Place game objects
 
 placeStartingStructures()
@@ -277,42 +344,29 @@ function placeStructure(structure) {
     structures[structure.id] = structure
 }
 
-/* function placeObject(opts) {
+// Build mode
 
-    let id = newId()
+let buildMode = false
 
-    let element = document.createElement("div")
+function enterBuildMode(structure) {
 
-    element.classList.add(opts.type)
-    element.id = id
+    if (buildMode) return
 
-    objects[id] = opts
+    // place preview logic
 
-    element.style.position = "absolute"
+    placePreviewSize
 
-    element.style.top = gridPartDimensions * opts.y + "px"
-    element.style.left = gridPartDimensions * opts.x + "px"
-
-    map.appendChild(element)
-
-    opts.id = id
-
-    return opts
+    enablePlacePreview()
 }
 
-placeCommandCenter()
+function exitBuildMode() {
 
-function placeCommandCenter() {
+    if (!buildMode) return
 
-    let type = "player"
-    let pos = { x: 0, y: 0 }
 
-    placeObject({
-        type: type,
-        x: pos.x,
-        y: pos.y,
-    })
-} */
+
+    disablePlacePreview()
+}
 
 // Destroying structures
 
@@ -320,53 +374,6 @@ function destroyStructure(structure) {
 
 
 }
-
-// When placing structure show graphic
-
-window.addEventListener("load", createPlacePreview)
-
-function createPlacePreview() {
-
-    let el = document.createElement("div")
-
-    el.classList.add("placePreview")
-
-    el.style.width = 3 * gridPartDimensions + "px"
-    el.style.height = 3 * gridPartDimensions + "px"
-
-    mapEl.appendChild(el)
-
-    globalThis.placePreviewEl = el
-}
-
-function followCursor(e) {
-
-    mapEl.style.cursor = "none"
-
-    let el = placePreviewEl
-
-    // Get cursor distance from top and divide by map distance from top to get cursor distance from top of map
-
-    let top = Math.floor((((e.pageY - mapEl.getBoundingClientRect().top) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions) * gridPartDimensions
-    let left = Math.floor((((e.pageX - mapEl.getBoundingClientRect().left) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions) * gridPartDimensions
-
-    // Make sure top stays inside the map
-
-    top = Math.min(top, gridPartDimensions * gridSize - gridPartDimensions * 3)
-    top = Math.max(top, 0)
-
-    // Make sure left stays inside the map
-
-    left = Math.min(left, gridPartDimensions * gridSize - gridPartDimensions * 3)
-    left = Math.max(left, 0)
-
-    el.style.top = top + "px"
-    el.style.left = left + "px"
-}
-
-window.addEventListener("mousemove", followCursor)
-window.addEventListener("wheel", followCursor)
-window.addEventListener("keydown", followCursor)
 
 // Draw outline for selecting units or buildings
 

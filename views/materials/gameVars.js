@@ -67,6 +67,55 @@ let properties = {
                 }
             },
         },
+        pumpjack: {
+            owner: undefined,
+            width: 2,
+            height: 2,
+            image: "materials/images/pumpjack.png",
+            income: {
+                credits: 15,
+                oil: 0.5,
+                steel: 0.25,
+            },
+            upgrades: {
+                tier2: {
+
+                },
+                tier3: {
+
+                },
+            },
+        },
+    },
+    terrainTypes: {
+        grass: {
+            traversable: {
+                land: true,
+                water: false,
+                air: true,
+            },
+        },
+        sand: {
+            traversable: {
+                land: true,
+                water: false,
+                air: true,
+            },
+        },
+        mountain: {
+            traversable: {
+                land: false,
+                water: false,
+                air: true,
+            },
+        },
+        water: {
+            traversable: {
+                land: false,
+                water: true,
+                air: true,
+            },
+        },
     },
     hotkeys: {
         moveUp: "ArrowUp",
@@ -79,7 +128,7 @@ let properties = {
         panLeft: "a",
         panRight: "d",
 
-        stopPlacing: "x",
+        exitBuildMode: "x",
     },
     players: {
 

@@ -5,7 +5,7 @@ body {
     font-family: "poppins", "sans-serif";
     overflow-x: hidden;
     overflow-y: scroll;
-    --primary: rgb(5, 228, 5);
+    --primary: rgb(236, 233, 20);
     --primaryShade: rgb(66, 66, 66);
     --secondaryShade: rgb(38, 40, 43);
     --tertiaryShade: white;
@@ -130,22 +130,26 @@ body {
 
 .displayParent {
     position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
+    left: 7.5px;
+    top: 7.5px;
+    bottom: 7.5px;
     max-width: 200px;
     overflow: hidden;
     z-index: 1000;
-    background: rgb(39, 38, 38);
+    user-select: none;
 }
 
 .resourceDisplayParent {
     display: flex;
     flex-wrap: wrap;
-    padding: 20px 10px;
+    padding: 20px 0;
+    background: rgba( 255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    width: 200px;
+    margin-bottom: 7.5px;
 }
 
-.resourceParent {
+.resourceDisplayChild {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -153,17 +157,51 @@ body {
     text-align: center;
 }
 
-.resourceImage {
-    width: 50px;
-    height: 50px;
+.resourceDisplayImage {
+    width: 45px;
+    height: 45px;
     margin: auto;
 }
 
-.resourceHeader {
+.resourceDisplayHeader {
     margin: 0;
     padding: 10px 0;
     font-weight: 400;
     font-size: 14px;
+}
+
+.interactionDisplayParent {
+    display: flex;
+    flex-direction: column;
+    background: rgba( 255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    width: 200px;
+}
+
+.structureDisplayChild {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.structureDisplayChild:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.structureDisplayImage {
+    width: 65px;
+    height: 65px;
+}
+
+.structureDisplayHeader {
+    margin: 0;
+    padding-left: 8px;
+    padding-bottom: 5px;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 
@@ -197,7 +235,7 @@ body {
 }
 
 .placePreview {
-    border: rgba(255, 255, 255, 0.4) 1.5px solid;
+    border: rgba(255, 255, 255, 0.4) 1.75px solid;
     position: absolute;
 }
 

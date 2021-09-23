@@ -410,7 +410,7 @@ function enterBuildMode(structureTypeName) {
     placePreviewWidth = structureType.width
     placePreviewHeight = structureType.height
 
-    buildNotificationEl.classList.add("buildNoficiationParentShow")
+    buildNotificationEl.classList.add("buildNofiticationParentShow")
 
     enablePlacePreview()
 
@@ -427,7 +427,7 @@ function exitBuildMode() {
 
     mapEl.style.cursor = "default"
 
-
+    buildNotificationEl.classList.remove("buildNofiticationParentShow")
 
     players.Carson.buildMode = false
 }

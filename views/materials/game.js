@@ -61,6 +61,8 @@ function addStructureDisplay() {
         let structureDisplayChild = document.createElement("div")
         structureDisplayChild.classList.add("structureDisplayChild")
 
+        structureDisplayChild.onclick = function() { enterBuildMode(structureTypeName) }
+
         structureDisplayParent.appendChild(structureDisplayChild)
 
         let structureDisplayImage = document.createElement("img")
@@ -117,7 +119,7 @@ function playMusic() {
 
 let scale = 1
 
-document.onwheel = function zoom(event) {
+mapEl.onwheel = function zoom(event) {
 
     scale += event.deltaY * -0.001;
 
@@ -286,6 +288,8 @@ function createPlacePreview() {
 
 function enablePlacePreview() {
 
+    placePreviewEl.style.opacity = 1
+
     // Make place preview shadow follow the cursor
 
     window.addEventListener("mousemove", followCursor)
@@ -300,9 +304,16 @@ function disablePlacePreview() {
     window.removeEventListener("mousemove", followCursor)
     window.removeEventListener("wheel", followCursor)
     window.removeEventListener("keydown", followCursor)
+
+    //
+
+    mapEl.style.cursor = "default"
+
+    placePreviewEl.style.opacity = 0
 }
 
-let placePreviewSize = 0
+let placePreviewWidth = 0
+let placePreviewHeight = 0
 
 function followCursor(e) {
 
@@ -312,8 +323,10 @@ function followCursor(e) {
 
     // adjust placePreview size to match structure
 
-    el.style.width = placePreviewSize * gridPartDimensions + "px"
-    el.style.height = placePreviewSize * gridPartDimensions + "px"
+    console.log(placePreviewWidth)
+
+    el.style.width = placePreviewWidth * gridPartDimensions + "px"
+    el.style.height = placePreviewHeight * gridPartDimensions + "px"
 
     // Get cursor distance from top and divide by map distance from top to get cursor distance from top of map
 
@@ -322,12 +335,12 @@ function followCursor(e) {
 
     // Make sure top stays inside the map
 
-    top = Math.min(top, gridPartDimensions * gridSize - gridPartDimensions * 3)
+    top = Math.min(top, gridPartDimensions * gridSize - gridPartDimensions * placePreviewHeight)
     top = Math.max(top, 0)
 
     // Make sure left stays inside the map
 
-    left = Math.min(left, gridPartDimensions * gridSize - gridPartDimensions * 3)
+    left = Math.min(left, gridPartDimensions * gridSize - gridPartDimensions * placePreviewWidth)
     left = Math.max(left, 0)
 
     el.style.top = top + "px"
@@ -385,26 +398,38 @@ function placeStructure(structure) {
 
 // Build mode
 
-let buildMode = false
+function enterBuildMode(structureTypeName) {
 
-function enterBuildMode(structure) {
+    if (players.Carson.buildMode) return
 
-    if (buildMode) return
+    let structureType = structureTypes[structureTypeName]
 
     // place preview logic
+    console.log(structureType)
 
-    placePreviewSize
+    placePreviewWidth = structureType.width
+    placePreviewHeight = structureType.height
+
+    buildNotificationEl.classList.add("buildNoficiationParentShow")
 
     enablePlacePreview()
+
+    players.Carson.buildMode = true
 }
 
 function exitBuildMode() {
 
-    if (!buildMode) return
+    if (!players.Carson.buildMode) return
 
-
+    console.log("hey")
 
     disablePlacePreview()
+
+    mapEl.style.cursor = "default"
+
+
+
+    players.Carson.buildMode = false
 }
 
 // Destroying structures

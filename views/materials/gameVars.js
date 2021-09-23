@@ -69,6 +69,48 @@ let properties = {
                 }
             },
         },
+        plasmaTurret: {
+            owner: undefined,
+            width: 2,
+            height: 2,
+            displayName: "Plasma Turret",
+            creditCost: 300,
+            image: "materials/images/plasmaTurret.png",
+            income: {
+                credits: 15,
+                oil: 0.5,
+                steel: 0.25,
+            },
+            upgrades: {
+                tier2: {
+
+                },
+                tier3: {
+
+                },
+            },
+        },
+        barrack: {
+            owner: undefined,
+            width: 3,
+            height: 3,
+            displayName: "Barracks",
+            creditCost: 300,
+            image: "materials/images/barrack.png",
+            income: {
+                credits: 15,
+                oil: 0.5,
+                steel: 0.25,
+            },
+            upgrades: {
+                tier2: {
+
+                },
+                tier3: {
+
+                },
+            },
+        },
         pumpjack: {
             owner: undefined,
             width: 2,
@@ -76,6 +118,69 @@ let properties = {
             displayName: "Pumpjack",
             creditCost: 300,
             image: "materials/images/pumpjack.png",
+            income: {
+                credits: 15,
+                oil: 0.5,
+                steel: 0.25,
+            },
+            upgrades: {
+                tier2: {
+
+                },
+                tier3: {
+
+                },
+            },
+        },
+        mineshaft: {
+            owner: undefined,
+            width: 3,
+            height: 4,
+            displayName: "Mineshaft",
+            creditCost: 300,
+            image: "materials/images/mineshaft.png",
+            income: {
+                credits: 15,
+                oil: 0.5,
+                steel: 0.25,
+            },
+            upgrades: {
+                tier2: {
+
+                },
+                tier3: {
+
+                },
+            },
+        },
+        generator: {
+            owner: undefined,
+            width: 2,
+            height: 1,
+            displayName: "Generator",
+            creditCost: 300,
+            image: "materials/images/generator.png",
+            income: {
+                credits: 15,
+                oil: 0.5,
+                steel: 0.25,
+            },
+            upgrades: {
+                tier2: {
+
+                },
+                tier3: {
+
+                },
+            },
+        },
+        steelRefinery: {
+            owner: undefined,
+            width: 4,
+            height: 3,
+            displayName: "Steel Refinery",
+            creditCost: 300,
+            image: "materials/images/steelRefinery.png",
             income: {
                 credits: 15,
                 oil: 0.5,
@@ -195,7 +300,11 @@ let properties = {
 
             this.name = opts.name
 
-            // 
+            //
+
+            this.buildMode = false
+
+            //
 
             this.id = newId()
 

@@ -134,8 +134,8 @@ body {
     top: 7.5px;
     bottom: 7.5px;
     max-width: 200px;
-    overflow: hidden;
     z-index: 1000;
+    overflow-y: scroll;
     user-select: none;
 }
 
@@ -261,6 +261,7 @@ body {
 .placePreview {
     border: rgba(255, 255, 255, 0.4) 1.75px solid;
     position: absolute;
+    transition: opacity 0.3s;
 }
 
 .commandCenter {

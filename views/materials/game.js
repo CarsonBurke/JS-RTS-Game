@@ -374,6 +374,8 @@ function placeStructure(structure) {
 
     // Apply stylings
 
+    el.style.cursor = "pointer"
+
     el.style.backgroundImage = "url(" + structure.image + ")"
 
     el.style.position = "absolute"
@@ -411,6 +413,8 @@ function enterBuildMode(structureTypeName) {
 
     // place preview logic
 
+    placePreviewEl.style.backgroundImage = "url(" + structureType.image + ")"
+
     placePreviewWidth = structureType.width
     placePreviewHeight = structureType.height
 
@@ -447,7 +451,9 @@ function exitBuildMode() {
 
 function selectStructure(structure) {
 
-    structure.el.classList.add("structureOutline")
+    if (selectStructure)
+
+        structure.el.classList.add("structureOutline")
 }
 
 function deSelectStructure(structure) {

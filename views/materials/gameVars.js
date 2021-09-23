@@ -252,6 +252,7 @@ let properties = {
         panLeft: "a",
         panRight: "d",
 
+        exitStructureSelect: "x",
         exitBuildMode: "x",
     },
     buildNotificationEl: document.getElementById("buildNotificationParent"),
@@ -308,6 +309,7 @@ let properties = {
 
             //
 
+            this.selectedStructure = false
             this.buildMode = false
 
             //

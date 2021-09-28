@@ -429,6 +429,42 @@ function placeStructure(structure) {
 
 // Build mode
 
+let placingStructureType
+
+function newStructure(event) {
+
+    let el = placePreviewEl
+
+    // adjust placePreview size to match structure
+
+    el.style.width = placePreviewWidth * gridPartDimensions + "px"
+    el.style.height = placePreviewHeight * gridPartDimensions + "px"
+
+    // Get cursor distance from y and divide by map distance from top to get cursor distance from top of map
+
+    let y = Math.floor((((event.pageY - mapEl.getBoundingClientRect().top) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions)
+    let x = Math.floor((((event.pageX - mapEl.getBoundingClientRect().left) / scale) - (el.offsetHeight * 0.5)) / gridPartDimensions)
+
+    // Make sure y stays inside the map
+
+    y = Math.min(y, gridPartDimensions * gridSize - gridPartDimensions * placePreviewHeight)
+    y = Math.max(y, 0)
+
+    // Make sure x stays inside the map
+
+    x = Math.min(x, gridPartDimensions * gridSize - gridPartDimensions * placePreviewWidth)
+    x = Math.max(x, 0)
+
+    let structure = new Structure({
+        type: placingStructureType,
+        owner: "Carson",
+        x: x,
+        y: y,
+    })
+
+    placeStructure(structure)
+}
+
 function enterBuildMode(structureTypeName) {
 
     if (players.Carson.buildMode) return
@@ -449,24 +485,11 @@ function enterBuildMode(structureTypeName) {
 
     enablePlacePreview()
 
+    //
+
+    placingStructureType = structureTypeName
+
     document.addEventListener("click", newStructure)
-
-    function newStructure(event) {
-
-        let x = Math.floor((event.pageX - mapEl.getBoundingClientRect().left) / 20)
-        let y = Math.floor((event.pageY - mapEl.getBoundingClientRect().top) / 20)
-
-        let structure = new Structure({
-            type: structureTypeName,
-            owner: "Carson",
-            x: x,
-            y: y,
-        })
-
-        placeStructure(structure)
-
-        console.log("placed Structure")
-    }
 
     players.Carson.buildMode = true
 }
@@ -480,6 +503,8 @@ function exitBuildMode() {
         let displayEl = document.getElementById(structureTypeName + "DisplayChild")
         displayEl.classList.remove("structureDisplayChildSelected")
     }
+
+    document.removeEventListener("click", newStructure)
 
     disablePlacePreview()
 

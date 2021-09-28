@@ -37,6 +37,11 @@ function createGrid() {
     }
 }
 
+function generateTerrain() {
+
+
+}
+
 //
 
 let el = buildNotificationEl
@@ -365,15 +370,13 @@ function placeStartingStructures() {
     placeStructure(structure)
 }
 
-function placeStructure(structure) {
+function chargeToBuildStructure(structure) {
 
     let cost = []
 
     for (let resourceType in structure.cost) {
 
         let resourceAmount = structure.cost[resourceType]
-
-        console.log(resourceAmount)
 
         if (resourceAmount >= players[structure.owner].resources[resourceType].amount) {
 
@@ -389,6 +392,20 @@ function placeStructure(structure) {
 
         players[structure.owner].resources[resourceType].amount -= resourceAmount
     }
+
+    return true
+}
+
+function isPlaceablePosition(structure) {
+
+
+}
+
+function placeStructure(structure) {
+
+    if (!chargeToBuildStructure(structure)) return
+
+    isPlaceablePosition()
 
     let el = structure.el
 
@@ -412,7 +429,6 @@ function placeStructure(structure) {
 
     el.style.top = structure.y * gridPartDimensions + "px"
     el.style.left = structure.x * gridPartDimensions + "px"
-
 
     // Add ability to select structure
 
@@ -454,8 +470,6 @@ function newStructure(event) {
     y = Math.min(y, gridSize - structureType.height)
     y = Math.max(y, 0)
 
-    console.log(y)
-
     // Make sure x stays inside the map
 
     x = Math.min(x, gridSize - structureType.width)
@@ -471,9 +485,19 @@ function newStructure(event) {
     placeStructure(structure)
 }
 
-function enterBuildMode(structureTypeName) {
+async function enterBuildMode(structureTypeName) {
 
     if (players.Carson.buildMode) return
+
+    function wait(miliseconds) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve()
+            }, miliseconds)
+        })
+    }
+
+    await wait(100)
 
     let structureType = structureTypes[structureTypeName]
 

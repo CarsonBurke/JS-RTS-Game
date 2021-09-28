@@ -221,6 +221,14 @@ let properties = {
                 water: false,
                 air: true,
             },
+
+        },
+        forest: {
+            traversable: {
+                land: false,
+                water: false,
+                air: true,
+            },
         },
         sand: {
             traversable: {
@@ -240,6 +248,13 @@ let properties = {
             traversable: {
                 land: false,
                 water: true,
+                air: true,
+            },
+        },
+        stone: {
+            traversable: {
+                land: true,
+                water: false,
                 air: true,
             },
         },

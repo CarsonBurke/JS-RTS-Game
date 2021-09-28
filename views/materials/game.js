@@ -1,5 +1,5 @@
 import "./gameVars.js"
-import { Perlin } from "./perlin.js"
+import { perlin } from "./perlin.js"
 
 // Create map and implement values
 
@@ -10,14 +10,7 @@ let gridSize = mapDimensions / gridPartDimensions
 map.style.width = mapDimensions + "px"
 map.style.height = mapDimensions + "px"
 
-let perlinNoise = new Perlin(1000)
-
-console.log(perlinNoise)
-
-function newTerrainValue(x, y) {
-
-    return perlinNoise.noise(x, 0, 0)
-}
+perlin.seed()
 
 createGrid()
 
@@ -28,7 +21,7 @@ function createGrid() {
     for (let x = 0; x < gridSize; x++) {
         for (let y = 0; y < gridSize; y++) {
 
-            let terrainValue = newTerrainValue(x, y)
+            let terrainValue = perlin.get(x, y) * 255
             console.log(terrainValue)
 
             let gridPart = new GridPart({ x: x, y: y })

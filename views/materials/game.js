@@ -429,9 +429,13 @@ function placeStructure(structure) {
 
 // Build mode
 
-let placingStructureType
+let placingStructureTypeName
 
 function newStructure(event) {
+
+    let structureType = structureTypes[placingStructureTypeName]
+
+    //
 
     let el = placePreviewEl
 
@@ -447,16 +451,18 @@ function newStructure(event) {
 
     // Make sure y stays inside the map
 
-    y = Math.min(y, gridPartDimensions * gridSize - gridPartDimensions * placePreviewHeight)
+    y = Math.min(y, gridSize - structureType.height)
     y = Math.max(y, 0)
+
+    console.log(y)
 
     // Make sure x stays inside the map
 
-    x = Math.min(x, gridPartDimensions * gridSize - gridPartDimensions * placePreviewWidth)
+    x = Math.min(x, gridSize - structureType.width)
     x = Math.max(x, 0)
 
     let structure = new Structure({
-        type: placingStructureType,
+        type: placingStructureTypeName,
         owner: "Carson",
         x: x,
         y: y,
@@ -487,7 +493,7 @@ function enterBuildMode(structureTypeName) {
 
     //
 
-    placingStructureType = structureTypeName
+    placingStructureTypeName = structureTypeName
 
     document.addEventListener("click", newStructure)
 

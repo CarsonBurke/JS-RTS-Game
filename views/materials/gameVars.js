@@ -6,6 +6,13 @@ let properties = {
     nextId: 0,
     mapEl: document.getElementById("map"),
     cursorEl: document.getElementById("cursor"),
+    colors: {
+        red: "#ff0000",
+        blue: "#0066ff",
+        green: "#00ff00",
+        yellow: "#ffff00",
+        grey: "#9D9D9D",
+    },
     resourceTypes: {
         credits: {
             amount: 10000 + 1000,

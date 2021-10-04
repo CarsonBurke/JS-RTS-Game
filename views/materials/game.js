@@ -488,9 +488,11 @@ function newStructure(event) {
     placeStructure(structure)
 }
 
+let buildMode
+
 async function enterBuildMode(structureTypeName) {
 
-    if (players.Carson.buildMode) return
+    if (buildMode) return
 
     function wait(miliseconds) {
         return new Promise(resolve => {
@@ -518,18 +520,22 @@ async function enterBuildMode(structureTypeName) {
 
     enablePlacePreview()
 
-    //
+    // Enable ability to place structures
 
     placingStructureTypeName = structureTypeName
 
     document.addEventListener("click", newStructure)
 
-    players.Carson.buildMode = true
+    // Make it known that buildMode is on
+
+    buildMode = true
 }
 
 function exitBuildMode() {
 
-    if (!players.Carson.buildMode) return
+    if (!buildMode) return
+
+    // Remove interaction effect for displayEl
 
     for (let structureTypeName in structureTypes) {
 
@@ -537,46 +543,66 @@ function exitBuildMode() {
         displayEl.classList.remove("structureDisplayChildSelected")
     }
 
+    // Stop ability to place structures
+
     document.removeEventListener("click", newStructure)
 
     disablePlacePreview()
 
+    // Show cursor again
+
     mapEl.style.cursor = "default"
+
+    // Remove buildNotification
 
     buildNotificationEl.classList.remove("buildNofiticationParentShow")
 
-    players.Carson.buildMode = false
+    // Make it clear that buildMode is off
+
+    buildMode = false
 }
 
 // Selecting structures
 
 function selectStructure(structure) {
 
-    if (selectStructure)
+    // Make sure player isn't in buildMode
 
-        structure.el.classList.add("structureOutline")
+    if (buildMode) return
+
+    // Make sure structure isn't already selected
+
+    if (structure.selected) return
+
+    structure.selected = true
+
+    structure.el.classList.add("structureOutline")
+
+    // Show interactionEl
+
+    let interactionEl = structure.interactionEl
+
+    interactionEl.classList.add("interactionChildShow")
 }
 
 function deSelectStructure(structure) {
 
+    if (!structure.selected) return
+
+    structure.selected = false
+
     structure.el.classList.remove("structureOutline")
+
+    // Hide interactionEl
+
+    let interactionEl = structure.interactionEl
+
+    interactionEl.classList.remove("interactionChildShow")
 }
 
 // Destroying structures
 
 function destroyStructure(structure) {
-
-
-}
-
-// Draw outline for selecting units or buildings
-
-function createOutline() {
-
-
-}
-
-function drawOutline() {
 
 
 }

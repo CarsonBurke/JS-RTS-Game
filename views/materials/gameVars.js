@@ -317,6 +317,10 @@ let properties = {
             this.id = newId()
             this.el = document.createElement("div")
 
+            this.interactionEl = document.createElement("div")
+
+            this.interactionEl.classList.add("interactionChild")
+
             for (let propertyName in structureTypes[this.type]) {
 
                 let property = structureTypes[this.type][propertyName]
@@ -325,37 +329,12 @@ let properties = {
             }
         }
     },
-    /*     CommandCenter: class {
-            constructor(opts) {
-
-                this.owner = opts.owner
-
-                this.type = "commandCenter"
-                this.x = opts.x
-                this.y = opts.y
-
-                this.id = newId()
-                this.el = document.createElement("div")
-
-                for (let propertyName in structureTypes[this.type]) {
-
-                    let property = structureTypes[this.type][propertyName]
-
-                    this[propertyName] = property
-                }
-            }
-        }, */
     Player: class {
         constructor(opts) {
 
             // Add options to player
 
             this.name = opts.name
-
-            //
-
-            this.selectedStructure = false
-            this.buildMode = false
 
             //
 
@@ -371,8 +350,6 @@ let properties = {
 
                 this.resources[resourceName] = resource
             }
-
-
         }
     },
 }

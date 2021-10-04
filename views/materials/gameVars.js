@@ -13,6 +13,13 @@ let properties = {
         yellow: "#ffff00",
         grey: "#9D9D9D",
     },
+    wait: function(miliseconds) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve()
+            }, miliseconds)
+        })
+    },
     resourceTypes: {
         credits: {
             amount: 10000 + 1000,
@@ -315,11 +322,16 @@ let properties = {
             this.y = opts.y
 
             this.id = newId()
+
             this.el = document.createElement("div")
 
-            this.interactionEl = document.createElement("div")
+            this.selectionEl = document.createElement("div")
 
-            this.interactionEl.classList.add("interactionChild")
+            this.selectionEl.classList.add("selectionDisplayParent")
+
+            let interactionDisplayParent = document.getElementsByClassName("interactionDisplayParent")[0]
+
+            interactionDisplayParent.appendChild(this.selectionEl)
 
             for (let propertyName in structureTypes[this.type]) {
 

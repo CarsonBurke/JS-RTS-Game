@@ -56,11 +56,9 @@ addStructureDisplay()
 
 function addStructureDisplay() {
 
-    let structureDisplayParent = document.createElement("div")
-    structureDisplayParent.classList.add("structureDisplayParent")
+    let structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
 
-    let interactionDisplayParent = document.getElementById("interactionDisplayParent")
-    interactionDisplayParent.appendChild(structureDisplayParent)
+    structureDisplayParent.classList.add("structureDisplayParentShow")
 
     for (let structureTypeName in structureTypes) {
 
@@ -315,10 +313,6 @@ function disablePlacePreview() {
     window.removeEventListener("wheel", followCursor)
     window.removeEventListener("keydown", followCursor)
 
-    //
-
-    mapEl.style.cursor = "default"
-
     placePreviewEl.style.opacity = 0
 }
 
@@ -327,7 +321,7 @@ let placePreviewHeight = 0
 
 function followCursor(e) {
 
-    mapEl.style.cursor = "none"
+    //
 
     let el = placePreviewEl
 
@@ -494,14 +488,6 @@ async function enterBuildMode(structureTypeName) {
 
     if (buildMode) return
 
-    function wait(miliseconds) {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve()
-            }, miliseconds)
-        })
-    }
-
     await wait(100)
 
     let structureType = structureTypes[structureTypeName]
@@ -562,7 +548,48 @@ function exitBuildMode() {
     buildMode = false
 }
 
+async function advancedShowEl(el) {
+
+    await wait(300)
+
+    el.style.display = "block"
+
+    await wait(300)
+
+    console.log(el)
+
+    el.classList.add(el.classList[0] + "Show")
+}
+
+async function advancedHideEl(el) {
+
+    el.classList.remove(el.classList[0] + "Show")
+
+    await wait(300)
+
+    el.style.display = "none"
+}
+
 // Selecting structures
+
+function deSelectStructure(structure) {
+
+    structure.el.classList.remove("structureOutline")
+
+    // Hide selectionEl
+
+    advancedHideEl(structure.selectionEl)
+
+    // Show structureDisplay
+
+    let structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
+
+    advancedShowEl(structureDisplayParent)
+
+    // Record that the structure is no longer selected
+
+    structure.selected = false
+}
 
 function selectStructure(structure) {
 
@@ -570,34 +597,29 @@ function selectStructure(structure) {
 
     if (buildMode) return
 
-    // Make sure structure isn't already selected
+    // Check if strucutre is already selected
 
-    if (structure.selected) return
+    if (structure.selected) {
 
-    structure.selected = true
+        deSelectStructure(structure)
+        return
+    }
 
     structure.el.classList.add("structureOutline")
 
-    // Show interactionEl
+    // Hide structureDisplay
 
-    let interactionEl = structure.interactionEl
+    let structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
 
-    interactionEl.classList.add("interactionChildShow")
-}
+    advancedHideEl(structureDisplayParent)
 
-function deSelectStructure(structure) {
+    // show selectionEl
 
-    if (!structure.selected) return
+    advancedShowEl(structure.selectionEl)
 
-    structure.selected = false
+    // Record that the structure is selected
 
-    structure.el.classList.remove("structureOutline")
-
-    // Hide interactionEl
-
-    let interactionEl = structure.interactionEl
-
-    interactionEl.classList.remove("interactionChildShow")
+    structure.selected = true
 }
 
 // Destroying structures

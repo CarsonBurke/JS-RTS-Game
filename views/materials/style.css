@@ -57,6 +57,9 @@ body {
 }
 
 
+/**/
+
+
 /* Template */
 
 .button {
@@ -178,6 +181,35 @@ body {
     border: rgba(255, 255, 255, 0.25) 1px solid;
     backdrop-filter: blur(10px);
     width: 200px;
+}
+
+.selectionDisplayParent {
+    opacity: 0;
+    pointer-events: none;
+    position: relative;
+    left: -10px;
+    transition: all 0.3s;
+    height: 200px;
+}
+
+.selectionDisplayParentShow {
+    left: 0;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.structureDisplayParent {
+    opacity: 0;
+    pointer-events: none;
+    left: -10px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.structureDisplayParentShow {
+    opacity: 1;
+    pointer-events: all;
+    left: 0;
 }
 
 .structureDisplayChild {

@@ -629,6 +629,15 @@ function destroyStructure(structure) {
 
 }
 
+// Purchasing upgrades
+
+function purchaseUpgrade(upgrade) {
+
+    if (upgrade.purchased) return
+
+    console.log("Trying to purchase " + upgrade.displayName)
+}
+
 // Generate resources
 
 setInterval(generateResources, 250)

@@ -189,7 +189,6 @@ body {
     position: relative;
     left: -10px;
     transition: all 0.3s;
-    height: 200px;
 }
 
 .selectionDisplayParentShow {

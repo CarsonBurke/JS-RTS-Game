@@ -67,17 +67,32 @@ let properties = {
             },
             upgrades: {
                 tier2: {
+                    purchased: false,
                     displayName: "Teir 2",
                     image: "materials/images/commandCenterTier2.png",
                     cost: {
                         credits: 1000,
                     },
                     income: {
-
+                        credits: 5,
+                        concrete: 2,
+                        oil: 0.75,
+                        steel: 0.4,
                     },
                 },
                 tier3: {
-
+                    purchased: false,
+                    displayName: "Teir 3",
+                    image: "materials/images/commandCenterTier3.png",
+                    cost: {
+                        credits: 1000,
+                    },
+                    income: {
+                        credits: 8,
+                        concrete: 3,
+                        oil: 1.1,
+                        steel: 0.7,
+                    },
                 },
             },
             units: {
@@ -325,19 +340,51 @@ let properties = {
 
             this.el = document.createElement("div")
 
-            this.selectionEl = document.createElement("div")
-
-            this.selectionEl.classList.add("selectionDisplayParent")
-
-            let interactionDisplayParent = document.getElementsByClassName("interactionDisplayParent")[0]
-
-            interactionDisplayParent.appendChild(this.selectionEl)
-
             for (let propertyName in structureTypes[this.type]) {
 
                 let property = structureTypes[this.type][propertyName]
 
                 this[propertyName] = property
+            }
+
+            // Add things the user can do when selecting the structure
+
+            this.selectionEl = document.createElement("div")
+
+            this.selectionEl.classList.add("selectionDisplayParent")
+
+            let selectionEl = this.selectionEl
+
+            let interactionDisplayParent = document.getElementsByClassName("interactionDisplayParent")[0]
+
+            interactionDisplayParent.appendChild(selectionEl)
+
+            for (let upgradeName in this.upgrades) {
+
+                let upgrade = this.upgrades[upgradeName]
+
+                let structureDisplayChild = document.createElement("div")
+                structureDisplayChild.classList.add("structureDisplayChild")
+
+                structureDisplayChild.onclick = function() {
+                    purchaseUpgrade(upgrade)
+                }
+
+                selectionEl.appendChild(structureDisplayChild)
+
+                let structureDisplayImage = document.createElement("img")
+                structureDisplayImage.classList.add("structureDisplayImage")
+
+                structureDisplayImage.src = upgrade.image
+
+                structureDisplayChild.appendChild(structureDisplayImage)
+
+                let structureDisplayHeader = document.createElement("h3")
+                structureDisplayHeader.classList.add("structureDisplayHeader")
+
+                structureDisplayHeader.innerHTML = upgrade.displayName
+
+                structureDisplayChild.appendChild(structureDisplayHeader)
             }
         }
     },
@@ -364,6 +411,12 @@ let properties = {
             }
         }
     },
+    Upgrade: class {
+        constructor() {
+
+
+        }
+    }
 }
 
 

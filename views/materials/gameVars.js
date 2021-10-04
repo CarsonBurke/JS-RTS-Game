@@ -367,7 +367,7 @@ let properties = {
                 structureDisplayChild.classList.add("structureDisplayChild")
 
                 structureDisplayChild.onclick = function() {
-                    purchaseUpgrade(upgrade)
+                    purchaseUpgrade(structure, upgrade)
                 }
 
                 selectionEl.appendChild(structureDisplayChild)

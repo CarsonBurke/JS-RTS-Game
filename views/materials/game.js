@@ -631,9 +631,37 @@ function destroyStructure(structure) {
 
 // Purchasing upgrades
 
-function purchaseUpgrade(upgrade) {
+function chargeToPurchaseUpgrade(structure, upgrade) {
+
+    let cost = []
+
+    for (let resourceType in upgrade.cost) {
+
+        let resourceAmount = upgrade.cost[resourceType]
+
+        if (resourceAmount >= players[upgrade.owner].resources[resourceType].amount) {
+
+            return
+        }
+
+        cost[resourceType] = resourceAmount
+    }
+
+    for (let resourceType in cost) {
+
+        let resourceAmount = cost[resourceType]
+
+        players[structure.owner].resources[resourceType].amount -= resourceAmount
+    }
+
+    return true
+}
+
+function purchaseUpgrade(structure, upgrade) {
 
     if (upgrade.purchased) return
+
+    if (!chargeToPurchaseUpgrade(structure, upgrade)) return
 
     console.log("Trying to purchase " + upgrade.displayName)
 }

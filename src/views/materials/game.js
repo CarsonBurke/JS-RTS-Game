@@ -271,18 +271,18 @@ let properties = {
                 air: true,
             },
         },
-        darkGrass: {
+        lightGrass: {
             value: 120,
             traversable: {
-                land: true,
+                land: false,
                 water: false,
                 air: true,
             },
         },
-        lightGrass: {
-            value: 175,
+        darkGrass: {
+            value: 200,
             traversable: {
-                land: false,
+                land: true,
                 water: false,
                 air: true,
             },

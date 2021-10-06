@@ -546,19 +546,6 @@ function blendTerrain() {
             bottomRight: "45deg",
         }
 
-        /* 
-        
-
-
-        */
-
-        /*         let cornerStylings = {
-                    topLeft: "borderTopLeftRadius",
-                    topRight: "borderTopRightRadius",
-                    bottomLeft: "borderBottomLeftRadius",
-                    bottomRight: "borderBottomLeftRadius",
-                } */
-
         // Loop through each corner
 
         for (let cornerName in corners) {
@@ -585,7 +572,7 @@ function blendTerrain() {
 
                     let color2 = window.getComputedStyle(gridPart.el, null).getPropertyValue('background-color')
 
-                    gridPart.el.style.backgroundImage = "linear-gradient(" + styleChange + ", " + color1 + " 50%, " + color2 + " 100%)"
+                    gridPart.el.style.backgroundImage = "linear-gradient(" + styleChange + ", " + color1 + " 49.9%, " + color2 + " 50.01%)"
 
                     // Inform us that this tile has been blended already
 

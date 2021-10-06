@@ -1,10 +1,10 @@
 import "./gameVars.js"
-import { perlin } from "./perlin.js"
+import "./perlin.js"
 
 // Assign variables
 
 let properties = {
-    mapDimensions: 1000,
+    mapDimensions: 5000,
     gridPartDimensions: 20,
     nextId: 0,
     mapEl: document.getElementById("map"),
@@ -247,22 +247,48 @@ let properties = {
         },
     },
     terrainTypes: {
-        grass: {
+        deepWater: {
+            value: 10,
+            traversable: {
+                land: false,
+                water: true,
+                air: true,
+            },
+        },
+        water: {
+            value: 40,
+            traversable: {
+                land: false,
+                water: true,
+                air: true,
+            },
+        },
+        sand: {
+            value: 50,
             traversable: {
                 land: true,
                 water: false,
                 air: true,
             },
-
         },
-        forest: {
+        darkGrass: {
+            value: 120,
+            traversable: {
+                land: true,
+                water: false,
+                air: true,
+            },
+        },
+        lightGrass: {
+            value: 175,
             traversable: {
                 land: false,
                 water: false,
                 air: true,
             },
         },
-        sand: {
+        stone: {
+            value: 225,
             traversable: {
                 land: true,
                 water: false,
@@ -270,22 +296,9 @@ let properties = {
             },
         },
         mountain: {
+            value: 255,
             traversable: {
                 land: false,
-                water: false,
-                air: true,
-            },
-        },
-        water: {
-            traversable: {
-                land: false,
-                water: true,
-                air: true,
-            },
-        },
-        stone: {
-            traversable: {
-                land: true,
                 water: false,
                 air: true,
             },
@@ -441,27 +454,47 @@ let gridSize = mapDimensions / gridPartDimensions
 map.style.width = mapDimensions + "px"
 map.style.height = mapDimensions + "px"
 
-perlin.seed()
-
 createGrid()
 
 function createGrid() {
+
+    function findTerrainWithValue(value) {
+
+        for (let terrainName in terrainTypes) {
+
+            let terrainType = terrainTypes[terrainName]
+
+            if (terrainType.value >= value) return terrainName
+        }
+    }
+
+    //
+
+    noise.seed(Math.random())
 
     // Loop through each position
 
     for (let x = 0; x < gridSize; x++) {
         for (let y = 0; y < gridSize; y++) {
 
-            let terrainValue = perlin.get(x, y) * 255
-            console.log(terrainValue)
+            // Create ew grid part
 
             let gridPart = new GridPart({ x: x, y: y })
+
+            // Find terrain type
+
+            let terrainValue = Math.floor(Math.abs(noise.simplex2(x / 100, y / 100)) * 256)
+
+            gridPart.type = findTerrainWithValue(terrainValue)
+
+            // Add gridPart element
 
             let el = gridPart.el
             let id = gridPart.id
 
             el.id = id
 
+            el.classList.add("gridPart")
             el.classList.add(gridPart.type)
 
             el.style.background = ""
@@ -470,6 +503,8 @@ function createGrid() {
             el.style.height = gridPartDimensions + "px"
 
             map.appendChild(el)
+
+            // Add girdPart to positions
 
             positions[id] = gridPart
         }

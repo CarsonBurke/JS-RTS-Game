@@ -289,8 +289,36 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 8px;
+    font-size: 10px;
     /* box-shadow: inset rgba(255, 255, 255, 0.1) 0 0 0 0.5px; */
+}
+
+.deepWater {
+    background: rgb(36, 88, 201);
+}
+
+.water {
+    background: rgb(43, 103, 233);
+}
+
+.sand {
+    background: yellow;
+}
+
+.darkGrass {
+    background: rgb(7, 155, 7);
+}
+
+.lightGrass {
+    background: rgb(0, 214, 0);
+}
+
+.stone {
+    background: gray;
+}
+
+.mountain {
+    background: rgb(36, 36, 36);
 }
 
 .placePreview {

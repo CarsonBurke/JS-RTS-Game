@@ -539,6 +539,26 @@ function blendTerrain() {
             ],
         }
 
+        let cornerStylings = {
+            topLeft: "235deg",
+            topRight: "325deg",
+            bottomLeft: "90deg",
+            bottomRight: "45deg",
+        }
+
+        /* 
+        
+
+
+        */
+
+        /*         let cornerStylings = {
+                    topLeft: "borderTopLeftRadius",
+                    topRight: "borderTopRightRadius",
+                    bottomLeft: "borderBottomLeftRadius",
+                    bottomRight: "borderBottomLeftRadius",
+                } */
+
         // Loop through each corner
 
         for (let cornerName in corners) {
@@ -551,16 +571,34 @@ function blendTerrain() {
 
                 if (!searchedGridPart) continue
 
-                /* searchedGridPart.el.innerText = gridPart.x + "," + gridPart.y */
+                if (searchedGridPart.blended) continue
 
-                if (searchedGridPart.type != gridPart.type) gridPart.el.style.borderRadius = "20px"
+                if (searchedGridPart.type != gridPart.type) {
+
+                    let styleChange = cornerStylings[cornerName]
+
+                    // Adjust styling to blend
+
+                    /* gridPart.el.style[styleChange] = "20px" */
+
+                    let color1 = window.getComputedStyle(searchedGridPart.el, null).getPropertyValue('background-color')
+
+                    let color2 = window.getComputedStyle(gridPart.el, null).getPropertyValue('background-color')
+
+                    gridPart.el.style.backgroundImage = "linear-gradient(" + styleChange + ", " + color1 + " 50%, " + color2 + " 100%)"
+
+                    // Inform us that this tile has been blended already
+
+                    searchedGridPart.blended = true
+                    gridPart.blended = true
+                }
             }
         }
     }
 
     for (let gridPart of positions) {
 
-        console.log(gridPart)
+        if (gridPart.blended) continue
 
         findNearbyTerrain(gridPart)
     }

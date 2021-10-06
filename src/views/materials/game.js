@@ -4,7 +4,7 @@ import "./perlin.js"
 // Assign variables
 
 let properties = {
-    mapDimensions: 5000,
+    mapDimensions: 1000,
     gridPartDimensions: 20,
     nextId: 0,
     mapEl: document.getElementById("map"),
@@ -45,10 +45,7 @@ let properties = {
             el: document.getElementById("concreteAmount"),
         },
     },
-    positions: {
-
-
-    },
+    positions: [],
     structures: {
 
     },
@@ -506,8 +503,66 @@ function createGrid() {
 
             // Add girdPart to positions
 
-            positions[id] = gridPart
+            positions[x * 50 + y] = gridPart
         }
+    }
+}
+
+blendTerrain()
+
+function blendTerrain() {
+
+    function findNearbyTerrain(gridPart) {
+
+        // Check all sorrounding positions
+
+        let corners = {
+            topLeft: [
+                { x: -1, y: 0 },
+                { x: -1, y: -1 },
+                { x: 0, y: -1 },
+            ],
+            topRight: [
+                { x: 0, y: -1 },
+                { x: +1, y: +1 },
+                { x: +1, y: 0 },
+            ],
+            bottomLeft: [
+                { x: 0, y: +1 },
+                { x: -1, y: +1 },
+                { x: -1, y: 0 },
+            ],
+            bottomRight: [
+                { x: +1, y: -1 },
+                { x: +1, y: 0 },
+                { x: 0, y: +1 },
+            ],
+        }
+
+        // Loop through each corner
+
+        for (let cornerName in corners) {
+
+            let corner = corners[cornerName]
+
+            for (let pos of corner) {
+
+                let searchedGridPart = positions[(gridPart.x + pos.x) * 50 + gridPart.y + pos.y]
+
+                if (!searchedGridPart) continue
+
+                /* searchedGridPart.el.innerText = gridPart.x + "," + gridPart.y */
+
+                if (searchedGridPart.type != gridPart.type) gridPart.el.style.borderRadius = "20px"
+            }
+        }
+    }
+
+    for (let gridPart of positions) {
+
+        console.log(gridPart)
+
+        findNearbyTerrain(gridPart)
     }
 }
 

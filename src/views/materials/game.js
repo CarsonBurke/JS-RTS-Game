@@ -517,33 +517,38 @@ function blendTerrain() {
         // Check all sorrounding positions
 
         let corners = {
-            topLeft: [
-                { x: -1, y: 0 },
-                { x: -1, y: -1 },
-                { x: 0, y: -1 },
-            ],
-            topRight: [
-                { x: 0, y: -1 },
-                { x: +1, y: +1 },
-                { x: +1, y: 0 },
-            ],
-            bottomLeft: [
-                { x: 0, y: +1 },
-                { x: -1, y: +1 },
-                { x: -1, y: 0 },
-            ],
-            bottomRight: [
-                { x: +1, y: -1 },
-                { x: +1, y: 0 },
-                { x: 0, y: +1 },
-            ],
-        }
-
-        let cornerStylings = {
-            topLeft: "235deg",
-            topRight: "325deg",
-            bottomLeft: "90deg",
-            bottomRight: "45deg",
+            topLeft: {
+                degree: "135deg",
+                cornerPos: { x: -1, y: -1 },
+                sides: [
+                    { x: -1, y: 0 },
+                    { x: 0, y: -1 },
+                ],
+            },
+            topRight: {
+                degree: "45deg",
+                cornerPos: { x: +1, y: +1 },
+                sides: [
+                    { x: 0, y: -1 },
+                    { x: +1, y: 0 },
+                ]
+            },
+            bottomLeft: {
+                degree: "-135deg",
+                cornerPos: { x: -1, y: +1 },
+                sides: [
+                    { x: 0, y: +1 },
+                    { x: -1, y: 0 },
+                ]
+            },
+            bottomRight: {
+                degree: "-45deg",
+                cornerPos: { x: +1, y: -1 },
+                sides: [
+                    { x: +1, y: 0 },
+                    { x: 0, y: +1 },
+                ]
+            },
         }
 
         // Loop through each corner
@@ -552,31 +557,45 @@ function blendTerrain() {
 
             let corner = corners[cornerName]
 
-            for (let pos of corner) {
+            let likeTerrain = 0
+
+            for (let pos of corner.sides) {
+
+                let searchedGridPart = positions[(gridPart.x + pos.x) * 50 + gridPart.y + pos.y]
+
+                if (!searchedGridPart) {
+
+                    likeTerrain += 1
+                    continue
+                }
+
+                if (searchedGridPart.type == gridPart.type) likeTerrain += 1
+            }
+
+            if (likeTerrain == 0) {
+
+                let pos = corner.cornerPos
 
                 let searchedGridPart = positions[(gridPart.x + pos.x) * 50 + gridPart.y + pos.y]
 
                 if (!searchedGridPart) continue
 
-                if (searchedGridPart.blended) continue
-
                 if (searchedGridPart.type != gridPart.type) {
 
-                    let styleChange = cornerStylings[cornerName]
+                    let degree = corner.degree
 
                     // Adjust styling to blend
-
-                    /* gridPart.el.style[styleChange] = "20px" */
 
                     let color1 = window.getComputedStyle(searchedGridPart.el, null).getPropertyValue('background-color')
 
                     let color2 = window.getComputedStyle(gridPart.el, null).getPropertyValue('background-color')
 
-                    gridPart.el.style.backgroundImage = "linear-gradient(" + styleChange + ", " + color1 + " 49.9%, " + color2 + " 50.01%)"
+                    gridPart.el.style.backgroundImage = "linear-gradient(" + degree + ", " + color1 + " 49.9%, " + color2 + " 50.01%)"
+
+                    // Change the searched type to gridPart's type
 
                     // Inform us that this tile has been blended already
 
-                    searchedGridPart.blended = true
                     gridPart.blended = true
                 }
             }

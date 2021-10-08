@@ -5,7 +5,7 @@ import "./perlin.js"
 
 let properties = {
     mapDimensions: 1000,
-    gridPartDimensions: 20,
+    gridPartDimensions: 2,
     nextId: 0,
     mapEl: document.getElementById("map"),
     cursorEl: document.getElementById("cursor"),
@@ -508,7 +508,7 @@ function createGrid() {
     }
 }
 
-blendTerrain()
+/* blendTerrain() */
 
 function blendTerrain() {
 

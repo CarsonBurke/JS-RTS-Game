@@ -273,6 +273,10 @@ body {
     left: 0;
     bottom: 0;
     right: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+    scroll-behavior: smooth;
 }
 
 .map {
@@ -282,7 +286,6 @@ body {
     transition: all 0.2s;
     display: flex;
     flex-wrap: wrap;
-    overflow: hidden;
 }
 
 .gridPart {

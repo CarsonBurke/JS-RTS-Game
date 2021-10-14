@@ -4,8 +4,8 @@ import "./perlin.js"
 // Assign variables
 
 let properties = {
-    mapDimensions: 1000,
-    gridPartDimensions: 2,
+    mapDimensions: 5000,
+    gridPartDimensions: 20,
     nextId: 0,
     mapEl: document.getElementById("map"),
     cursorEl: document.getElementById("cursor"),
@@ -301,6 +301,9 @@ let properties = {
             },
         },
     },
+    scrollKeys: [
+        "ArrowUp", "ArrowLeft", "ArrowRight", "ArrowDown", " ", "End", "PageUp", "PageDown", "Home"
+    ],
     hotkeys: {
         moveUp: "ArrowUp",
         moveLeft: "ArrowLeft",
@@ -694,6 +697,8 @@ let scale = 1
 
 mapEl.onwheel = function zoom(event) {
 
+    event.preventDefault()
+
     scale += event.deltaY * -0.001;
 
     scale = Math.min(Math.max(0.75, scale), 2);
@@ -709,6 +714,17 @@ let leftPos = 0
 window.onkeydown = function(event) {
 
     let key = event.key
+
+    // Disable scroll ability of scroll keys
+
+    for (let keyName of scrollKeys) {
+
+        if (key != keyName) continue
+
+        event.preventDefault()
+    }
+
+    //
 
     if (key == hotkeys.panUp) {
 
@@ -730,23 +746,6 @@ window.onkeydown = function(event) {
     if (key == hotkeys.stopPlacing) {
 
         stopPlacing()
-    }
-
-    if (key == hotkeys.moveUp) {
-
-        movePlayer("up")
-    }
-    if (key == hotkeys.moveLeft) {
-
-        movePlayer("left")
-    }
-    if (key == hotkeys.moveDown) {
-
-        movePlayer("down")
-    }
-    if (key == hotkeys.moveRight) {
-
-        movePlayer("right")
     }
 
     if (key == hotkeys.exitBuildMode) exitBuildMode()
@@ -821,26 +820,33 @@ function changeDirection() {
 
         if (move.qualifier == "positive") {
 
-            upPos += 40
+            upPos -= 60
 
         } else {
 
-            upPos -= 40
+            upPos += 60
         }
     } else {
 
         if (move.qualifier == "positive") {
 
-            leftPos += 40
+            leftPos -= 60
 
         } else {
 
-            leftPos -= 40
+            leftPos += 60
         }
     }
 
-    map.style.top = upPos + "px"
-    map.style.left = leftPos + "px"
+    let mapContainer = document.getElementById("mapContainer")
+
+    /* mapContainer.scrollBy(leftPos, upPos) */
+
+    mapContainer.scroll({
+        top: upPos,
+        left: leftPos,
+        behaviour: "smooth"
+    })
 
 }
 

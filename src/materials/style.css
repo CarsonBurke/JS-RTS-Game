@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", "sans-serif";
+    overflow-x: hidden;
+    overflow-y: scroll;
+    --primary: rgb(236, 233, 20);
+    --primaryShade: rgb(66, 66, 66);
+    --secondaryShade: rgb(38, 40, 43);
+    --tertiaryShade: white;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 90px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Outlined.eot);
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Outlined'), url(https://example.com/MaterialIcons-Outlined.woff2) format('woff2'), url(https://example.com/MaterialIcons-Outlined.woff) format('woff'), url(https://example.com/MaterialIcons-Outlined.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+
+/* Template */
+
+
+/*  */
+
+.mapContainer {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: var(--secondaryShade);
+}
+
+.map {
+    background: var(--primaryShade);
+    transition: all 0.3s;
+}

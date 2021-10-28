@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", "sans-serif";
+    overflow-x: hidden;
+    overflow-y: scroll;
+    --primary: rgb(236, 233, 20);
+    --primaryShade: rgb(66, 66, 66);
+    --secondaryShade: rgb(38, 40, 43);
+    --tertiaryShade: white;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Outlined.eot);
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Outlined'), url(https://example.com/MaterialIcons-Outlined.woff2) format('woff2'), url(https://example.com/MaterialIcons-Outlined.woff) format('woff'), url(https://example.com/MaterialIcons-Outlined.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+
+/**/
+
+
+/* Template */
+
+.button {
+    outline: none;
+    user-select: none;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 16px;
+    margin: 10px auto;
+    display: block;
+    width: fit-content;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    font-family: "poppins";
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 14px 22px 0, rgba(255, 255, 255, 0) inset 0 0 0 0;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.button:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0, rgba(255, 255, 255, 0) inset 0 0 0 10000px, rgba(0, 0, 0, 0.2) inset 0 0 0 10000px;
+}
+
+.button:focus {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 18px 0, rgba(255, 255, 255, 0.12) inset 0 0 0 10000px, rgba(0, 0, 0, 0) inset 0 0 0 10000px;
+}
+
+
+/* Hero */
+
+.heroContainer {
+    min-height: 100vh;
+    background: var(--secondaryShade);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroParent {
+    background: var(--primaryShade);
+    padding: 14px 8px;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 12px 60px 0;
+}
+
+.heroHeader {
+    font-size: 48px;
+    margin: 0 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.heroText {
+    text-align: center;
+    width: 90%;
+    margin: 30px 0;
+}
+
+.heroButton {
+    margin-bottom: 0;
+    width: 100%;
+    font-size: 19px;
+}
+
+
+/* UI */
+
+.displayParent {
+    position: fixed;
+    left: 7.5px;
+    top: 7.5px;
+    bottom: 7.5px;
+    max-width: 200px;
+    z-index: 1000;
+    overflow-y: scroll;
+    user-select: none;
+}
+
+.resourceDisplayParent {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.25);
+    border: rgba(255, 255, 255, 0.25) 1px solid;
+    backdrop-filter: blur(10px);
+    width: 200px;
+    margin-bottom: 7.5px;
+}
+
+.resourceDisplayChild {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90px;
+    text-align: center;
+}
+
+.resourceDisplayImage {
+    width: 45px;
+    height: 45px;
+    margin: auto;
+}
+
+.resourceDisplayHeader {
+    margin: 0;
+    padding: 10px 0;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.interactionDisplayParent {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.25);
+    border: rgba(255, 255, 255, 0.25) 1px solid;
+    backdrop-filter: blur(10px);
+    width: 200px;
+}
+
+.selectionDisplayParent {
+    opacity: 0;
+    pointer-events: none;
+    position: relative;
+    left: -10px;
+    transition: all 0.3s;
+}
+
+.selectionDisplayParentShow {
+    left: 0;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.structureDisplayParent {
+    opacity: 0;
+    pointer-events: none;
+    left: -10px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.structureDisplayParentShow {
+    opacity: 1;
+    pointer-events: all;
+    left: 0;
+}
+
+.structureDisplayChild {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.structureDisplayChild:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.structureDisplayChildSelected {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.structureDisplayImage {
+    width: 65px;
+    height: 65px;
+}
+
+.structureDisplayHeader {
+    margin: 0;
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.buildNotificationParent {
+    left: 0;
+    right: 0;
+    width: fit-content;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.25);
+    border: rgba(255, 255, 255, 0.25) 1px solid;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    z-index: 1000;
+    padding: 10px 20px;
+    font-size: 22px;
+    user-select: none;
+    opacity: 0;
+    transition: all 0.3s;
+    bottom: 0;
+}
+
+.buildNofiticationParentShow {
+    opacity: 1;
+    bottom: 7.5px;
+}
+
+
+/* Game */
+
+.mapContainer {
+    background: var(--secondaryShade);
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.map {
+    position: relative;
+    background: var(--primaryShade);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0 90px 0;
+    transition: all 0.2s;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gridPart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    /* box-shadow: inset rgba(255, 255, 255, 0.1) 0 0 0 0.5px; */
+}
+
+.deepWater {
+    background: rgb(36, 88, 201);
+}
+
+.water {
+    background: rgb(43, 103, 233);
+}
+
+.sand {
+    background: yellow;
+}
+
+.darkGrass {
+    background: rgb(7, 155, 7);
+}
+
+.lightGrass {
+    background: rgb(0, 214, 0);
+}
+
+.stone {
+    background: gray;
+}
+
+.mountain {
+    background: rgb(36, 36, 36);
+}
+
+.placePreview {
+    position: absolute;
+    transition: opacity 0.3s;
+    border: rgba(255, 255, 255, 0.5) 1.5px solid;
+    backdrop-filter: blur(5px);
+    background-size: cover;
+    background-position: center;
+    filter: brightness(70%);
+}
+
+.commandCenter {
+    border-radius: 10px;
+}
+
+.structureOutline {
+    outline: 1.75px solid white;
+}
+
+
+/*  */

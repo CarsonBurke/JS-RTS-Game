@@ -376,6 +376,8 @@ let properties = {
 
             interactionDisplayParent.appendChild(selectionEl)
 
+            //
+
             for (let upgradeName in this.upgrades) {
 
                 const upgrade = this.upgrades[upgradeName]
@@ -405,6 +407,18 @@ let properties = {
 
                 structureDisplayChild.appendChild(structureDisplayHeader)
             }
+
+            // structureDestroy el config
+
+            let structureDestroy = document.createElement('div')
+
+            structureDestroy.classList.add('structureDestroy')
+
+            structureDestroy.innerText = 'Destroy'
+
+            structureDestroy.onclick = function() { structure.destroy() }
+
+            selectionEl.appendChild(structureDestroy)
         }
     },
     Player: class {

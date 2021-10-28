@@ -8,6 +8,7 @@ body {
     --primary: rgb(236, 233, 20);
     --primaryShade: rgb(66, 66, 66);
     --secondaryShade: rgb(38, 40, 43);
+    --danger: rgb(250, 28, 28);
     --tertiaryShade: white;
     color: white;
     scroll-behavior: smooth;
@@ -238,6 +239,22 @@ body {
     padding-left: 10px;
     font-weight: 400;
     font-size: 16px;
+}
+
+.structureDestroy {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    color: var(--danger);
+}
+
+.structureDestroy:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .buildNotificationParent {

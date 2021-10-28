@@ -6,6 +6,8 @@ let properties = {
     nextId: 0,
     mapEl: document.getElementById("map"),
     cursorEl: document.getElementById("cursor"),
+    buildMode: undefined,
+    selectedStructure: undefined,
     colors: {
         red: "#ff0000",
         blue: "#0066ff",
@@ -48,9 +50,8 @@ let properties = {
     },
     structureTypes: {
         commandCenter: {
-
-            width: 5,
-            height: 5,
+            width: 8,
+            height: 8,
             displayName: "Command Center",
             image: "materials/images/commandCenter.png",
             cost: {
@@ -65,7 +66,7 @@ let properties = {
             upgrades: {
                 tier2: {
                     purchased: false,
-                    displayName: "Teir 2",
+                    displayName: "Tier 2",
                     image: "materials/images/commandCenterTier2.png",
                     cost: {
                         credits: 1000,
@@ -76,10 +77,11 @@ let properties = {
                         oil: 0.75,
                         steel: 0.4,
                     },
+                    requirements: [],
                 },
                 tier3: {
                     purchased: false,
-                    displayName: "Teir 3",
+                    displayName: "Tier 3",
                     image: "materials/images/commandCenterTier3.png",
                     cost: {
                         credits: 1000,
@@ -90,6 +92,7 @@ let properties = {
                         oil: 1.1,
                         steel: 0.7,
                     },
+                    requirements: ['tier2'],
                 },
             },
             units: {
@@ -343,6 +346,8 @@ let properties = {
     Structure: class {
         constructor(opts) {
 
+            const structure = this
+
             this.owner = opts.owner
 
             this.type = opts.type
@@ -355,9 +360,7 @@ let properties = {
 
             for (let propertyName in structureTypes[this.type]) {
 
-                let property = structureTypes[this.type][propertyName]
-
-                this[propertyName] = property
+                this[propertyName] = structureTypes[this.type][propertyName]
             }
 
             // Add things the user can do when selecting the structure
@@ -365,6 +368,7 @@ let properties = {
             this.selectionEl = document.createElement("div")
 
             this.selectionEl.classList.add("selectionDisplayParent")
+            this.selectionEl.style.display = 'none'
 
             let selectionEl = this.selectionEl
 
@@ -374,13 +378,15 @@ let properties = {
 
             for (let upgradeName in this.upgrades) {
 
-                let upgrade = this.upgrades[upgradeName]
+                const upgrade = this.upgrades[upgradeName]
+
+                //
 
                 let structureDisplayChild = document.createElement("div")
                 structureDisplayChild.classList.add("structureDisplayChild")
 
                 structureDisplayChild.onclick = function() {
-                    purchaseUpgrade(this, upgrade)
+                    structure.upgrade(upgrade)
                 }
 
                 selectionEl.appendChild(structureDisplayChild)
@@ -430,4 +436,13 @@ let properties = {
 
         }
     }
+}
+
+// Assign variables to globalThis
+
+for (let propertyName in properties) {
+
+    let property = properties[propertyName]
+
+    globalThis[propertyName] = property
 }

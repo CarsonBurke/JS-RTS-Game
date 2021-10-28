@@ -1,12 +1,3 @@
-// Assign variables to globalThis
-
-for (let propertyName in properties) {
-
-    let property = properties[propertyName]
-
-    globalThis[propertyName] = property
-}
-
 // Create map and implement values
 
 // Dimensions / number of tiles will give size, size should be 10px
@@ -510,80 +501,7 @@ function placeStartingStructures() {
         y: 10,
     })
 
-    placeStructure(structure)
-}
-
-function chargeToBuildStructure(structure) {
-
-    let cost = []
-
-    for (let resourceType in structure.cost) {
-
-        let resourceAmount = structure.cost[resourceType]
-
-        if (resourceAmount >= players[structure.owner].resources[resourceType].amount) {
-
-            return
-        }
-
-        cost[resourceType] = resourceAmount
-    }
-
-    for (let resourceType in cost) {
-
-        let resourceAmount = cost[resourceType]
-
-        players[structure.owner].resources[resourceType].amount -= resourceAmount
-    }
-
-    return true
-}
-
-function isPlaceablePosition(structure) {
-
-
-}
-
-function placeStructure(structure) {
-
-    if (!chargeToBuildStructure(structure)) return
-
-    isPlaceablePosition()
-
-    let el = structure.el
-
-    // Give class
-
-    el.classList.add(structure.type)
-
-    // Apply stylings
-
-    el.style.cursor = "pointer"
-
-    el.style.backgroundImage = "url(" + structure.image + ")"
-
-    el.style.position = "absolute"
-
-    el.style.backgroundPosition = "center"
-    el.style.backgroundSize = "cover"
-
-    el.style.width = structure.width * gridPartDimensions + "px"
-    el.style.height = structure.height * gridPartDimensions + "px"
-
-    el.style.top = structure.y * gridPartDimensions + "px"
-    el.style.left = structure.x * gridPartDimensions + "px"
-
-    // Add ability to select structure
-
-    structure.el.onclick = function() { selectStructure(structure) }
-
-    // Add element to map
-
-    mapEl.appendChild(el)
-
-    // Add structure to structure list
-
-    structures[structure.id] = structure
+    structure.place()
 }
 
 // Build mode
@@ -618,17 +536,15 @@ function newStructure(event) {
     x = Math.min(x, gridSize - structureType.width)
     x = Math.max(x, 0)
 
-    let structure = new Structure({
+    const structure = new Structure({
         type: placingStructureTypeName,
         owner: "Carson",
         x: x,
         y: y,
     })
 
-    placeStructure(structure)
+    structure.place()
 }
-
-let buildMode
 
 async function enterBuildMode(structureTypeName) {
 
@@ -696,11 +612,11 @@ function exitBuildMode() {
 
 async function advancedShowEl(el) {
 
-    await wait(300)
+    await wait(100)
 
     el.style.display = "block"
 
-    await wait(300)
+    await wait(100)
 
     el.classList.add(el.classList[0] + "Show")
 }
@@ -709,103 +625,9 @@ async function advancedHideEl(el) {
 
     el.classList.remove(el.classList[0] + "Show")
 
-    await wait(300)
+    await wait(100)
 
     el.style.display = "none"
-}
-
-// Selecting structures
-
-function deSelectStructure(structure) {
-
-    structure.el.classList.remove("structureOutline")
-
-    // Hide selectionEl
-
-    advancedHideEl(structure.selectionEl)
-
-    // Show structureDisplay
-
-    let structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
-
-    advancedShowEl(structureDisplayParent)
-
-    // Record that the structure is no longer selected
-
-    structure.selected = false
-}
-
-function selectStructure(structure) {
-
-    // Make sure player isn't in buildMode
-
-    if (buildMode) return
-
-    // Check if strucutre is already selected
-
-    if (structure.selected) {
-
-        deSelectStructure(structure)
-        return
-    }
-
-    structure.el.classList.add("structureOutline")
-
-    // Hide structureDisplay
-
-    let structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
-
-    advancedHideEl(structureDisplayParent)
-
-    // show selectionEl
-
-    advancedShowEl(structure.selectionEl)
-
-    // Record that the structure is selected
-
-    structure.selected = true
-}
-
-// Destroying structures
-
-function destroyStructure(structure) {
-
-
-}
-
-// Purchasing upgrades
-
-function chargeToPurchaseUpgrade(structure, upgrade) {
-
-    let cost = []
-
-    for (let resourceType in upgrade.cost) {
-
-        let resourceAmount = upgrade.cost[resourceType]
-
-        if (resourceAmount >= players[structure.owner].resources[resourceType].amount) {
-
-            return
-        }
-
-        cost[resourceType] = resourceAmount
-    }
-
-    for (let resourceType in cost) {
-
-        let resourceAmount = cost[resourceType]
-
-        players[structure.owner].resources[resourceType].amount -= resourceAmount
-    }
-
-    return true
-}
-
-function purchaseUpgrade(structure, upgrade) {
-
-    if (upgrade.purchased) return
-
-    if (!chargeToPurchaseUpgrade(structure, upgrade)) return
 }
 
 // Generate resources
@@ -826,7 +648,7 @@ function generateResources() {
             let playerResources = players[owner].resources[resourceType]
 
             playerResources.amount += structureIncome
-            playerResources.el.innerHTML = (playerResources.amount).toFixed(0)
+            playerResources.el.innerHTML = Math.floor(playerResources.amount)
         }
     }
 }

@@ -165,6 +165,16 @@ Structure.prototype.destroy = function() {
 
     structure.el.remove()
 
+    // Delete selectionEl
+
+    structure.selectionEl.remove()
+
+    // Show structureDisplay
+
+    const structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
+
+    advancedShowEl(structureDisplayParent)
+
     // Delete object
 
     delete structures[structure.id]

@@ -548,11 +548,16 @@ function newStructure(event) {
 
 async function enterBuildMode(structureTypeName) {
 
-    if (buildMode) return
+    const structureType = structureTypes[structureTypeName]
+
+    // If already in build mode and build mode structureType isn't this structureType
+
+    if (buildMode && buildMode.structureType != structureType) {
+
+        exitBuildMode()
+    }
 
     await wait(100)
-
-    let structureType = structureTypes[structureTypeName]
 
     // place preview logic
 
@@ -576,21 +581,20 @@ async function enterBuildMode(structureTypeName) {
 
     // Make it known that buildMode is on
 
-    buildMode = true
+    buildMode = structureTypeName
 }
 
 function exitBuildMode() {
+
+    // Stop if already not in build mode
 
     if (!buildMode) return
 
     // Remove interaction effect for displayEl
 
-    for (let structureTypeName in structureTypes) {
-
-        let displayEl = document.getElementById(structureTypeName + "DisplayChild")
-        displayEl.classList.remove("structureDisplayChildSelected")
-    }
-
+    let displayEl = document.getElementById(buildMode + "DisplayChild")
+    displayEl.classList.remove("structureDisplayChildSelected")
+    
     // Stop ability to place structures
 
     document.removeEventListener("click", newStructure)
@@ -607,7 +611,7 @@ function exitBuildMode() {
 
     // Make it clear that buildMode is off
 
-    buildMode = false
+    buildMode = undefined
 }
 
 async function advancedShowEl(el) {

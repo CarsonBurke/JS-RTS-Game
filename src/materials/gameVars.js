@@ -394,6 +394,7 @@ let properties = {
                 }
 
                 selectionEl.appendChild(structureDisplayChild)
+                upgrade.el = structureDisplayChild
 
                 let structureDisplayImage = document.createElement("img")
                 structureDisplayImage.classList.add("structureDisplayImage")

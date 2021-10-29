@@ -301,8 +301,7 @@ window.onkeydown = function(event) {
 
         stopPlacing()
     }
-
-    if (key == hotkeys.exitBuildMode) exitBuildMode()
+    else if (key == hotkeys.exitBuildMode) exitBuildMode()
     else if (key == hotkeys.deleteStructure && selectedStructure) selectedStructure.destroy()
 }
 

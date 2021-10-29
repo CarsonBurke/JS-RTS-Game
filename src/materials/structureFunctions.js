@@ -145,7 +145,11 @@ Structure.prototype.upgrade = function(upgrade) {
         structure.income[type] = upgrade.income[type]
     }
 
-    // Style based on upgrade
+    // Hide upgrade el
+
+    advancedHideEl(upgrade.el)
+
+    // Style structure el based on upgrade
 
     const el = structure.el
 
@@ -155,7 +159,6 @@ Structure.prototype.upgrade = function(upgrade) {
 
     upgrade.purchased = true
 }
-
 
 Structure.prototype.destroy = function() {
 

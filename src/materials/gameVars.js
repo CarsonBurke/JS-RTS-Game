@@ -350,29 +350,29 @@ let properties = {
 
             const structure = this
 
-            this.owner = opts.owner
+            structure.owner = opts.owner
 
-            this.type = opts.type
-            this.x = opts.x
-            this.y = opts.y
+            structure.type = opts.type
+            structure.x = opts.x
+            structure.y = opts.y
 
-            this.id = newId()
+            structure.id = newId()
 
-            this.el = document.createElement("div")
+            structure.el = document.createElement("div")
 
-            for (let propertyName in structureTypes[this.type]) {
+            for (let propertyName in structureTypes[structure.type]) {
 
-                this[propertyName] = structureTypes[this.type][propertyName]
+                structure[propertyName] = structureTypes[structure.type][propertyName]
             }
 
             // Add things the user can do when selecting the structure
 
-            this.selectionEl = document.createElement("div")
+            structure.selectionEl = document.createElement("div")
 
-            this.selectionEl.classList.add("selectionDisplayParent")
-            this.selectionEl.style.display = 'none'
+            structure.selectionEl.classList.add("selectionDisplayParent")
+            structure.selectionEl.style.display = 'none'
 
-            let selectionEl = this.selectionEl
+            let selectionEl = structure.selectionEl
 
             let interactionDisplayParent = document.getElementsByClassName("interactionDisplayParent")[0]
 
@@ -380,11 +380,11 @@ let properties = {
 
             //
 
-            for (let upgradeName in this.upgrades) {
+            for (let upgradeName in structure.upgrades) {
 
-                const upgrade = this.upgrades[upgradeName]
+                const upgrade = structure.upgrades[upgradeName]
 
-                //
+                // Create elements for the upgrades
 
                 let structureDisplayChild = document.createElement("div")
                 structureDisplayChild.classList.add("structureDisplayChild")
@@ -427,23 +427,25 @@ let properties = {
     Player: class {
         constructor(opts) {
 
+            const player = this
+
             // Add options to player
 
-            this.name = opts.name
+            player.name = opts.name
 
             //
 
-            this.id = newId()
+            player.id = newId()
 
             // Add resources to player
 
-            this.resources = {}
+            player.resources = {}
 
             for (let resourceName in resourceTypes) {
 
                 let resource = resourceTypes[resourceName]
 
-                this.resources[resourceName] = resource
+                player.resources[resourceName] = resource
             }
         }
     },

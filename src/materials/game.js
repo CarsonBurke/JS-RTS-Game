@@ -21,8 +21,6 @@ function createGrid() {
         }
     }
 
-    //
-
     noise.seed(Math.random())
 
     // Loop through each position

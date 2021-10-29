@@ -338,7 +338,7 @@ body {
 
 .placePreview {
     position: absolute;
-    transition: opacity 0.3s;
+    transition: opacity 0.2s;
     border: rgba(255, 255, 255, 0.5) 1.5px solid;
     backdrop-filter: blur(5px);
     background-size: cover;

@@ -2,6 +2,27 @@ Structure.prototype.place = function() {
 
     const structure = this
 
+    function isStructurePlacable(object1, object2) {
+
+        // Check if object1 is inside object2
+
+        if (object1.x >= object2.x && object1.x <= object2.x + object2.width && object1.y >= object2.y && object1.y <= object2.y + object2.height) {
+
+            return true
+        }
+    }
+
+    // Make sure no other structures are in the way
+
+    for (let structureID in structures) {
+        
+        const existingStructure = structures[structureID]
+
+        // Stop if structure is blocked
+
+        if (!isStructurePlacable(structure, existingStructure)) return
+    }
+
     // Try to charge cost of structure, stop if fails
 
     if (!players[structure.owner].chargeResources(structure.cost)) return

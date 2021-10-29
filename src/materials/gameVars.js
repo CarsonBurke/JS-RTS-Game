@@ -317,6 +317,8 @@ let properties = {
 
         exitStructureSelect: "x",
         exitBuildMode: "x",
+
+        deleteStructure: 'Delete',
     },
     buildNotificationEl: document.getElementById("buildNotificationParent"),
     players: {

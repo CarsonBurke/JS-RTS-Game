@@ -59,7 +59,7 @@ function createGrid() {
 
             // Add girdPart to positions
 
-            positions[x * 50 + y] = gridPart
+            positions[x * mapDimensions + y] = gridPart
         }
     }
 }
@@ -303,6 +303,7 @@ window.onkeydown = function(event) {
     }
 
     if (key == hotkeys.exitBuildMode) exitBuildMode()
+    else if (key == hotkeys.deleteStructure && selectedStructure) selectedStructure.destroy()
 }
 
 window.onkeyup = function(event) {

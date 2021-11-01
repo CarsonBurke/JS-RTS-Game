@@ -226,7 +226,7 @@ function createPlayers() {
 
 // Music
 
-let musicPlaying = false
+/* let musicPlaying = false
 
 document.addEventListener("mousedown", playMusic)
 document.addEventListener("keydown", playMusic)
@@ -235,11 +235,84 @@ function playMusic() {
 
     if (musicPlaying) return
 
-    let music = new Audio("materials/sounds/song1.mp4")
+    const music = new Audio("materials/sounds/song1.mp4")
     music.loop = true
     music.play()
 
     musicPlaying = true
+} */
+
+// Music
+
+playMusic()
+
+function playMusic() {
+
+    let songs = []
+    let songPlayingIndex = 0
+    let musicPlaying = false
+    
+    createPlaylist()
+    
+    function createPlaylist() {
+    
+        // List of song urls
+    
+        const path = 'materials/sounds/'
+        const songURLs = [
+            path + 'song1.mp4',
+            path + 'song2.mp4',
+            path + 'song3.mp4',
+        ]
+    
+        for (let songURL of songURLs) {
+    
+            // Configure audio of url
+    
+            const song = new Audio(songURL)
+    
+            // Load the song
+    
+            song.load()
+    
+            // Inform window when song ends
+    
+            song.addEventListener('ended', function() { playNextSong() })
+    
+            // Add song to songs
+            
+            songs.push(song)
+        }
+    }
+    
+    function playNextSong() {
+    
+        // Increase song index
+    
+        songPlayingIndex += 1
+    
+        // Play song
+    
+        songs[songPlayingIndex].play()
+    }
+
+    document.addEventListener("mousedown", startMusic)
+    document.addEventListener("keydown", startMusic)
+
+    function startMusic() {
+
+        // Stop if music is already playing
+
+        if (musicPlaying) return
+
+        // Play song
+
+        songs[songPlayingIndex].play()
+
+        // Record that a song is playing
+    
+        musicPlaying = true
+    }
 }
 
 // Allows user to scroll to zoom
@@ -249,11 +322,10 @@ let scale = 1
 mapEl.onwheel = function zoom(event) {
 
     event.preventDefault()
-    return
 
-    scale += event.deltaY * -0.001;
+    scale += event.deltaY * -0.001
 
-    scale = Math.min(Math.max(0.75, scale), 2);
+    scale = Math.min(Math.max(0.75, scale), 2)
 
     map.style.transform = "scale(" + scale + ")"
 }

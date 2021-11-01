@@ -89,7 +89,7 @@ body {
 }
 
 .button:focus {
-    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 18px 0, rgba(255, 255, 255, 0.12) inset 0 0 0 10000px, rgba(0, 0, 0, 0) inset 0 0 0 10000px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 14px 18px 0, rgba(255, 255, 255, 0.12) inset 0 0 0 10000px, rgba(0, 0, 0, 0) inset 0 0 0 10000px;
 }
 
 
@@ -147,7 +147,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     padding: 20px 0;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.35);
     border: rgba(255, 255, 255, 0.25) 1px solid;
     backdrop-filter: blur(10px);
     width: 200px;
@@ -178,7 +178,7 @@ body {
 .interactionDisplayParent {
     display: flex;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.35);
     border: rgba(255, 255, 255, 0.25) 1px solid;
     backdrop-filter: blur(10px);
     width: 200px;
@@ -262,7 +262,7 @@ body {
     right: 0;
     width: fit-content;
     margin: auto;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.35);
     border: rgba(255, 255, 255, 0.25) 1px solid;
     backdrop-filter: blur(10px);
     position: fixed;

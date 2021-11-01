@@ -286,14 +286,24 @@ function playMusic() {
     }
     
     function playNextSong() {
-    
-        // Increase song index
-    
-        songPlayingIndex += 1
-    
+
         // Play song
-    
+
         songs[songPlayingIndex].play()
+
+        // If last song
+
+        if (songPlayingIndex == songs.length) {
+
+            // Set index to 0 and stop
+
+            songPlayingIndex = 0
+            return
+        }
+
+        // Increase song index
+
+        songPlayingIndex += 1
     }
 
     document.addEventListener("mousedown", startMusic)
@@ -312,6 +322,10 @@ function playMusic() {
         // Record that a song is playing
     
         musicPlaying = true
+
+        // Increase song index
+
+        songPlayingIndex += 1
     }
 }
 

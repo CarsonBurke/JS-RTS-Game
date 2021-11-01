@@ -6,7 +6,10 @@ Structure.prototype.place = function() {
 
         // Check if object1 is inside object2
 
-        if (object1.x >= object2.x && object1.x <= object2.x + object2.width && object1.y >= object2.y && object1.y <= object2.y + object2.height) {
+        if (object1.x >= object2.x 
+            && object1.x <= object2.x + object2.width 
+            && object1.y >= object2.y 
+            && object1.y <= object2.y + object2.height) {
 
             return true
         }

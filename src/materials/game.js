@@ -287,19 +287,13 @@ function playMusic() {
     
     function playNextSong() {
 
+        // If last song set index to 0
+
+        if (songPlayingIndex == songs.length) songPlayingIndex = 0
+
         // Play song
-
+        
         songs[songPlayingIndex].play()
-
-        // If last song
-
-        if (songPlayingIndex == songs.length) {
-
-            // Set index to 0 and stop
-
-            songPlayingIndex = 0
-            return
-        }
 
         // Increase song index
 

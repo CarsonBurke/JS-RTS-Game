@@ -226,24 +226,6 @@ function createPlayers() {
 
 // Music
 
-/* let musicPlaying = false
-
-document.addEventListener("mousedown", playMusic)
-document.addEventListener("keydown", playMusic)
-
-function playMusic() {
-
-    if (musicPlaying) return
-
-    const music = new Audio("materials/sounds/song1.mp4")
-    music.loop = true
-    music.play()
-
-    musicPlaying = true
-} */
-
-// Music
-
 playMusic()
 
 function playMusic() {

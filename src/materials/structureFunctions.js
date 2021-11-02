@@ -4,15 +4,19 @@ Structure.prototype.place = function() {
 
     function isStructurePlacable(object1, object2) {
 
+        console.log(object1.x, object2.x, object1.y, object2.y)
+
         // Check if object1 is inside object2
 
-        if (object1.x >= object2.x 
-            && object1.x <= object2.x + object2.width 
-            && object1.y >= object2.y 
-            && object1.y <= object2.y + object2.height) {
+        if (object1.x + object1.width > object2.x 
+            && object1.x < object2.x + object2.width
+            && object1.y + object1.height > object2.y 
+            && object1.y < object2.y + object2.height) {
 
-            return true
+            return false
         }
+
+        return true
     }
 
     // Make sure no other structures are in the way

@@ -4,37 +4,37 @@ let properties = {
     mapDimensions: 5000,
     gridPartDimensions: 20,
     nextId: 0,
-    mapEl: document.getElementById("map"),
-    cursorEl: document.getElementById("cursor"),
+    mapEl: document.getElementById('map'),
+    cursorEl: document.getElementById('cursor'),
     buildMode: undefined,
     selectedStructure: undefined,
     colors: {
-        red: "#ff0000",
-        blue: "#0066ff",
-        green: "#00ff00",
-        yellow: "#ffff00",
-        grey: "#9D9D9D",
+        red: '#ff0000',
+        blue: '#0066ff',
+        green: '#00ff00',
+        yellow: '#ffff00',
+        grey: '#9D9D9D',
     },
     resourceTypes: {
         credits: {
             amount: 10000 + 1000,
-            description: "",
-            el: document.getElementById("creditsAmount"),
+            description: '',
+            el: document.getElementById('creditsAmount'),
         },
         oil: {
             amount: 0,
-            description: "",
-            el: document.getElementById("oilAmount"),
+            description: '',
+            el: document.getElementById('oilAmount'),
         },
         steel: {
             amount: 0,
-            description: "",
-            el: document.getElementById("steelAmount"),
+            description: '',
+            el: document.getElementById('steelAmount'),
         },
         concrete: {
             amount: 0,
-            description: "",
-            el: document.getElementById("concreteAmount"),
+            description: '',
+            el: document.getElementById('concreteAmount'),
         },
     },
     positions: [],
@@ -45,8 +45,9 @@ let properties = {
         commandCenter: {
             width: 8,
             height: 8,
-            displayName: "Command Center",
-            image: "materials/images/commandCenter.png",
+            displayName: 'Command Center',
+            image: 'materials/images/commandCenter.png',
+            placeableOn: ['land'],
             cost: {
                 credits: 1000,
             },
@@ -59,8 +60,8 @@ let properties = {
             upgrades: {
                 tier2: {
                     purchased: false,
-                    displayName: "Tier 2",
-                    image: "materials/images/commandCenterTier2.png",
+                    displayName: 'Tier 2',
+                    image: 'materials/images/commandCenterTier2.png',
                     cost: {
                         credits: 1000,
                     },
@@ -74,8 +75,8 @@ let properties = {
                 },
                 tier3: {
                     purchased: false,
-                    displayName: "Tier 3",
-                    image: "materials/images/commandCenterTier3.png",
+                    displayName: 'Tier 3',
+                    image: 'materials/images/commandCenterTier3.png',
                     cost: {
                         credits: 1000,
                     },
@@ -101,8 +102,8 @@ let properties = {
 
             width: 2,
             height: 2,
-            displayName: "Plasma Turret",
-            image: "materials/images/plasmaTurret.png",
+            displayName: 'Plasma Turret',
+            image: 'materials/images/plasmaTurret.png',
             cost: {
                 credits: 1000,
             },
@@ -124,8 +125,8 @@ let properties = {
 
             width: 3,
             height: 3,
-            displayName: "Barracks",
-            image: "materials/images/barrack.png",
+            displayName: 'Barracks',
+            image: 'materials/images/barrack.png',
             cost: {
                 credits: 1000,
             },
@@ -147,8 +148,8 @@ let properties = {
 
             width: 2,
             height: 2,
-            displayName: "Pumpjack",
-            image: "materials/images/pumpjack.png",
+            displayName: 'Pumpjack',
+            image: 'materials/images/pumpjack.png',
             cost: {
                 credits: 1000,
             },
@@ -170,8 +171,8 @@ let properties = {
 
             width: 3,
             height: 4,
-            displayName: "Mineshaft",
-            image: "materials/images/mineshaft.png",
+            displayName: 'Mineshaft',
+            image: 'materials/images/mineshaft.png',
             cost: {
                 credits: 1000,
             },
@@ -193,8 +194,8 @@ let properties = {
 
             width: 2,
             height: 1,
-            displayName: "Generator",
-            image: "materials/images/generator.png",
+            displayName: 'Generator',
+            image: 'materials/images/generator.png',
             cost: {
                 credits: 1000,
             },
@@ -216,8 +217,8 @@ let properties = {
 
             width: 4,
             height: 3,
-            displayName: "Steel Refinery",
-            image: "materials/images/steelRefinery.png",
+            displayName: 'Steel Refinery',
+            image: 'materials/images/steelRefinery.png',
             cost: {
                 credits: 1000,
             },
@@ -295,25 +296,25 @@ let properties = {
         },
     },
     scrollKeys: [
-        "ArrowUp", "ArrowLeft", "ArrowRight", "ArrowDown", " ", "End", "PageUp", "PageDown", "Home"
+        'ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown', ' ', 'End', 'PageUp', 'PageDown', 'Home'
     ],
     hotkeys: {
-        moveUp: "ArrowUp",
-        moveLeft: "ArrowLeft",
-        moveDown: "ArrowDown",
-        moveRight: "ArrowRight",
+        moveUp: 'ArrowUp',
+        moveLeft: 'ArrowLeft',
+        moveDown: 'ArrowDown',
+        moveRight: 'ArrowRight',
 
-        panUp: "w",
-        panDown: "s",
-        panLeft: "a",
-        panRight: "d",
+        panUp: 'w',
+        panDown: 's',
+        panLeft: 'a',
+        panRight: 'd',
 
-        exitStructureSelect: "x",
-        exitBuildMode: "x",
+        exitStructureSelect: 'x',
+        exitBuildMode: 'x',
 
         deleteStructure: 'Delete',
     },
-    buildNotificationEl: document.getElementById("buildNotificationParent"),
+    buildNotificationEl: document.getElementById('buildNotificationParent'),
     players: {
 
     },
@@ -333,9 +334,9 @@ let properties = {
             this.x = pos.x
             this.y = pos.y
 
-            this.type = "gridPart"
+            this.type = 'gridPart'
             this.id = newId()
-            this.el = document.createElement("div")
+            this.el = document.createElement('div')
         }
     },
     Structure: class {
@@ -351,7 +352,7 @@ let properties = {
 
             structure.id = newId()
 
-            structure.el = document.createElement("div")
+            structure.el = document.createElement('div')
 
             for (let propertyName in structureTypes[structure.type]) {
 
@@ -360,14 +361,14 @@ let properties = {
 
             // Add things the user can do when selecting the structure
 
-            structure.selectionEl = document.createElement("div")
+            structure.selectionEl = document.createElement('div')
 
-            structure.selectionEl.classList.add("selectionDisplayParent")
+            structure.selectionEl.classList.add('selectionDisplayParent')
             structure.selectionEl.style.display = 'none'
 
             let selectionEl = structure.selectionEl
 
-            let interactionDisplayParent = document.getElementsByClassName("interactionDisplayParent")[0]
+            let interactionDisplayParent = document.getElementsByClassName('interactionDisplayParent')[0]
 
             interactionDisplayParent.appendChild(selectionEl)
 
@@ -379,8 +380,8 @@ let properties = {
 
                 // Create elements for the upgrades
 
-                let structureDisplayChild = document.createElement("div")
-                structureDisplayChild.classList.add("structureDisplayChild")
+                let structureDisplayChild = document.createElement('div')
+                structureDisplayChild.classList.add('structureDisplayChild')
 
                 structureDisplayChild.onclick = function() {
                     structure.upgrade(upgrade)
@@ -389,15 +390,15 @@ let properties = {
                 selectionEl.appendChild(structureDisplayChild)
                 upgrade.el = structureDisplayChild
 
-                let structureDisplayImage = document.createElement("img")
-                structureDisplayImage.classList.add("structureDisplayImage")
+                let structureDisplayImage = document.createElement('img')
+                structureDisplayImage.classList.add('structureDisplayImage')
 
                 structureDisplayImage.src = upgrade.image
 
                 structureDisplayChild.appendChild(structureDisplayImage)
 
-                let structureDisplayHeader = document.createElement("h3")
-                structureDisplayHeader.classList.add("structureDisplayHeader")
+                let structureDisplayHeader = document.createElement('h3')
+                structureDisplayHeader.classList.add('structureDisplayHeader')
 
                 structureDisplayHeader.innerHTML = upgrade.displayName
 

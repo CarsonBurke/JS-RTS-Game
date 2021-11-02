@@ -4,8 +4,8 @@
 
 let gridSize = mapDimensions / gridPartDimensions
 
-map.style.width = mapDimensions + "px"
-map.style.height = mapDimensions + "px"
+map.style.width = mapDimensions + 'px'
+map.style.height = mapDimensions + 'px'
 
 createGrid()
 
@@ -45,13 +45,13 @@ function createGrid() {
 
             el.id = id
 
-            el.classList.add("gridPart")
+            el.classList.add('gridPart')
             el.classList.add(gridPart.type)
 
-            el.style.background = ""
+            el.style.background = ''
 
-            el.style.width = gridPartDimensions + "px"
-            el.style.height = gridPartDimensions + "px"
+            el.style.width = gridPartDimensions + 'px'
+            el.style.height = gridPartDimensions + 'px'
 
             map.appendChild(el)
 
@@ -72,7 +72,7 @@ function blendTerrain() {
 
         let corners = {
             topLeft: {
-                degree: "135deg",
+                degree: '135deg',
                 cornerPos: { x: -1, y: -1 },
                 sides: [
                     { x: -1, y: 0 },
@@ -80,7 +80,7 @@ function blendTerrain() {
                 ],
             },
             topRight: {
-                degree: "45deg",
+                degree: '45deg',
                 cornerPos: { x: +1, y: +1 },
                 sides: [
                     { x: 0, y: -1 },
@@ -88,7 +88,7 @@ function blendTerrain() {
                 ]
             },
             bottomLeft: {
-                degree: "-135deg",
+                degree: '-135deg',
                 cornerPos: { x: -1, y: +1 },
                 sides: [
                     { x: 0, y: +1 },
@@ -96,7 +96,7 @@ function blendTerrain() {
                 ]
             },
             bottomRight: {
-                degree: "-45deg",
+                degree: '-45deg',
                 cornerPos: { x: +1, y: -1 },
                 sides: [
                     { x: +1, y: 0 },
@@ -144,7 +144,7 @@ function blendTerrain() {
 
                     let color2 = window.getComputedStyle(gridPart.el, null).getPropertyValue('background-color')
 
-                    gridPart.el.style.backgroundImage = "linear-gradient(" + degree + ", " + color1 + " 49.9%, " + color2 + " 50.01%)"
+                    gridPart.el.style.backgroundImage = 'linear-gradient(' + degree + ', ' + color1 + ' 49.9%, ' + color2 + ' 50.01%)'
 
                     // Change the searched type to gridPart's type
 
@@ -167,7 +167,7 @@ function blendTerrain() {
 //
 
 let el = buildNotificationEl
-el.innerText = "Press " + hotkeys.exitBuildMode + " to exit build mode"
+el.innerText = 'Press ' + hotkeys.exitBuildMode + ' to exit build mode'
 
 // Add structure display
 
@@ -175,32 +175,32 @@ addStructureDisplay()
 
 function addStructureDisplay() {
 
-    let structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
+    let structureDisplayParent = document.getElementsByClassName('structureDisplayParent')[0]
 
-    structureDisplayParent.classList.add("structureDisplayParentShow")
+    structureDisplayParent.classList.add('structureDisplayParentShow')
 
     for (let structureTypeName in structureTypes) {
 
         let structureType = structureTypes[structureTypeName]
 
-        let structureDisplayChild = document.createElement("div")
-        structureDisplayChild.classList.add("structureDisplayChild")
+        let structureDisplayChild = document.createElement('div')
+        structureDisplayChild.classList.add('structureDisplayChild')
 
-        structureDisplayChild.id = structureTypeName + "DisplayChild"
+        structureDisplayChild.id = structureTypeName + 'DisplayChild'
 
         structureDisplayChild.onclick = function() { enterBuildMode(structureTypeName) }
 
         structureDisplayParent.appendChild(structureDisplayChild)
 
-        let structureDisplayImage = document.createElement("img")
-        structureDisplayImage.classList.add("structureDisplayImage")
+        let structureDisplayImage = document.createElement('img')
+        structureDisplayImage.classList.add('structureDisplayImage')
 
         structureDisplayImage.src = structureType.image
 
         structureDisplayChild.appendChild(structureDisplayImage)
 
-        let structureDisplayHeader = document.createElement("h3")
-        structureDisplayHeader.classList.add("structureDisplayHeader")
+        let structureDisplayHeader = document.createElement('h3')
+        structureDisplayHeader.classList.add('structureDisplayHeader')
 
         structureDisplayHeader.innerHTML = structureType.displayName
 
@@ -210,7 +210,7 @@ function addStructureDisplay() {
 
 // Create players
 
-let playerNames = ["Carson", "Hive"]
+let playerNames = ['Carson', 'Hive']
 
 createPlayers()
 
@@ -219,7 +219,7 @@ function createPlayers() {
     for (let playerName of playerNames) {
 
         players[playerName] = new Player({
-            name: "Carson"
+            name: 'Carson'
         })
     }
 }
@@ -282,8 +282,8 @@ function playMusic() {
         songPlayingIndex += 1
     }
 
-    document.addEventListener("mousedown", startMusic)
-    document.addEventListener("keydown", startMusic)
+    document.addEventListener('mousedown', startMusic)
+    document.addEventListener('keydown', startMusic)
 
     function startMusic() {
 
@@ -317,7 +317,7 @@ mapEl.onwheel = function zoom(event) {
 
     scale = Math.min(Math.max(0.75, scale), 2)
 
-    map.style.transform = "scale(" + scale + ")"
+    map.style.transform = 'scale(' + scale + ')'
 }
 
 // Define events for when user presses a key
@@ -342,19 +342,19 @@ window.onkeydown = function(event) {
 
     if (key == hotkeys.panUp) {
 
-        startMove("up")
+        startMove('up')
 
     } else if (key == hotkeys.panDown) {
 
-        startMove("down")
+        startMove('down')
     }
     if (key == hotkeys.panLeft) {
 
-        startMove("left")
+        startMove('left')
 
     } else if (key == hotkeys.panRight) {
 
-        startMove("right")
+        startMove('right')
     }
 
     if (key == hotkeys.stopPlacing) {
@@ -371,16 +371,16 @@ window.onkeyup = function(event) {
 
     if (key == hotkeys.panUp) {
 
-        endMove("up")
+        endMove('up')
     } else if (key == hotkeys.panDown) {
 
-        endMove("down")
+        endMove('down')
     } else if (key == hotkeys.panLeft) {
 
-        endMove("left")
+        endMove('left')
     } else if (key == hotkeys.panRight) {
 
-        endMove("right")
+        endMove('right')
     }
 }
 
@@ -388,33 +388,33 @@ let move = false
 
 function startMove(direction) {
 
-    if (direction == "up") {
+    if (direction == 'up') {
 
         move = {
-            direction: "up",
-            qualifier: "positive"
+            direction: 'up',
+            qualifier: 'positive'
         }
 
-    } else if (direction == "down") {
+    } else if (direction == 'down') {
 
         move = {
-            direction: "up",
-            qualifier: "negative"
+            direction: 'up',
+            qualifier: 'negative'
         }
 
     }
-    if (direction == "left") {
+    if (direction == 'left') {
 
         move = {
-            direction: "left",
-            qualifier: "positive"
+            direction: 'left',
+            qualifier: 'positive'
         }
 
-    } else if (direction == "right") {
+    } else if (direction == 'right') {
 
         move = {
-            direction: "left",
-            qualifier: "negative"
+            direction: 'left',
+            qualifier: 'negative'
         }
     }
 }
@@ -430,9 +430,9 @@ function changeDirection() {
 
     if (!move) return
 
-    if (move.direction == "up") {
+    if (move.direction == 'up') {
 
-        if (move.qualifier == "positive") {
+        if (move.qualifier == 'positive') {
 
             upPos -= 60
 
@@ -442,7 +442,7 @@ function changeDirection() {
         }
     } else {
 
-        if (move.qualifier == "positive") {
+        if (move.qualifier == 'positive') {
 
             leftPos -= 60
 
@@ -464,27 +464,27 @@ function changeDirection() {
 
     // Find mapContainer el
 
-    let mapContainer = document.getElementById("mapContainer")
+    let mapContainer = document.getElementById('mapContainer')
 
     // Scroll based on positions
 
     mapContainer.scroll({
         top: upPos,
         left: leftPos,
-        behaviour: "smooth"
+        behaviour: 'smooth'
     })
 
 }
 
 // When placing something show graphic
 
-window.addEventListener("load", createPlacePreview)
+window.addEventListener('load', createPlacePreview)
 
 function createPlacePreview() {
 
-    let el = document.createElement("div")
+    let el = document.createElement('div')
 
-    el.classList.add("placePreview")
+    el.classList.add('placePreview')
 
     mapEl.appendChild(el)
 
@@ -497,18 +497,18 @@ function enablePlacePreview() {
 
     // Make place preview shadow follow the cursor
 
-    window.addEventListener("mousemove", followCursor)
-    window.addEventListener("wheel", followCursor)
-    window.addEventListener("keydown", followCursor)
+    window.addEventListener('mousemove', followCursor)
+    window.addEventListener('wheel', followCursor)
+    window.addEventListener('keydown', followCursor)
 }
 
 function disablePlacePreview() {
 
     // Disable place preview
 
-    window.removeEventListener("mousemove", followCursor)
-    window.removeEventListener("wheel", followCursor)
-    window.removeEventListener("keydown", followCursor)
+    window.removeEventListener('mousemove', followCursor)
+    window.removeEventListener('wheel', followCursor)
+    window.removeEventListener('keydown', followCursor)
 
     placePreviewEl.style.opacity = 0
 }
@@ -524,8 +524,8 @@ function followCursor(e) {
 
     // adjust placePreview size to match structure
 
-    el.style.width = placePreviewWidth * gridPartDimensions + "px"
-    el.style.height = placePreviewHeight * gridPartDimensions + "px"
+    el.style.width = placePreviewWidth * gridPartDimensions + 'px'
+    el.style.height = placePreviewHeight * gridPartDimensions + 'px'
 
     // Get cursor distance from top and divide by map distance from top to get cursor distance from top of map
 
@@ -542,8 +542,8 @@ function followCursor(e) {
     left = Math.min(left, gridPartDimensions * gridSize - gridPartDimensions * placePreviewWidth)
     left = Math.max(left, 0)
 
-    el.style.top = top + "px"
-    el.style.left = left + "px"
+    el.style.top = top + 'px'
+    el.style.left = left + 'px'
 }
 
 // Place game objects
@@ -555,8 +555,8 @@ function placeStartingStructures() {
     // Create starting command center
 
     let structure = new Structure({
-        type: "commandCenter",
-        owner: "Carson",
+        type: 'commandCenter',
+        owner: 'Carson',
         x: 5,
         y: 10,
     })
@@ -578,8 +578,8 @@ function newStructure(event) {
 
     // adjust placePreview size to match structure
 
-    el.style.width = placePreviewWidth * gridPartDimensions + "px"
-    el.style.height = placePreviewHeight * gridPartDimensions + "px"
+    el.style.width = placePreviewWidth * gridPartDimensions + 'px'
+    el.style.height = placePreviewHeight * gridPartDimensions + 'px'
 
     // Get cursor distance from y and divide by map distance from top to get cursor distance from top of map
 
@@ -598,7 +598,7 @@ function newStructure(event) {
 
     const structure = new Structure({
         type: placingStructureTypeName,
-        owner: "Carson",
+        owner: 'Carson',
         x: x,
         y: y,
     })
@@ -621,15 +621,15 @@ async function enterBuildMode(structureTypeName) {
 
     // place preview logic
 
-    placePreviewEl.style.backgroundImage = "url(" + structureType.image + ")"
+    placePreviewEl.style.backgroundImage = 'url(' + structureType.image + ')'
 
     placePreviewWidth = structureType.width
     placePreviewHeight = structureType.height
 
-    let displayEl = document.getElementById(structureTypeName + "DisplayChild")
-    displayEl.classList.add("structureDisplayChildSelected")
+    let displayEl = document.getElementById(structureTypeName + 'DisplayChild')
+    displayEl.classList.add('structureDisplayChildSelected')
 
-    buildNotificationEl.classList.add("buildNofiticationParentShow")
+    buildNotificationEl.classList.add('buildNofiticationParentShow')
 
     enablePlacePreview()
 
@@ -637,7 +637,7 @@ async function enterBuildMode(structureTypeName) {
 
     placingStructureTypeName = structureTypeName
 
-    document.addEventListener("click", newStructure)
+    document.addEventListener('click', newStructure)
 
     // Make it known that buildMode is on
 
@@ -652,22 +652,22 @@ function exitBuildMode() {
 
     // Remove interaction effect for displayEl
 
-    let displayEl = document.getElementById(buildMode + "DisplayChild")
-    displayEl.classList.remove("structureDisplayChildSelected")
+    let displayEl = document.getElementById(buildMode + 'DisplayChild')
+    displayEl.classList.remove('structureDisplayChildSelected')
     
     // Stop ability to place structures
 
-    document.removeEventListener("click", newStructure)
+    document.removeEventListener('click', newStructure)
 
     disablePlacePreview()
 
     // Show cursor again
 
-    mapEl.style.cursor = "default"
+    mapEl.style.cursor = 'default'
 
     // Remove buildNotification
 
-    buildNotificationEl.classList.remove("buildNofiticationParentShow")
+    buildNotificationEl.classList.remove('buildNofiticationParentShow')
 
     // Make it clear that buildMode is off
 
@@ -678,20 +678,20 @@ async function advancedShowEl(el) {
 
     await wait(100)
 
-    el.style.display = "block"
+    el.style.display = 'block'
 
     await wait(100)
 
-    el.classList.add(el.classList[0] + "Show")
+    el.classList.add(el.classList[0] + 'Show')
 }
 
 async function advancedHideEl(el) {
 
-    el.classList.remove(el.classList[0] + "Show")
+    el.classList.remove(el.classList[0] + 'Show')
 
     await wait(100)
 
-    el.style.display = "none"
+    el.style.display = 'none'
 }
 
 // Generate resources

@@ -66,20 +66,20 @@ Structure.prototype.place = function() {
 
     // Apply stylings
 
-    el.style.cursor = "pointer"
+    el.style.cursor = 'pointer'
 
-    el.style.backgroundImage = "url(" + structure.image + ")"
+    el.style.backgroundImage = 'url(' + structure.image + ')'
 
-    el.style.position = "absolute"
+    el.style.position = 'absolute'
 
-    el.style.backgroundPosition = "center"
-    el.style.backgroundSize = "cover"
+    el.style.backgroundPosition = 'center'
+    el.style.backgroundSize = 'cover'
 
-    el.style.width = structure.width * gridPartDimensions + "px"
-    el.style.height = structure.height * gridPartDimensions + "px"
+    el.style.width = structure.width * gridPartDimensions + 'px'
+    el.style.height = structure.height * gridPartDimensions + 'px'
 
-    el.style.top = structure.y * gridPartDimensions + "px"
-    el.style.left = structure.x * gridPartDimensions + "px"
+    el.style.top = structure.y * gridPartDimensions + 'px'
+    el.style.left = structure.x * gridPartDimensions + 'px'
 
     // Add ability to select structure
 
@@ -119,11 +119,11 @@ Structure.prototype.select = function() {
 
     //
 
-    structure.el.classList.add("structureOutline")
+    structure.el.classList.add('structureOutline')
 
     // Hide structureDisplay
 
-    let structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
+    let structureDisplayParent = document.getElementsByClassName('structureDisplayParent')[0]
 
     advancedHideEl(structureDisplayParent)
 
@@ -146,7 +146,7 @@ Structure.prototype.deSelect = function() {
 
     // Remove outline
 
-    structure.el.classList.remove("structureOutline")
+    structure.el.classList.remove('structureOutline')
 
     // Hide selectionEl
 
@@ -154,7 +154,7 @@ Structure.prototype.deSelect = function() {
 
     // Show structureDisplay
 
-    let structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
+    let structureDisplayParent = document.getElementsByClassName('structureDisplayParent')[0]
 
     advancedShowEl(structureDisplayParent)
 
@@ -205,7 +205,7 @@ Structure.prototype.upgrade = function(upgrade) {
 
     const el = structure.el
 
-    el.style.backgroundImage = "url(" + upgrade.image + ")"
+    el.style.backgroundImage = 'url(' + upgrade.image + ')'
 
     //
 
@@ -226,7 +226,7 @@ Structure.prototype.destroy = function() {
 
     // Show structureDisplay
 
-    const structureDisplayParent = document.getElementsByClassName("structureDisplayParent")[0]
+    const structureDisplayParent = document.getElementsByClassName('structureDisplayParent')[0]
 
     advancedShowEl(structureDisplayParent)
 

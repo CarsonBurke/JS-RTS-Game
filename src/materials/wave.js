@@ -5,8 +5,8 @@ let defaultFadeAmount = 250
 let defaultWaveSpeed = 1
 
 let themes = {
-    light: "rgb(255, 255, 255, ",
-    dark: "rgb(0, 0, 0, "
+    light: 'rgb(255, 255, 255, ',
+    dark: 'rgb(0, 0, 0, '
 }
 
 // Add styles
@@ -32,14 +32,14 @@ function addStyles() {
 }
     `
 
-    var styleSheet = document.createElement("style")
+    var styleSheet = document.createElement('style')
     styleSheet.innerHTML = styles
     document.head.appendChild(styleSheet)
 }
 
-let waveButtons = document.getElementsByClassName("waveButton")
+let waveButtons = document.getElementsByClassName('waveButton')
 
-window.addEventListener("load", addChanges)
+window.addEventListener('load', addChanges)
 
 function addChanges() {
 
@@ -47,13 +47,13 @@ function addChanges() {
 
     for (let button of waveButtons) {
 
-        button.addEventListener("mousedown", addWave)
+        button.addEventListener('mousedown', addWave)
 
         for (let child of button.childNodes) {
 
             if (child.style) {
 
-                child.style.pointerEvents = "none"
+                child.style.pointerEvents = 'none'
             }
         }
     }
@@ -65,9 +65,9 @@ async function addWave(e) {
 
     // Add wave
 
-    let wave = document.createElement("div")
+    let wave = document.createElement('div')
 
-    wave.classList.add("wave")
+    wave.classList.add('wave')
 
     button.appendChild(wave)
 
@@ -76,9 +76,9 @@ async function addWave(e) {
     let x = e.clientX
     let y = e.clientY
 
-    wave.style.left = x - button.getBoundingClientRect().left + "px"
+    wave.style.left = x - button.getBoundingClientRect().left + 'px'
 
-    wave.style.top = y - button.getBoundingClientRect().top + "px"
+    wave.style.top = y - button.getBoundingClientRect().top + 'px'
 
     if (!button.dataset.waveFadeAmount) {
 
@@ -98,7 +98,7 @@ async function addWave(e) {
     let theme
 
     switch (button.dataset.waveTheme) {
-        case "dark":
+        case 'dark':
 
             theme = themes.dark
 
@@ -126,14 +126,14 @@ async function addWave(e) {
 
         size += button.offsetWidth / 100
 
-        wave.style.boxShadow = theme + button.dataset.waveStrength + ") 0 0 0 " + size + "px"
+        wave.style.boxShadow = theme + button.dataset.waveStrength + ') 0 0 0 ' + size + 'px'
 
         wave.style.opacity = 1 - i / button.dataset.waveFadeAmount
 
         await waveTimer(1)
     }
 
-    wave.style.transition = "opacity " + button.dataset.waveTime / 5 + "s"
+    wave.style.transition = 'opacity ' + button.dataset.waveTime / 5 + 's'
 
     wave.style.opacity = 0
 

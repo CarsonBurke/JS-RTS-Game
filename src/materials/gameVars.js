@@ -15,13 +15,6 @@ let properties = {
         yellow: "#ffff00",
         grey: "#9D9D9D",
     },
-    wait: function(miliseconds) {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve()
-            }, miliseconds)
-        })
-    },
     resourceTypes: {
         credits: {
             amount: 10000 + 1000,
@@ -271,7 +264,7 @@ let properties = {
         lightGrass: {
             value: 120,
             traversable: {
-                land: false,
+                land: true,
                 water: false,
                 air: true,
             },

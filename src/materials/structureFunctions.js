@@ -4,8 +4,6 @@ Structure.prototype.place = function() {
 
     function isStructurePlacable(object1, object2) {
 
-        console.log(object1.x, object2.x, object1.y, object2.y)
-
         // Check if object1 is inside object2
 
         if (object1.x + object1.width > object2.x 
@@ -28,6 +26,32 @@ Structure.prototype.place = function() {
         // Stop if structure is blocked
 
         if (!isStructurePlacable(structure, existingStructure)) return
+    }
+
+    // Check if structure is on unplacable terrain
+
+    const rect = { 
+        x1: structure.x, 
+        y1: structure.y, 
+        x2: structure.x + structure.width, 
+        y2: structure.y + structure.height,
+    }
+
+    // Find positions inside structure
+
+    const positionsInsideRect = getPositionsInsideRect(rect)
+
+    // Loop through positions
+
+    for (const pos of positionsInsideRect) {
+
+        // Find gridPart with matching pos
+
+        const gridPart = positions[pos.y * mapDimensions + pos.x]
+
+        // Stop if terrain is not traversable
+
+        if (!terrainTypes[gridPart.type].traversable.land) return
     }
 
     // Try to charge cost of structure, stop if fails
